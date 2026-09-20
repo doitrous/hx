@@ -5,6 +5,7 @@ import { Tabs } from '@/components/ui/Tabs'
 import { Button } from '@/components/ui/Button'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Workspace, type WorkspaceHandle } from '@/components/workspace/Workspace'
+import { GitHubStar } from '@/components/landing/GitHubStar'
 import { BelowDemo } from '@/components/landing/BelowDemo'
 import { useAccounts } from '@/lib/accounts'
 import { track } from '@/lib/analytics'
@@ -99,8 +100,9 @@ export function Landing() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-paper">
-      <header className="flex items-center px-4 py-4 sm:px-8">
+      <header className="mx-auto flex w-full max-w-[1680px] items-center justify-between px-4 py-4 sm:px-8">
         <Logo className="h-[24px]" />
+        <GitHubStar />
       </header>
 
       <main className="flex-1">

@@ -40,6 +40,6 @@ export function pageView() {
   window.gtag?.('event', 'page_view', { page_path: location.pathname, page_location: location.origin + location.pathname })
 }
 
-export function track(name: 'example_run' | 'first_analysis' | 'sheet_view' | 'dictation_start', params?: { mode?: string; view?: string }) {
+export function track(name: 'example_run' | 'first_analysis' | 'sheet_view' | 'dictation_start' | 'github_click', params?: { mode?: string; view?: string }) {
   window.gtag?.('event', name, params)
 }

@@ -1,5 +1,9 @@
 # Hx
 
+[![Star on GitHub](https://img.shields.io/github/stars/doitrous/hx?style=social)](https://github.com/doitrous/hx)
+
+**If Hx is useful to you, please star the repository. It is how other doctors find it.**
+
 The clinical record that fills itself in while you write.
 
 A doctor types or dictates a history, examination or operative note. Hx opens the questions that

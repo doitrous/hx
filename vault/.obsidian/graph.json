@@ -6,16 +6,7 @@
   "hideUnresolved": false,
   "showOrphans": true,
   "collapse-color-groups": true,
-  "colorGroups": [
-    { "query": "path:History", "color": { "a": 1, "rgb": 4886745 } },
-    { "query": "path:Examination", "color": { "a": 1, "rgb": 5290080 } },
-    { "query": "path:Operative/Core", "color": { "a": 1, "rgb": 15246141 } },
-    { "query": "path:Operative/Events", "color": { "a": 1, "rgb": 14242639 } },
-    { "query": "path:Operative/Procedures", "color": { "a": 1, "rgb": 10181046 } },
-    { "query": "path:Maps", "color": { "a": 1, "rgb": 2927011 } },
-    { "query": "path:Project", "color": { "a": 1, "rgb": 8947848 } },
-    { "query": "path:Research", "color": { "a": 1, "rgb": 13937677 } }
-  ],
+  "colorGroups": [],
   "collapse-display": true,
   "showArrow": false,
   "textFadeMultiplier": 0,
@@ -26,6 +17,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 2.091114869652053,
+  "scale": 2.0863474083514038,
   "close": false
 }

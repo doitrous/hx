@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Badge } from '@/components/ui/Badge'
 import { Meter } from '@/components/ui/Meter'
 import type { Bundle } from '@/lib/types'
+import { GitHubStar, REPO_URL } from './GitHubStar'
 
 /**
  * Everything under the demo. Editorial, not a feature grid: a serif heading in
@@ -36,6 +37,8 @@ export function BelowDemo({ bundles, accounts }: { bundles: Bundle[] | null; acc
       {bundles && <Catalogue bundles={bundles} />}
 
       {!accounts && <ComingSoon />}
+
+      <OpenSource />
     </div>
   )
 }
@@ -144,6 +147,37 @@ function ComingSoon() {
       <Entry title="A dashboard of what is still owed">
         See which notes are unfinished, how complete your documentation is over time, and which questions you most
         often leave open.
+      </Entry>
+    </Band>
+  )
+}
+
+function OpenSource() {
+  return (
+    <Band
+      title="Open source, and the medicine is not code"
+      aside={
+        <>
+          <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-ink-2">
+            Hx is free and MIT licensed. If it is useful to you, a star on GitHub is how other doctors find it.
+          </p>
+          <GitHubStar size="lg" className="mt-5" />
+        </>
+      }
+    >
+      <Entry title="Every checklist is a plain note">
+        A trigger, the questions, and what it connects to. Diabetes links to a kidney screen, cirrhosis links to
+        varices. No programming is needed to read one or to correct one.
+      </Entry>
+      <Entry title="If a list is wrong, fix it">
+        Missing a question you always ask? Disagree with one? Open the note, change the line, and send it. Every
+        change is checked against hundreds of real-world phrasings before it ships.
+      </Entry>
+      <Entry title="Run it yourself">
+        The whole thing is one container and one key.{' '}
+        <a href={REPO_URL} target="_blank" rel="noreferrer" className="font-medium text-ink underline decoration-line-2 underline-offset-2 hover:decoration-ink-3">
+          github.com/doitrous/hx
+        </a>
       </Entry>
     </Band>
   )
