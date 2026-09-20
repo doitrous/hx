@@ -28,6 +28,8 @@ export const THRESHOLDS = {
 };
 
 const LEAN_RULES = "Judge every question against `note` only. A condition applies only if the note says it of the patient themself: something denied, not mentioned, or true only of a relative does not apply. A point counts as documented when the note addresses it at all: stating that it is absent, normal, none or unknown counts, and so does giving a value.";
+const TRIGGER_WORDS_MAX = 28; // words of a clause offered when narrowing a trigger to its keyword
+const TRIGGER_SPAN_WORDS = 4;
 const RECENT_SENTENCES_MAX = 60; // caps the cost of the evidence-choice question
 
 const TRIGGER_CRITERIA = {
@@ -326,6 +328,22 @@ export async function analyze({ mode, text, open = [], locked = [], known = {}, 
       }, { kind: "leftover" })
     : null;
 
+  // What the note said that opened each new bundle, so the client can show what was caught. One clause
+  // added since the last judgment is the answer for free. Otherwise ask, offering only the new clauses.
+  const allIndices = scrubbedSentences.map((_, i) => i);
+  const triggerPool = (nothingRemoved && addedIndices.length ? addedIndices : allIndices).slice(-RECENT_SENTENCES_MAX);
+  const triggerClause = new Map(); // bundleId -> { index } | { questionId, keyForIndex }
+  for (const id of freshIds) {
+    const b = bundles.get(id);
+    if (!b.trigger || !triggerPool.length) continue;
+    if (triggerPool.length === 1) { triggerClause.set(id, { index: triggerPool[0] }); continue; }
+    const criteria = { none: "No sentence shows it" };
+    const keyForIndex = new Map();
+    for (const i of triggerPool) { criteria[`s${i}`] = scrubbedSentences[i].text; keyForIndex.set(`s${i}`, i); }
+    const questionId = tripB.add({ type: "choice", instructions: `Which sentence of the note is the one that shows this: ${b.trigger}`, criteria }, { kind: "triggerClause" });
+    triggerClause.set(id, { questionId, keyForIndex });
+  }
+
   const pendingA = [];
   for (const [fieldKey, p] of itemP) {
     if (lockedSet.has(fieldKey) || fieldState(p) === "empty") continue;
@@ -361,7 +379,41 @@ export async function analyze({ mode, text, open = [], locked = [], known = {}, 
       pendingB.push(beginField(fieldKey, b, item, tripC, "C"));
     }
   }
+  // Narrow each trigger clause to the words that did it ("DM2" out of "k/c/o DM2, HTN"). Options are the
+  // clause's own word runs, so the answer is always a span of the note and never generated text.
+  const triggerSpan = new Map(); // bundleId -> { index, questionId?, spans? }
+  for (const [id, pick] of triggerClause) {
+    if (suppressCatchAll && id === CATCH_ALL) continue;
+    const index = pick.index ?? pick.keyForIndex.get(answersB.get(pick.questionId)?.choice);
+    if (index == null) continue;
+    const clause = scrubbedSentences[index].text;
+    const words = [...clause.matchAll(/[^\s,;:()"“”]+/g)].slice(0, TRIGGER_WORDS_MAX).map((m) => ({ start: m.index, end: m.index + m[0].replace(/[.!?]+$/, "").length }));
+    const criteria = {};
+    const spans = new Map();
+    for (let a = 0; a < words.length; a++) for (let n = 1; n <= TRIGGER_SPAN_WORDS && a + n <= words.length; n++) {
+      const span = { start: words[a].start, end: words[a + n - 1].end };
+      if (span.end <= span.start) continue;
+      const key = `w${a}_${n}`;
+      criteria[key] = clause.slice(span.start, span.end);
+      spans.set(key, span);
+    }
+    if (spans.size < 2) { triggerSpan.set(id, { index }); continue; }
+    const questionId = tripC.add({ type: "choice", instructions: `In "${clause}", which words are the mention that shows this: ${bundles.get(id).trigger} Pick the shortest complete mention.`, criteria }, { kind: "triggerSpan" });
+    triggerSpan.set(id, { index, questionId, spans });
+  }
   const answersC = await send(tripC);
+
+  for (const [id, t] of triggerSpan) {
+    const original = originalSentences[t.index];
+    const span = t.spans?.get(answersC.get(t.questionId)?.choice);
+    // Offsets were measured on the name-scrubbed clause. They only transfer when scrubbing left it untouched.
+    const exact = span && scrubbedSentences[t.index].text === original.text;
+    const lead = original.text.length - original.text.trimStart().length;
+    const r = bundleResults.find((b) => b.id === id);
+    r.trigger = exact
+      ? { start: original.start + span.start, end: original.start + span.end }
+      : { start: original.start + lead, end: original.start + original.text.trimEnd().length };
+  }
 
   const resolvedB = pendingB.map((p) => finishEvidence(p, answersC, null, null));
 

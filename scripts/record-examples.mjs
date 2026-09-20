@@ -17,9 +17,11 @@ const out = { bundlesVersion: bundles.version };
 for (const ex of examples) {
   const frames = [];
   let open = [];
+  let prevHash;
   const ends = [...ex.text.matchAll(/[.!?](?=\s|$)/g)].map((m) => m.index + 1);
   for (const at of ends) {
-    const res = await analyze({ mode: ex.mode, text: ex.text.slice(0, at), open, locked: [] }, { jev, bundles });
+    const res = await analyze({ mode: ex.mode, text: ex.text.slice(0, at), open, locked: [], prevHash }, { jev, bundles });
+    prevHash = res.clausesHash;
     open = res.bundles.filter((b) => b.open).map((b) => b.id);
     const fields = Object.fromEntries(Object.entries(res.fields).filter(([, f]) => f.state !== "empty"));
     frames.push({ at, res: { bundles: res.bundles.filter((b) => b.open), fields } });

@@ -7,6 +7,7 @@ import { systemColor } from '@/lib/systems'
 import { cn } from '@/lib/cn'
 import type { Bundle, Sheet } from '@/lib/types'
 import { countBundleItems, displayTitle, type BundleNode } from './bundleTree'
+import { CaughtTitle } from './CaughtTitle'
 import { FieldRow } from './FieldRow'
 
 export function BundleSection({
@@ -20,6 +21,7 @@ export function BundleSection({
   onDismiss,
   readOnly,
   registerRef,
+  caught = {},
   depth = 0,
 }: {
   node: BundleNode
@@ -32,6 +34,8 @@ export function BundleSection({
   onDismiss: (fieldKey: string) => void
   readOnly?: boolean
   registerRef: (bundleId: string, el: HTMLElement | null) => void
+  /** The phrase of the note that opened each bundle, and its colour. */
+  caught?: Record<string, { hue: string; phrase: string }>
   depth?: number
 }) {
   const { bundle, parents, children } = node
@@ -77,7 +81,7 @@ export function BundleSection({
       )}
 
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <h3 className="font-sans text-[13.5px] font-bold tracking-[-0.012em] text-ink">{displayTitle(bundle.title)}</h3>
+        <h3 className="font-sans text-[13.5px] font-bold tracking-[-0.012em] text-ink"><CaughtTitle title={displayTitle(bundle.title)} caught={caught[bundle.id]} /></h3>
         <span className="tnum font-mono text-[11.5px] text-ink-3">
           {filled} / {total}
         </span>
@@ -127,6 +131,7 @@ export function BundleSection({
               onDismiss={onDismiss}
               readOnly={readOnly}
               registerRef={registerRef}
+              caught={caught}
               depth={depth + 1}
             />
           ))}

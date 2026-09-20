@@ -91,7 +91,7 @@ export function Landing() {
       let applied = 0
       const show = (upTo: number) => {
         ws()?.setText(full.slice(0, upTo))
-        while (applied < frames.length && frames[applied].at <= upTo) ws()?.applyResponse(frames[applied++].res)
+        while (applied < frames.length && frames[applied].at <= upTo) ws()?.applyResponse(frames[applied++].res, full)
       }
       const finish = () => {
         show(full.length)

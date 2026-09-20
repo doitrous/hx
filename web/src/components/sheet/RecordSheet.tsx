@@ -35,6 +35,7 @@ export function RecordSheet({
   onDismiss,
   onRestore,
   noteText = '',
+  caught = {},
   readOnly,
   pending,
   headerExtra,
@@ -51,6 +52,8 @@ export function RecordSheet({
   onRestore: (fieldKey: string) => void
   /** The note itself, so the inspector can quote the clause a value came from. */
   noteText?: string
+  /** Per bundle: the phrase of the note that opened it and the colour that phrase wears in the note. */
+  caught?: Record<string, { hue: string; phrase: string }>
   readOnly?: boolean
   /** An analysis is in flight: the header shows a scanning hairline. */
   pending?: boolean
@@ -172,7 +175,7 @@ export function RecordSheet({
       onBlurCapture={() => (holding.current = false)}
     >
       <SheetMotionStyles />
-      <div className="relative flex flex-col gap-2.5 border-b border-line bg-surface px-5 py-3.5">
+      <div className="relative flex flex-col gap-2 border-b border-line bg-surface px-4 py-2.5 sm:gap-2.5 sm:px-5 sm:py-3.5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <h2 className="font-serif text-[17px] font-semibold text-ink">Record sheet</h2>
@@ -225,7 +228,7 @@ export function RecordSheet({
 
       {view === 'record' && <NextToDocument openBundles={openBundles} sheet={sheet} onJumpTo={jumpTo} />}
 
-      <div ref={scrollRef} onScroll={handleScroll} className="@container relative min-h-0 flex-1 overflow-y-auto bg-paper px-5 py-4">
+      <div ref={scrollRef} onScroll={handleScroll} className="@container relative min-h-0 flex-1 overflow-y-auto bg-paper px-4 py-3 sm:px-5 sm:py-4">
         <div className="flex flex-col gap-7">
           {sections.map(
             (section) =>
@@ -246,6 +249,7 @@ export function RecordSheet({
                           onSelect={(k) => setSelectedKey((cur) => (cur === k ? null : k))}
                           registerRef={registerRef}
                           idle={idle}
+                          caught={caught}
                         />
                       ) : (
                         <BundleSection
@@ -260,6 +264,7 @@ export function RecordSheet({
                           onDismiss={dismiss}
                           readOnly={readOnly}
                           registerRef={registerRef}
+                          caught={caught}
                         />
                       ),
                     )}
