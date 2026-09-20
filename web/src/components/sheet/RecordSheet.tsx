@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ChevronDown, Undo2 } from 'lucide-react'
 import { Icon } from '@/components/ui/Icon'
 import { cn } from '@/lib/cn'
+import { Ticks } from '@/components/ui/Meter'
 import { track } from '@/lib/analytics'
 import type { Bundle, Sheet } from '@/lib/types'
 import { aggregateCounts, buildBundleForest, displayTitle, groupForest, orderedOpenBundles } from './bundleTree'
@@ -322,15 +323,11 @@ export function RecordSheet({
   )
 }
 
-/** Filled / unclear / empty as one proportional bar. Blue is answered, crimson is still owed. */
+/** One block per open question. Blue is answered, grey is unclear, faint is still owed. */
 function Tally({ counts, idle }: { counts: { filled: number; unclear: number; empty: number; total: number }; idle?: boolean }) {
-  const share = (n: number) => (counts.total === 0 ? 0 : (n / counts.total) * 100)
   return (
     <div>
-      <div className="flex h-1.5 overflow-hidden rounded-full bg-inset">
-        <span className="h-full bg-accent transition-[width] duration-500 ease-out" style={{ width: `${share(counts.filled)}%` }} />
-        <span className="h-full bg-ink-3/50 transition-[width] duration-500 ease-out" style={{ width: `${share(counts.unclear)}%` }} />
-      </div>
+      <Ticks filled={counts.filled} unclear={counts.unclear} total={counts.total} stretch />
       {idle ? (
         <p className="mt-1.5 text-[12px] text-ink-2">
           <b className="tnum font-semibold text-ink">{counts.total}</b> questions every note gets. More appear as you write.

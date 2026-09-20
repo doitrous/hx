@@ -38,13 +38,13 @@ export function Meter({
   const p = clamp((value / max) * 100, 0, 100)
   return (
     <div
-      className={cn('relative overflow-hidden rounded-full bg-inset', HEIGHT[size], className)}
+      className={cn('relative overflow-hidden rounded-[2px] bg-inset', HEIGHT[size], className)}
       role="meter"
       aria-valuenow={Math.round(value)}
       aria-valuemin={0}
       aria-valuemax={max}
     >
-      <div className={cn('cn-meter-fill h-full rounded-full', FILL[tone])} style={{ width: `${p}%` }} />
+      <div className={cn('cn-meter-fill h-full rounded-[1px]', FILL[tone])} style={{ width: `${p}%` }} />
     </div>
   )
 }
@@ -70,8 +70,8 @@ export function RangeScale({
   const p = clamp((value / max) * 100, 0, 100)
   return (
     <div className={cn('w-full', className)}>
-      <div className="relative h-2.5 overflow-hidden rounded-full bg-inset">
-        <div className="cn-meter-fill h-full rounded-full bg-primary" style={{ width: `${p}%` }} />
+      <div className="relative h-2.5 overflow-hidden rounded-[2px] bg-inset">
+        <div className="cn-meter-fill h-full rounded-[1px] bg-primary" style={{ width: `${p}%` }} />
         {zones.slice(0, -1).map((z) => (
           <span
             key={z.label}
@@ -87,5 +87,45 @@ export function RangeScale({
         ))}
       </div>
     </div>
+  )
+}
+
+/**
+ * One small block per question: blue once answered, grey while unclear, faint
+ * while still open. Exact where a bar is approximate, and the strip's length
+ * shows how big the set is. `stretch` spreads the blocks across the full width.
+ */
+export function Ticks({
+  filled,
+  unclear = 0,
+  total,
+  stretch,
+  className,
+}: {
+  filled: number
+  unclear?: number
+  total: number
+  stretch?: boolean
+  className?: string
+}) {
+  return (
+    <span
+      role="meter"
+      aria-valuenow={filled}
+      aria-valuemin={0}
+      aria-valuemax={total}
+      className={cn('flex items-center', stretch ? 'h-2 w-full gap-px sm:gap-[2px]' : 'h-[9px] gap-[2px]', className)}
+    >
+      {Array.from({ length: total }, (_, i) => (
+        <span
+          key={i}
+          className={cn(
+            'h-full rounded-[1px] transition-colors duration-300',
+            stretch ? 'min-w-0 flex-1' : 'w-[4px]',
+            i < filled ? 'bg-accent' : i < filled + unclear ? 'bg-ink-3/60' : 'bg-line-2',
+          )}
+        />
+      ))}
+    </span>
   )
 }

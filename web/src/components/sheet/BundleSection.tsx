@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Icon } from '@/components/ui/Icon'
-import { Meter } from '@/components/ui/Meter'
+import { Ticks } from '@/components/ui/Meter'
 import { Tooltip } from '@/components/ui/Popover'
 import { systemColor } from '@/lib/systems'
 import { cn } from '@/lib/cn'
@@ -87,7 +87,7 @@ export function BundleSection({
             Complete
           </span>
         ) : (
-          <Meter value={total === 0 ? 0 : (filled / total) * 100} size="sm" tone="accent" className="min-w-20 max-w-28 flex-1" />
+          <Ticks filled={filled} unclear={unclear} total={total} />
         )}
       </div>
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, CornerDownRight, Pencil, Undo2, X } from 'lucide-react'
 import { Icon } from '@/components/ui/Icon'
-import { Meter } from '@/components/ui/Meter'
+import { Ticks } from '@/components/ui/Meter'
 import { systemColor } from '@/lib/systems'
 import { cn } from '@/lib/cn'
 import type { Bundle, Item, Sheet } from '@/lib/types'
@@ -72,7 +72,7 @@ export function QuestionBundle({
             <span className="tnum font-mono text-[11.5px] text-ink-3">
               {idle ? `${total} questions` : `${empty + unclear} left`}
             </span>
-            <Meter value={total === 0 ? 0 : (filled / total) * 100} size="sm" tone="accent" className="w-16" />
+            <Ticks filled={filled} unclear={unclear} total={total} />
           </>
         )}
       </div>

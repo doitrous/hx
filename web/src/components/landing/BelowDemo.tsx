@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Badge } from '@/components/ui/Badge'
-import { Meter } from '@/components/ui/Meter'
+import { Meter, Ticks } from '@/components/ui/Meter'
 import type { Bundle } from '@/lib/types'
 import { GitHubStar, REPO_URL } from './GitHubStar'
 
@@ -12,7 +12,7 @@ import { GitHubStar, REPO_URL } from './GitHubStar'
 export function BelowDemo({ bundles, accounts }: { bundles: Bundle[] | null; accounts: boolean }) {
   return (
     <div className="mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-      <Band title="How it decides what to ask">
+      <Band title="How it decides what to ask" aside={<TriggerVisual />}>
         <Entry title="A phrase opens its questions">
           Mention diabetes, a pain, a stoma or a drain and the questions clinicians normally ask about it appear. One
           set can open another: diabetes brings a kidney screen, a bowel resection brings the drain and the leak test.
@@ -34,7 +34,7 @@ export function BelowDemo({ bundles, accounts }: { bundles: Bundle[] | null; acc
         </Entry>
       </Band>
 
-      <Band title="Why it earns its place on the ward">
+      <Band title="Why it earns its place on the ward" aside={<EvidenceVisual />}>
         <Entry title="Nothing new to learn">
           There is no form, no template to pick and no button to press. You write or dictate the note the way you
           always have. The sheet does its work beside you and stays out of the way.
@@ -66,10 +66,13 @@ export function BelowDemo({ bundles, accounts }: { bundles: Bundle[] | null; acc
       <Band
         title="Where this can go"
         aside={
+          <>
           <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-ink-2">
             The engine is small and the checklists are plain notes, so the same idea stretches a long way. These are
             directions, not promises. Tell us which one you need.
           </p>
+          <AuditVisual />
+          </>
         }
       >
         <Entry title="Teaching the complete history">
@@ -98,6 +101,8 @@ export function BelowDemo({ bundles, accounts }: { bundles: Bundle[] | null; acc
         </Entry>
       </Band>
 
+      <Vision />
+
       {!accounts && <ComingSoon />}
 
       <OpenSource />
@@ -123,6 +128,134 @@ function Entry({ title, children }: { title: string; children: ReactNode }) {
       <h3 className="text-[15px] font-semibold text-ink">{title}</h3>
       <p className="mt-2 text-[14.5px] leading-relaxed text-ink-2">{children}</p>
     </article>
+  )
+}
+
+/** Small illustrative cards for the left rail. Built from the product's own parts, so they look like the thing they describe. */
+function Card({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div aria-hidden className="mt-6 max-w-sm overflow-hidden rounded-lg border border-line bg-surface shadow-panel">
+      <div className="flex items-center justify-between border-b border-line px-3.5 py-2">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-3">{label}</span>
+        <span className="text-[11px] text-ink-3">Illustration</span>
+      </div>
+      <div className="p-3.5">{children}</div>
+    </div>
+  )
+}
+
+const mark = 'rounded-[2px] bg-accent/15 px-0.5 text-ink'
+
+/** One phrase opens a set, and the set opens its follow-ups. The names and counts are the catalogue's own. */
+function TriggerVisual() {
+  const chain: [string, number, number][] = [
+    ['Chronic renal failure', 14, 0],
+    ['Limb ischemia history', 10, 0],
+    ['Sensory symptoms', 9, 0],
+  ]
+  return (
+    <Card label="One phrase">
+      <p className="font-mono text-[12.5px] leading-relaxed text-ink">
+        “k/c/o <mark className={mark}>DM2</mark> for 8 yrs, on metformin”
+      </p>
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <span className="text-[13px] font-semibold text-ink">Diabetes mellitus</span>
+        <Ticks filled={3} total={14} />
+      </div>
+      <ul className="ms-1 mt-2 flex flex-col gap-1.5 border-s-2 border-line ps-3">
+        {chain.map(([name, total, filled]) => (
+          <li key={name} className="flex items-center justify-between gap-3">
+            <span className="truncate text-[12.5px] text-ink-2">{name}</span>
+            <Ticks filled={filled} total={total} />
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-[11.5px] text-ink-3">Three letters, 47 questions a consultant would ask.</p>
+    </Card>
+  )
+}
+
+/** The answer is the doctor's own sentence, never a generated one. */
+function EvidenceVisual() {
+  const facts: [string, string][] = [
+    ['0', 'words written for you'],
+    ['< ½¢', 'to check a whole note'],
+    ['1 to 2 s', 'behind your typing'],
+  ]
+  return (
+    <>
+      <Card label="Copied, never invented">
+        <p className="text-[12.5px] leading-relaxed text-ink-2">
+          …a 16-French drain was placed. <mark className={mark}>Estimated blood loss was 350 ml.</mark> The abdomen was closed in layers…
+        </p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          <span className="inline-flex h-7 items-center gap-1.5 rounded-md bg-accent/10 px-2 text-[12px] font-medium text-ink">
+            <span className="text-accent">✓</span> Blood loss · 350 mL
+          </span>
+          <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-line-2 px-2 text-[12px] font-medium text-ink">
+            <span className="size-1.5 rounded-full bg-primary" /> Counts correct
+          </span>
+        </div>
+      </Card>
+      <dl className="mt-5 grid max-w-sm grid-cols-3 gap-3">
+        {facts.map(([v, l]) => (
+          <div key={l} className="flex flex-col-reverse gap-1 border-t border-line pt-2.5">
+            <dt className="text-[11.5px] leading-snug text-ink-3">{l}</dt>
+            <dd className="tnum font-serif text-[20px] font-semibold leading-none text-ink">{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </>
+  )
+}
+
+/** What a department view could look like. Synthetic figures. */
+function AuditVisual() {
+  const rows: [string, number, number][] = [
+    ['Operative notes', 18, 1],
+    ['Admission histories', 14, 3],
+    ['Discharge plans', 9, 2],
+  ]
+  return (
+    <Card label="Department audit">
+      <ul className="flex flex-col gap-2.5">
+        {rows.map(([name, filled, unclear]) => (
+          <li key={name}>
+            <div className="mb-1 flex items-baseline justify-between text-[12.5px]">
+              <span className="text-ink">{name}</span>
+              <span className="tnum font-mono text-[11.5px] text-ink-3">{filled * 5}% complete</span>
+            </div>
+            <Ticks filled={filled} unclear={unclear} total={20} stretch />
+          </li>
+        ))}
+      </ul>
+    </Card>
+  )
+}
+
+function Vision() {
+  const lines: [string, string][] = [
+    ['An open library of what to ask', 'Written and corrected by clinicians, for every specialty, hospital and language. Owned by nobody, useful to everybody.'],
+    ['A machine that checks, and never writes', 'The record stays the doctor\u2019s own words. The machine only notices what is missing, and shows its evidence when it ticks something off.'],
+    ['Documentation good enough to build on', 'When every note is complete and structured, handover, audit and research stop being extra work. They fall out of the note you were writing anyway.'],
+  ]
+  return (
+    <section className="border-t border-line py-16 lg:py-20">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary-strong">The vision</p>
+      <h2 className="mt-4 max-w-5xl font-serif text-[28px] font-semibold leading-[1.18] text-ink sm:text-[36px]">
+        Medicine already knows what a complete note looks like. That knowledge lives in textbooks and in consultants' heads, and it is
+        least available at three in the morning. Hx puts it beside the pen.
+      </h2>
+      <ol className="mt-10 grid gap-x-12 gap-y-8 lg:grid-cols-3">
+        {lines.map(([title, body], i) => (
+          <li key={title} className="border-t-2 border-ink pt-4">
+            <span className="tnum font-mono text-[12px] text-ink-3">0{i + 1}</span>
+            <h3 className="mt-1.5 font-serif text-[19px] font-semibold leading-snug text-ink">{title}</h3>
+            <p className="mt-2 text-[14.5px] leading-relaxed text-ink-2">{body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
   )
 }
 
