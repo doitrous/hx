@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /app/
+Sitemap: https://hx.semicoded.com/sitemap.xml

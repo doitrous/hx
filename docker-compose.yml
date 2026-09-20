@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: history_checker
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: history_checker
+    ports:
+      - "5433:5432" # 5432 may already be taken on the host
+    volumes:
+      - history_checker_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U history_checker"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  history_checker_pgdata:

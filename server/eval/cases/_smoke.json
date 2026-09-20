@@ -1,0 +1,8 @@
+[
+ {"text":"Myocardial infarction.","mustOpen":["named_diagnosis"]},
+ {"text":"Acute MI.","mustOpen":["named_diagnosis"]},
+ {"text":"60 year old man with a history of myocardial infarction two years ago, on aspirin.","mustOpen":["named_diagnosis"]},
+ {"text":"His father died of a myocardial infarction.","mustNotOpen":["named_diagnosis"]},
+ {"text":"Known diabetic for 10 years on metformin.","mustOpen":["diabetes"],"mustNotOpen":["hypertension"]},
+ {"text":"Presents with epigastric pain for 3 days. He denies vomiting.","mustOpen":["pain","abdominal"],"mustNotOpen":["vomiting","named_diagnosis"]}
+]

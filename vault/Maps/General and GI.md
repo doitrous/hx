@@ -1,0 +1,113 @@
+# General and GI (Operative)
+
+Map of content for General and GI procedures.
+
+## Procedures
+
+- [[Proc - Abdominoperineal resection]]
+    - → [[Op - Stoma formation]]: This item captures the technical detail of the stoma already known to have been formed
+    - → [[Op - Specimen]]: The resected specimen should be sent for histology
+    - → [[Op - Bleeding]]: Pelvic dissection carries a significant bleeding risk
+    - → [[Op - Contamination and washout]]: APR for an obstructing or perforated tumour can involve contamination
+- [[Proc - Anal fistula surgery]]
+    - → [[Op - Iatrogenic injury]]: Anal fistula surgery risks incontinence from unintended sphincter division
+    - → [[Op - Bleeding]]: Division of tissue in fistula surgery carries a bleeding risk
+- [[Proc - Appendectomy]]
+    - → [[Op - Conversion to open]]: A laparoscopic appendectomy may need to be converted to open for dense adhesions or difficult anatomy
+    - → [[Op - Specimen]]: The appendix should be sent for histology
+    - → [[Op - Drain]]: A drain is sometimes left after a perforated or gangrenous appendicitis
+    - → [[Op - Contamination and washout]]: A perforated or gangrenous appendix commonly spills contaminated content requiring washout
+- [[Proc - Bariatric surgery (sleeve gastrectomy or gastric bypass)]]
+    - → [[Op - Laparoscopic access]]: Bariatric surgery is almost always performed laparoscopically
+    - → [[Op - Conversion to open]]: Bleeding or difficult anatomy may require conversion to open
+    - → [[Op - Bleeding]]: Staple lines carry a recognised bleeding risk
+    - → [[Op - Drain]]: A drain is sometimes left near the staple line or anastomosis
+- [[Proc - Diagnostic laparoscopy]]
+    - → [[Op - Laparoscopic access]]: Diagnostic laparoscopy depends on safe abdominal entry
+    - → [[Op - Conversion to open]]: Unexpected findings at diagnostic laparoscopy may require conversion to open
+    - → [[Op - Specimen]]: A biopsy taken at diagnostic laparoscopy should be tracked for histology
+- [[Proc - Exploratory laparotomy]]
+    - → [[Op - Resection and anastomosis]]: Exploratory laparotomy often leads to a bowel resection once the source is found
+    - → [[Op - Contamination and washout]]: Peritonitis or a hollow viscus injury requires washout, which has its own documentation requirements
+    - → [[Op - Adhesiolysis]]: A laparotomy in a previously operated abdomen commonly requires adhesiolysis
+    - → [[Op - Drain]]: A drain is often left after exploration for contamination or an uncertain source
+    - → [[Op - Difficult or abandoned procedure]]: Exploration for an unclear source can encounter dense adhesions or an unresectable finding requiring a change of plan
+- [[Proc - Gastrectomy]]
+    - → [[Op - Resection and anastomosis]]: Gastric reconstruction includes a bowel anastomosis with its own documentation requirements
+    - → [[Op - Bleeding]]: Gastric and omental dissection carries a bleeding risk
+    - → [[Op - Drain]]: A drain is often left near the anastomosis
+    - → [[Op - Specimen]]: The resected specimen should be sent for histology, especially for malignancy
+- [[Proc - Hartmann's procedure]]
+    - → [[Op - Stoma formation]]: This item captures the technical detail of the stoma already known to have been formed
+    - → [[Op - Contamination and washout]]: A Hartmann's procedure is usually performed for perforation or obstruction with contamination
+    - → [[Op - Specimen]]: The resected specimen should be sent for histology
+- [[Proc - Hemorrhoidectomy]]
+    - → [[Op - Bleeding]]: Primary and secondary hemorrhage are recognized complications of hemorrhoidectomy
+    - → [[Op - Iatrogenic injury]]: Hemorrhoidectomy risks inadvertent sphincter injury affecting continence
+- [[Proc - Incision and drainage of abscess]]
+    - → [[Op - Contamination and washout]]: A positive screen opens the contamination and washout bundle for type, extent and irrigation volume
+- [[Proc - Inguinal hernia repair (open)]]
+    - → [[Op - Mesh or implant]]: Most inguinal hernia repairs use mesh, which has its own documentation requirements
+    - → [[Op - Iatrogenic injury]]: Groin dissection risks injury to the ilioinguinal nerve, vas deferens or testicular vessels
+- [[Proc - Inguinal hernia repair (laparoscopic TAPP or TEP)]]
+    - → [[Op - Laparoscopic access]]: TAPP/TEP repair depends on safe entry into the preperitoneal or extraperitoneal space
+    - → [[Op - Conversion to open]]: Bleeding or a disrupted peritoneal flap may require conversion to an open repair
+    - → [[Op - Mesh or implant]]: TAPP/TEP repair relies on mesh, which has its own documentation requirements
+    - → [[Op - Iatrogenic injury]]: Preperitoneal dissection risks injury to nerves, the vas deferens or the epigastric or iliac vessels
+- [[Proc - Laparoscopic cholecystectomy]]
+    - → [[Op - Laparoscopic access]]: Cholecystectomy is performed through laparoscopic ports and access technique and injury should be documented
+    - → [[Op - Conversion to open]]: Difficult Calot's triangle anatomy or bleeding may require conversion to open cholecystectomy
+    - → [[Op - Drain]]: A drain is sometimes left after a difficult or inflamed cholecystectomy
+    - → [[Op - Specimen]]: The gallbladder should be sent for histology to exclude incidental malignancy
+    - → [[Op - Iatrogenic injury]]: Bile duct injury is the principal serious complication of cholecystectomy
+    - → [[Op - Intraoperative imaging]]: A positive screen opens the imaging bundle for indication, findings and any resulting change in plan
+- [[Proc - Left or sigmoid colectomy and anterior resection]]
+    - → [[Op - Resection and anastomosis]]: This item captures the technical detail of an anastomosis already known to have been performed
+    - → [[Op - Stoma formation]]: A low anastomosis is often protected by a defunctioning stoma
+    - → [[Op - Specimen]]: The resected specimen should be sent for histology, especially for a malignancy indication
+    - → [[Op - Drain]]: A pelvic drain is often left after a low rectal anastomosis
+    - → [[Op - Difficult or abandoned procedure]]: A bulky or locally advanced rectal tumour can make resection difficult or require a change of plan
+- [[Proc - Liver resection]]
+    - → [[Op - Bleeding]]: Liver transection carries a major bleeding risk
+    - → [[Op - Blood transfusion]]: Liver resection is a common indication for intraoperative transfusion
+    - → [[Op - Drain]]: A drain is often left to monitor for bile leak or bleeding
+    - → [[Op - Specimen]]: The resected specimen should be sent for histology, especially for a malignancy indication
+- [[Proc - Open cholecystectomy]]
+    - → [[Op - Drain]]: A drain is often left after an open cholecystectomy
+    - → [[Op - Specimen]]: The gallbladder should be sent for histology to exclude incidental malignancy
+    - → [[Op - Iatrogenic injury]]: Bile duct injury is the principal serious complication of cholecystectomy
+    - → [[Op - Intraoperative imaging]]: Cholangiography may be used during open cholecystectomy to delineate biliary anatomy
+- [[Proc - Perforated peptic ulcer repair]]
+    - → [[Op - Contamination and washout]]: A perforated ulcer spills gastric or duodenal contents, requiring washout
+    - → [[Op - Drain]]: A drain is often left near the repair site
+    - → [[Op - Conversion to open]]: A laparoscopic repair may need to be converted to open for a large or friable perforation
+- [[Proc - Pilonidal sinus excision]]
+    - → [[Op - Drain]]: A drain is sometimes used after a flap closure of a large pilonidal excision
+    - → [[Op - Bleeding]]: Bleeding from the excision bed is a recognized early complication
+    - → [[Op - Specimen]]: The excised tissue must be tracked and labelled for histology reporting
+- [[Proc - Right hemicolectomy]]
+    - → [[Op - Resection and anastomosis]]: This item captures the technical detail of an anastomosis already known to have been performed
+    - → [[Op - Specimen]]: The resected colon should be sent for histology, especially for a malignancy indication
+    - → [[Op - Stoma formation]]: A stoma may be fashioned instead of a primary anastomosis
+    - → [[Op - Iatrogenic injury]]: The right ureter and duodenum lie close to the operative field during right hemicolectomy
+- [[Proc - Small bowel resection]]
+    - → [[Op - Resection and anastomosis]]: This item captures the technical detail of an anastomosis already known to have been performed
+    - → [[Op - Stoma formation]]: A stoma may be fashioned instead of a primary anastomosis if the bowel is unhealthy or the patient unstable
+    - → [[Op - Specimen]]: The resected bowel should be sent for histology
+    - → [[Op - Bleeding]]: Mesenteric division carries a bleeding risk
+    - → [[Op - Contamination and washout]]: Bowel resection for ischemia or perforation commonly spills contaminated content requiring washout
+- [[Proc - Splenectomy]]
+    - → [[Op - Bleeding]]: The spleen and its hilum are highly vascular and bleeding is the main intraoperative risk
+    - → [[Op - Conversion to open]]: A laparoscopic splenectomy may need to be converted to open for uncontrolled bleeding
+    - → [[Op - Iatrogenic injury]]: The pancreatic tail and stomach lie close to the splenic hilum
+    - → [[Op - Specimen]]: The spleen should be sent for histology
+    - → [[Op - Blood transfusion]]: Splenic bleeding is a common indication for intraoperative transfusion
+- [[Proc - Ventral, incisional or umbilical hernia repair]]
+    - → [[Op - Mesh or implant]]: Most ventral and incisional hernia repairs use mesh, which has its own documentation requirements
+    - → [[Op - Adhesiolysis]]: Incisional hernias commonly have adherent bowel or omentum requiring adhesiolysis
+    - → [[Op - Laparoscopic access]]: A laparoscopic or robotic repair depends on safe abdominal access, often near prior scars
+- [[Proc - Whipple procedure]]
+    - → [[Op - Resection and anastomosis]]: The Whipple reconstruction includes at least one bowel anastomosis with its own documentation requirements
+    - → [[Op - Drain]]: A drain is routinely left to monitor for a pancreatic leak
+    - → [[Op - Bleeding]]: Dissection around major vessels carries a significant bleeding risk
+    - → [[Op - Specimen]]: The resected specimen requires orientation and histology, usually for malignancy

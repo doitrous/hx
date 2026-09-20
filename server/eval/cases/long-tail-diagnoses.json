@@ -1,0 +1,410 @@
+[
+ {
+  "name": "long-tail: Achalasia",
+  "mode": "clinical",
+  "text": "Known case of Achalasia.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Sarcoidosis",
+  "mode": "clinical",
+  "text": "PMH: Sarcoidosis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Pheochromocytoma",
+  "mode": "clinical",
+  "text": "He was diagnosed with Pheochromocytoma three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Psoriasis",
+  "mode": "clinical",
+  "text": "history of psoriasis, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Migraine",
+  "mode": "clinical",
+  "text": "She has Migraine.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Pericarditis",
+  "mode": "clinical",
+  "text": "Known case of Pericarditis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Pleural effusion",
+  "mode": "clinical",
+  "text": "PMH: Pleural effusion.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Nephrotic syndrome",
+  "mode": "clinical",
+  "text": "He was diagnosed with Nephrotic syndrome three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Celiac disease",
+  "mode": "clinical",
+  "text": "history of celiac disease, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Melanoma",
+  "mode": "clinical",
+  "text": "She has Melanoma.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Osteomyelitis",
+  "mode": "clinical",
+  "text": "Known case of Osteomyelitis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Supraventricular tachycardia",
+  "mode": "clinical",
+  "text": "PMH: Supraventricular tachycardia.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Hypercalcemia",
+  "mode": "clinical",
+  "text": "He was diagnosed with Hypercalcemia three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Hyponatremia",
+  "mode": "clinical",
+  "text": "history of hyponatremia, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Hemochromatosis",
+  "mode": "clinical",
+  "text": "She has Hemochromatosis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Wilson disease",
+  "mode": "clinical",
+  "text": "Known case of Wilson disease.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Polycystic ovary syndrome",
+  "mode": "clinical",
+  "text": "PMH: Polycystic ovary syndrome.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Uterine leiomyoma",
+  "mode": "clinical",
+  "text": "He was diagnosed with Uterine leiomyoma three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Trigeminal neuralgia",
+  "mode": "clinical",
+  "text": "history of trigeminal neuralgia, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Meniere disease",
+  "mode": "clinical",
+  "text": "She has Meniere disease.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Sjogren syndrome",
+  "mode": "clinical",
+  "text": "Known case of Sjogren syndrome.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Antiphospholipid syndrome",
+  "mode": "clinical",
+  "text": "PMH: Antiphospholipid syndrome.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Polycythemia vera",
+  "mode": "clinical",
+  "text": "He was diagnosed with Polycythemia vera three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Myelodysplastic syndrome",
+  "mode": "clinical",
+  "text": "history of myelodysplastic syndrome, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Interstitial lung disease",
+  "mode": "clinical",
+  "text": "She has Interstitial lung disease.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Glaucoma",
+  "mode": "clinical",
+  "text": "Known case of Glaucoma.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Cataract",
+  "mode": "clinical",
+  "text": "PMH: Cataract.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Lymphedema",
+  "mode": "clinical",
+  "text": "He was diagnosed with Lymphedema three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Raynaud phenomenon",
+  "mode": "clinical",
+  "text": "history of raynaud phenomenon, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Fibromyalgia",
+  "mode": "clinical",
+  "text": "She has Fibromyalgia.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Amyloidosis",
+  "mode": "clinical",
+  "text": "Known case of Amyloidosis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Budd-Chiari syndrome",
+  "mode": "clinical",
+  "text": "PMH: Budd-Chiari syndrome.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Choledocholithiasis",
+  "mode": "clinical",
+  "text": "He was diagnosed with Choledocholithiasis three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Malaria",
+  "mode": "clinical",
+  "text": "history of malaria, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Brucellosis",
+  "mode": "clinical",
+  "text": "She has Brucellosis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Schistosomiasis",
+  "mode": "clinical",
+  "text": "Known case of Schistosomiasis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Syphilis",
+  "mode": "clinical",
+  "text": "PMH: Syphilis.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Sciatica",
+  "mode": "clinical",
+  "text": "He was diagnosed with Sciatica three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Avascular necrosis",
+  "mode": "clinical",
+  "text": "history of avascular necrosis, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Huntington disease",
+  "mode": "clinical",
+  "text": "She has Huntington disease.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Narcolepsy",
+  "mode": "clinical",
+  "text": "Known case of Narcolepsy.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Hypopituitarism",
+  "mode": "clinical",
+  "text": "PMH: Hypopituitarism.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Primary hyperaldosteronism",
+  "mode": "clinical",
+  "text": "He was diagnosed with Primary hyperaldosteronism three years ago.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Urticaria",
+  "mode": "clinical",
+  "text": "history of urticaria, on treatment",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail: Meningioma",
+  "mode": "clinical",
+  "text": "She has Meningioma.",
+  "mustOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail negative: drug classes are not a disease",
+  "mode": "clinical",
+  "text": "On statins and a beta blocker.",
+  "mustNotOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail negative: a procedure is not a disease",
+  "mode": "clinical",
+  "text": "Lumbar puncture was done, CSF clear.",
+  "mustNotOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail negative: not a disease",
+  "mode": "clinical",
+  "text": "Vaccination up to date.",
+  "mustNotOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail negative: family member, not the patient",
+  "mode": "clinical",
+  "text": "His brother has sarcoidosis.",
+  "mustNotOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail negative: explicitly denied",
+  "mode": "clinical",
+  "text": "No history of malaria or syphilis.",
+  "mustNotOpen": [
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "long-tail negative: ruled out",
+  "mode": "clinical",
+  "text": "Glaucoma was ruled out by the ophthalmologist.",
+  "mustNotOpen": [
+   "named_diagnosis"
+  ]
+ }
+]

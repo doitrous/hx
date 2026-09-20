@@ -1,0 +1,1389 @@
+[
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "diabtic for 10 yrs",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "Known diabetec on insulin",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "k/c/o DM2",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "T2DM x 8y on OHA",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "IDDM since childhood",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "pt is diabetic & hypertensive",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "uncontrolled dm, last hba1c 10",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "diabeties mellitus type 2",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: diabetes",
+  "mode": "clinical",
+  "text": "sugar patient on metformin",
+  "mustOpen": [
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "HTN on amlodipine",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "hypertention for 5 years",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "known hypertensive",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "htn x10y",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "high blood pressure on treatment",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "hypertensve, poorly controlled",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: hypertension",
+  "mode": "clinical",
+  "text": "pt is diabetic & hypertensive",
+  "mustOpen": [
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "IHD, s/p PCI 2022",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "ischaemic heart dz",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "old MI 2019",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "had a heart attack 2 yrs ago",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "s/p CABG x3",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "NSTEMI last year",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "myocardial infraction in 2020",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "known cardiac patient with stents",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "angina on nitrates",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "post cath with 2 DES",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: ihd",
+  "mode": "clinical",
+  "text": "acute mi",
+  "mustOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy: heart_failure",
+  "mode": "clinical",
+  "text": "CHF on lasix",
+  "mustOpen": [
+   "heart_failure"
+  ]
+ },
+ {
+  "name": "messy: heart_failure",
+  "mode": "clinical",
+  "text": "HFrEF EF 30%",
+  "mustOpen": [
+   "heart_failure"
+  ]
+ },
+ {
+  "name": "messy: heart_failure",
+  "mode": "clinical",
+  "text": "congestive heart faliure",
+  "mustOpen": [
+   "heart_failure"
+  ]
+ },
+ {
+  "name": "messy: heart_failure",
+  "mode": "clinical",
+  "text": "decompensated heart failure",
+  "mustOpen": [
+   "heart_failure"
+  ]
+ },
+ {
+  "name": "messy: heart_failure",
+  "mode": "clinical",
+  "text": "DCM with EF 25%",
+  "mustOpen": [
+   "heart_failure"
+  ]
+ },
+ {
+  "name": "messy: atrial_fibrillation",
+  "mode": "clinical",
+  "text": "AF on warfarin",
+  "mustOpen": [
+   "atrial_fibrillation"
+  ]
+ },
+ {
+  "name": "messy: atrial_fibrillation",
+  "mode": "clinical",
+  "text": "a fib, rate controlled",
+  "mustOpen": [
+   "atrial_fibrillation"
+  ]
+ },
+ {
+  "name": "messy: atrial_fibrillation",
+  "mode": "clinical",
+  "text": "atrial fibrilation on DOAC",
+  "mustOpen": [
+   "atrial_fibrillation"
+  ]
+ },
+ {
+  "name": "messy: atrial_fibrillation",
+  "mode": "clinical",
+  "text": "AFib on apixaban",
+  "mustOpen": [
+   "atrial_fibrillation"
+  ]
+ },
+ {
+  "name": "messy: atrial_fibrillation",
+  "mode": "clinical",
+  "text": "chronic A.F.",
+  "mustOpen": [
+   "atrial_fibrillation"
+  ]
+ },
+ {
+  "name": "messy: valve_disease",
+  "mode": "clinical",
+  "text": "rheumatic heart disease with MS",
+  "mustOpen": [
+   "valve_disease"
+  ]
+ },
+ {
+  "name": "messy: valve_disease",
+  "mode": "clinical",
+  "text": "RHD, s/p MVR",
+  "mustOpen": [
+   "valve_disease"
+  ]
+ },
+ {
+  "name": "messy: valve_disease",
+  "mode": "clinical",
+  "text": "mitral stenosis, tight",
+  "mustOpen": [
+   "valve_disease"
+  ]
+ },
+ {
+  "name": "messy: valve_disease",
+  "mode": "clinical",
+  "text": "severe AS awaiting TAVI",
+  "mustOpen": [
+   "valve_disease"
+  ]
+ },
+ {
+  "name": "messy: valve_disease",
+  "mode": "clinical",
+  "text": "prosthetic mitral valve on warfarin",
+  "mustOpen": [
+   "valve_disease"
+  ]
+ },
+ {
+  "name": "messy: asthma",
+  "mode": "clinical",
+  "text": "asthmatic on inhalers",
+  "mustOpen": [
+   "asthma"
+  ]
+ },
+ {
+  "name": "messy: asthma",
+  "mode": "clinical",
+  "text": "bronchial asthma since childhood",
+  "mustOpen": [
+   "asthma"
+  ]
+ },
+ {
+  "name": "messy: asthma",
+  "mode": "clinical",
+  "text": "known BA on ventolin",
+  "mustOpen": [
+   "asthma"
+  ]
+ },
+ {
+  "name": "messy: asthma",
+  "mode": "clinical",
+  "text": "astma, uses salbutamol prn",
+  "mustOpen": [
+   "asthma"
+  ]
+ },
+ {
+  "name": "messy: copd",
+  "mode": "clinical",
+  "text": "COPD on home O2",
+  "mustOpen": [
+   "copd"
+  ]
+ },
+ {
+  "name": "messy: copd",
+  "mode": "clinical",
+  "text": "copd exacerbation last month",
+  "mustOpen": [
+   "copd"
+  ]
+ },
+ {
+  "name": "messy: copd",
+  "mode": "clinical",
+  "text": "chronic bronchitis, heavy smoker",
+  "mustOpen": [
+   "copd"
+  ]
+ },
+ {
+  "name": "messy: copd",
+  "mode": "clinical",
+  "text": "emphysema",
+  "mustOpen": [
+   "copd"
+  ]
+ },
+ {
+  "name": "messy: copd",
+  "mode": "clinical",
+  "text": "C.O.P.D on tiotropium",
+  "mustOpen": [
+   "copd"
+  ]
+ },
+ {
+  "name": "messy: tuberculosis",
+  "mode": "clinical",
+  "text": "old TB treated 2015",
+  "mustOpen": [
+   "tuberculosis"
+  ]
+ },
+ {
+  "name": "messy: tuberculosis",
+  "mode": "clinical",
+  "text": "pulmonary tuberclosis, completed 6 months ttt",
+  "mustOpen": [
+   "tuberculosis"
+  ]
+ },
+ {
+  "name": "messy: tuberculosis",
+  "mode": "clinical",
+  "text": "h/o koch's",
+  "mustOpen": [
+   "tuberculosis"
+  ]
+ },
+ {
+  "name": "messy: tuberculosis",
+  "mode": "clinical",
+  "text": "on anti-TB drugs",
+  "mustOpen": [
+   "tuberculosis"
+  ]
+ },
+ {
+  "name": "messy: vte",
+  "mode": "clinical",
+  "text": "DVT left leg 2021",
+  "mustOpen": [
+   "vte"
+  ]
+ },
+ {
+  "name": "messy: vte",
+  "mode": "clinical",
+  "text": "h/o PE on rivaroxaban",
+  "mustOpen": [
+   "vte"
+  ]
+ },
+ {
+  "name": "messy: vte",
+  "mode": "clinical",
+  "text": "deep vein thrombosis after surgery",
+  "mustOpen": [
+   "vte"
+  ]
+ },
+ {
+  "name": "messy: vte",
+  "mode": "clinical",
+  "text": "pulmonary embolisim last year",
+  "mustOpen": [
+   "vte"
+  ]
+ },
+ {
+  "name": "messy: vte",
+  "mode": "clinical",
+  "text": "previous dvt/pe",
+  "mustOpen": [
+   "vte"
+  ]
+ },
+ {
+  "name": "messy: neuro_stroke",
+  "mode": "clinical",
+  "text": "old CVA with rt hemiparesis",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy: neuro_stroke",
+  "mode": "clinical",
+  "text": "stroke 2 yrs ago",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy: neuro_stroke",
+  "mode": "clinical",
+  "text": "TIA last month",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy: neuro_stroke",
+  "mode": "clinical",
+  "text": "cerebrovascular accident, residual weakness",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy: neuro_stroke",
+  "mode": "clinical",
+  "text": "h/o stroke on plavix",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy: neuro_stroke",
+  "mode": "clinical",
+  "text": "ischemic strok 2020",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy: neuro_epilepsy",
+  "mode": "clinical",
+  "text": "epileptic on depakine",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "name": "messy: neuro_epilepsy",
+  "mode": "clinical",
+  "text": "known epilepsy, last fit 2 months ago",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "name": "messy: neuro_epilepsy",
+  "mode": "clinical",
+  "text": "epilepsey on keppra",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "name": "messy: neuro_epilepsy",
+  "mode": "clinical",
+  "text": "seizure disorder on carbamazepine",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "name": "messy: renal_crf",
+  "mode": "clinical",
+  "text": "CKD stage 4",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "name": "messy: renal_crf",
+  "mode": "clinical",
+  "text": "CRF, creatinine 4.5",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "name": "messy: renal_crf",
+  "mode": "clinical",
+  "text": "chronic kidney dz",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "name": "messy: renal_crf",
+  "mode": "clinical",
+  "text": "ESRD",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "name": "messy: renal_crf",
+  "mode": "clinical",
+  "text": "renal impairment for years",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "name": "messy: renal_crf",
+  "mode": "clinical",
+  "text": "chronic renal faliure",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "name": "messy: renal_dialysis",
+  "mode": "clinical",
+  "text": "ESRD on HD 3x/week",
+  "mustOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "name": "messy: renal_dialysis",
+  "mode": "clinical",
+  "text": "on regular hemodialysis via AVF",
+  "mustOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "name": "messy: renal_dialysis",
+  "mode": "clinical",
+  "text": "renal transplant 2018",
+  "mustOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "name": "messy: renal_dialysis",
+  "mode": "clinical",
+  "text": "on dialysis for 2 years",
+  "mustOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "name": "messy: renal_dialysis",
+  "mode": "clinical",
+  "text": "s/p kidney transplant on tacrolimus",
+  "mustOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "HCV cirrhosis child B",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "liver cirhosis with ascites",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "chronic liver disease, HCV +ve",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "bilharzial liver fibrosis with varices",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "CLD, decompensated",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "hep C treated with sofosbuvir",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: liver_cirrhosis",
+  "mode": "clinical",
+  "text": "hepatic patient with ascites",
+  "mustOpen": [
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy: gallstones",
+  "mode": "clinical",
+  "text": "GB stones on US",
+  "mustOpen": [
+   "gallstones"
+  ]
+ },
+ {
+  "name": "messy: gallstones",
+  "mode": "clinical",
+  "text": "calcular cholecystitis",
+  "mustOpen": [
+   "gallstones"
+  ]
+ },
+ {
+  "name": "messy: gallstones",
+  "mode": "clinical",
+  "text": "gall stones with biliary colic",
+  "mustOpen": [
+   "gallstones"
+  ]
+ },
+ {
+  "name": "messy: gallstones",
+  "mode": "clinical",
+  "text": "cholelithiasis",
+  "mustOpen": [
+   "gallstones"
+  ]
+ },
+ {
+  "name": "messy: gallstones",
+  "mode": "clinical",
+  "text": "chronic calcular cholecystitis",
+  "mustOpen": [
+   "gallstones"
+  ]
+ },
+ {
+  "name": "messy: pud",
+  "mode": "clinical",
+  "text": "PUD on PPI",
+  "mustOpen": [
+   "pud"
+  ]
+ },
+ {
+  "name": "messy: pud",
+  "mode": "clinical",
+  "text": "duodenal ulcer, H pylori +ve",
+  "mustOpen": [
+   "pud"
+  ]
+ },
+ {
+  "name": "messy: pud",
+  "mode": "clinical",
+  "text": "peptic ulcer diease",
+  "mustOpen": [
+   "pud"
+  ]
+ },
+ {
+  "name": "messy: pud",
+  "mode": "clinical",
+  "text": "old DU bleed",
+  "mustOpen": [
+   "pud"
+  ]
+ },
+ {
+  "name": "messy: thyroid",
+  "mode": "clinical",
+  "text": "hypothyroid on eltroxin",
+  "mustOpen": [
+   "thyroid"
+  ]
+ },
+ {
+  "name": "messy: thyroid",
+  "mode": "clinical",
+  "text": "hypothyroidism on levothyroxine",
+  "mustOpen": [
+   "thyroid"
+  ]
+ },
+ {
+  "name": "messy: thyroid",
+  "mode": "clinical",
+  "text": "Graves disease on carbimazole",
+  "mustOpen": [
+   "thyroid"
+  ]
+ },
+ {
+  "name": "messy: thyroid",
+  "mode": "clinical",
+  "text": "thyrotoxicosis",
+  "mustOpen": [
+   "thyroid"
+  ]
+ },
+ {
+  "name": "messy: thyroid",
+  "mode": "clinical",
+  "text": "MNG for years",
+  "mustOpen": [
+   "thyroid"
+  ]
+ },
+ {
+  "name": "messy: thyroid",
+  "mode": "clinical",
+  "text": "hyperthyrodism",
+  "mustOpen": [
+   "thyroid"
+  ]
+ },
+ {
+  "name": "messy: heme_anticoagulation",
+  "mode": "clinical",
+  "text": "on warfarin, INR 2.5",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy: heme_anticoagulation",
+  "mode": "clinical",
+  "text": "on marevan",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy: heme_anticoagulation",
+  "mode": "clinical",
+  "text": "takes aspirin 75 and plavix",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy: heme_anticoagulation",
+  "mode": "clinical",
+  "text": "on clexane bridging",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy: heme_anticoagulation",
+  "mode": "clinical",
+  "text": "on xarelto",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy: heme_anticoagulation",
+  "mode": "clinical",
+  "text": "on DAPT since stent",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy: rheum_ra_ctd",
+  "mode": "clinical",
+  "text": "RA on methotrexate",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "name": "messy: rheum_ra_ctd",
+  "mode": "clinical",
+  "text": "rheumatoid arthritis for 10 y",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "name": "messy: rheum_ra_ctd",
+  "mode": "clinical",
+  "text": "SLE on plaquenil",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "name": "messy: rheum_ra_ctd",
+  "mode": "clinical",
+  "text": "lupus with nephritis",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "name": "messy: rheum_ra_ctd",
+  "mode": "clinical",
+  "text": "rhumatoid on steroids",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "name": "messy: rheum_steroids",
+  "mode": "clinical",
+  "text": "on prednisolone 10 mg for years",
+  "mustOpen": [
+   "rheum_steroids"
+  ]
+ },
+ {
+  "name": "messy: rheum_steroids",
+  "mode": "clinical",
+  "text": "long term steroids",
+  "mustOpen": [
+   "rheum_steroids"
+  ]
+ },
+ {
+  "name": "messy: rheum_steroids",
+  "mode": "clinical",
+  "text": "chronic steroid use for asthma",
+  "mustOpen": [
+   "rheum_steroids"
+  ]
+ },
+ {
+  "name": "messy: infect_hiv_hepatitis",
+  "mode": "clinical",
+  "text": "HBV +ve",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "name": "messy: infect_hiv_hepatitis",
+  "mode": "clinical",
+  "text": "HBsAg positive",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "name": "messy: infect_hiv_hepatitis",
+  "mode": "clinical",
+  "text": "HIV on HAART",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "name": "messy: infect_hiv_hepatitis",
+  "mode": "clinical",
+  "text": "hepatitis B carrier",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "name": "messy: infect_hiv_hepatitis",
+  "mode": "clinical",
+  "text": "HCV Ab +ve, PCR negative",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "name": "messy: psych_illness",
+  "mode": "clinical",
+  "text": "depression on sertraline",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "name": "messy: psych_illness",
+  "mode": "clinical",
+  "text": "schizophrenia on olanzapine",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "name": "messy: psych_illness",
+  "mode": "clinical",
+  "text": "bipolar on lithium",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "name": "messy: psych_illness",
+  "mode": "clinical",
+  "text": "known psychiatric patient on antipsychotics",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "name": "messy: psych_illness",
+  "mode": "clinical",
+  "text": "anxiety disorder on SSRIs",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "name": "messy: heme_malignancy",
+  "mode": "clinical",
+  "text": "Ca colon s/p chemo",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "name": "messy: heme_malignancy",
+  "mode": "clinical",
+  "text": "breast cancer on tamoxifen, received radiotherapy",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "name": "messy: heme_malignancy",
+  "mode": "clinical",
+  "text": "lymphoma in remission",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "name": "messy: heme_malignancy",
+  "mode": "clinical",
+  "text": "NHL after 6 cycles CHOP",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "name": "messy: heme_malignancy",
+  "mode": "clinical",
+  "text": "on chemotherapy for leukemia",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "name": "messy: obesity",
+  "mode": "clinical",
+  "text": "morbid obesity BMI 48",
+  "mustOpen": [
+   "obesity"
+  ]
+ },
+ {
+  "name": "messy: obesity",
+  "mode": "clinical",
+  "text": "s/p sleeve gastrectomy 2021",
+  "mustOpen": [
+   "obesity"
+  ]
+ },
+ {
+  "name": "messy: obesity",
+  "mode": "clinical",
+  "text": "previous gastric bypass",
+  "mustOpen": [
+   "obesity"
+  ]
+ },
+ {
+  "name": "messy: obesity",
+  "mode": "clinical",
+  "text": "morbidly obese",
+  "mustOpen": [
+   "obesity"
+  ]
+ },
+ {
+  "name": "messy: prev_operations",
+  "mode": "clinical",
+  "text": "s/p appendectomy 2010",
+  "mustOpen": [
+   "prev_operations"
+  ]
+ },
+ {
+  "name": "messy: prev_operations",
+  "mode": "clinical",
+  "text": "previous CS x2",
+  "mustOpen": [
+   "prev_operations"
+  ]
+ },
+ {
+  "name": "messy: prev_operations",
+  "mode": "clinical",
+  "text": "had lap chole 2019",
+  "mustOpen": [
+   "prev_operations"
+  ]
+ },
+ {
+  "name": "messy: prev_operations",
+  "mode": "clinical",
+  "text": "h/o hernia repair with mesh",
+  "mustOpen": [
+   "prev_operations"
+  ]
+ },
+ {
+  "name": "messy: prev_operations",
+  "mode": "clinical",
+  "text": "past surgical hx: tonsillectomy",
+  "mustOpen": [
+   "prev_operations"
+  ]
+ },
+ {
+  "name": "messy: gyn_pregnancy",
+  "mode": "clinical",
+  "text": "pregnant 28 wks",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "name": "messy: gyn_pregnancy",
+  "mode": "clinical",
+  "text": "G3P2 at 32 weeks",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "name": "messy: gyn_pregnancy",
+  "mode": "clinical",
+  "text": "she is 12 weeks pregnant",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "name": "messy: gyn_pregnancy",
+  "mode": "clinical",
+  "text": "primigravida 36w",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "name": "messy: renal_stones",
+  "mode": "clinical",
+  "text": "renal stones, s/p ESWL",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "name": "messy: renal_stones",
+  "mode": "clinical",
+  "text": "lt ureteric stone with DJ stent",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "name": "messy: renal_stones",
+  "mode": "clinical",
+  "text": "recurrent kidney stones",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "name": "messy: renal_stones",
+  "mode": "clinical",
+  "text": "nephrolithiasis",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "name": "messy: renal_prostate_luts",
+  "mode": "clinical",
+  "text": "BPH on tamsulosin",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "name": "messy: renal_prostate_luts",
+  "mode": "clinical",
+  "text": "enlarged prostate with LUTS",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "name": "messy: renal_prostate_luts",
+  "mode": "clinical",
+  "text": "s/p TURP",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "name": "messy: renal_prostate_luts",
+  "mode": "clinical",
+  "text": "senile prostatic enlargment",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "name": "messy: osa",
+  "mode": "clinical",
+  "text": "OSA on CPAP",
+  "mustOpen": [
+   "osa"
+  ]
+ },
+ {
+  "name": "messy: osa",
+  "mode": "clinical",
+  "text": "obstructive sleep apnoea, uses cpap",
+  "mustOpen": [
+   "osa"
+  ]
+ },
+ {
+  "name": "messy: rheum_gout",
+  "mode": "clinical",
+  "text": "gout on allopurinol",
+  "mustOpen": [
+   "rheum_gout"
+  ]
+ },
+ {
+  "name": "messy: rheum_gout",
+  "mode": "clinical",
+  "text": "gouty arthritis",
+  "mustOpen": [
+   "rheum_gout"
+  ]
+ },
+ {
+  "name": "messy: rheum_gout",
+  "mode": "clinical",
+  "text": "hyperuricemia with recurrent gout attacks",
+  "mustOpen": [
+   "rheum_gout"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "father diabetic, mother hypertensive",
+  "mustNotOpen": [
+   "diabetes",
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "no DM, no HTN, no IHD",
+  "mustNotOpen": [
+   "diabetes",
+   "hypertension",
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "not diabetic not hypertensive",
+  "mustNotOpen": [
+   "diabetes",
+   "hypertension"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "denies asthma or TB",
+  "mustNotOpen": [
+   "asthma",
+   "tuberculosis"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "no h/o DVT or PE",
+  "mustNotOpen": [
+   "vte"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "HCV -ve, HBV -ve, HIV -ve",
+  "mustNotOpen": [
+   "infect_hiv_hepatitis",
+   "liver_cirrhosis"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "brother died of stroke",
+  "mustNotOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "not on anticoagulants",
+  "mustNotOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "no previous operations",
+  "mustNotOpen": [
+   "prev_operations"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "R/O MI, troponin negative, ECG normal",
+  "mustNotOpen": [
+   "ihd"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "free of chronic illness",
+  "mustNotOpen": [
+   "diabetes",
+   "hypertension",
+   "ihd",
+   "named_diagnosis"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "no known medical diseases, NKDA",
+  "mustNotOpen": [
+   "named_diagnosis",
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "BP 120/80, RBS 110",
+  "mustNotOpen": [
+   "hypertension",
+   "diabetes"
+  ]
+ },
+ {
+  "name": "messy negative",
+  "mode": "clinical",
+  "text": "thyroid function normal",
+  "mustNotOpen": [
+   "thyroid"
+  ]
+ }
+]

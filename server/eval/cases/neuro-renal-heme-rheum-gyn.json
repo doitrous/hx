@@ -1,0 +1,795 @@
+[
+ {
+  "text": "Old CVA in 2021 with residual right-sided weakness.",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "Known case of stroke, now on aspirin for secondary prevention.",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "H/O TIA last year, fully recovered.",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "PMH: old CVA, HTN, DM.",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "Sister had a stroke last year.",
+  "mustNotOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "CT brain normal, no evidence of stroke.",
+  "mustNotOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "The patient suffered a cerebrovascular accident three years ago with dysarthria that has since resolved.",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "old cva, mild residual weakness lt side",
+  "mustOpen": [
+   "neuro_stroke"
+  ]
+ },
+ {
+  "text": "Epileptic on Depakine, last fit 2 years ago.",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "text": "Known case of epilepsy since childhood, poorly controlled.",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "text": "PMH: epilepsy, on carbamazepine.",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "text": "No history of fits or epilepsy.",
+  "mustNotOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "text": "Father is epileptic.",
+  "mustNotOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "text": "She has a longstanding seizure disorder controlled on sodium valproate.",
+  "mustOpen": [
+   "neuro_epilepsy"
+  ]
+ },
+ {
+  "text": "Known Parkinson's disease on levodopa/carbidopa.",
+  "mustOpen": [
+   "neuro_parkinsons"
+  ]
+ },
+ {
+  "text": "Parkinsonism, on levodopa, with recent falls.",
+  "mustOpen": [
+   "neuro_parkinsons"
+  ]
+ },
+ {
+  "text": "Mother has Parkinson's disease.",
+  "mustNotOpen": [
+   "neuro_parkinsons"
+  ]
+ },
+ {
+  "text": "h/o Parkinson's dx 2015, tremor and rigidity",
+  "mustOpen": [
+   "neuro_parkinsons"
+  ]
+ },
+ {
+  "text": "Known case of multiple sclerosis, relapsing-remitting type.",
+  "mustOpen": [
+   "neuro_ms"
+  ]
+ },
+ {
+  "text": "MS diagnosed 2018, on interferon.",
+  "mustOpen": [
+   "neuro_ms"
+  ]
+ },
+ {
+  "text": "Echo shows MS, moderate mitral stenosis.",
+  "mustNotOpen": [
+   "neuro_ms"
+  ]
+ },
+ {
+  "text": "Patient has MS (mitral stenosis) on warfarin.",
+  "mustNotOpen": [
+   "neuro_ms"
+  ]
+ },
+ {
+  "text": "No history of multiple sclerosis.",
+  "mustNotOpen": [
+   "neuro_ms"
+  ]
+ },
+ {
+  "text": "She was diagnosed with multiple sclerosis five years ago and now has residual leg weakness.",
+  "mustOpen": [
+   "neuro_ms"
+  ]
+ },
+ {
+  "text": "Known myasthenia gravis on pyridostigmine.",
+  "mustOpen": [
+   "neuro_myasthenia"
+  ]
+ },
+ {
+  "text": "MG for 10 years, previous thymectomy.",
+  "mustOpen": [
+   "neuro_myasthenia"
+  ]
+ },
+ {
+  "text": "No history of myasthenia gravis.",
+  "mustNotOpen": [
+   "neuro_myasthenia"
+  ]
+ },
+ {
+  "text": "Peripheral neuropathy secondary to diabetes, glove and stocking numbness.",
+  "mustOpen": [
+   "neuro_peripheral_neuropathy"
+  ]
+ },
+ {
+  "text": "H/O Guillain-Barre syndrome 2019, required ICU admission.",
+  "mustOpen": [
+   "neuro_peripheral_neuropathy"
+  ]
+ },
+ {
+  "text": "GBS 3 years ago, now fully recovered.",
+  "mustOpen": [
+   "neuro_peripheral_neuropathy"
+  ]
+ },
+ {
+  "text": "No peripheral neuropathy.",
+  "mustNotOpen": [
+   "neuro_peripheral_neuropathy"
+  ]
+ },
+ {
+  "text": "Known dementia, lives with daughter who is decision-maker.",
+  "mustOpen": [
+   "neuro_dementia"
+  ]
+ },
+ {
+  "text": "Alzheimer's disease diagnosed 3 years ago, on donepezil.",
+  "mustOpen": [
+   "neuro_dementia"
+  ]
+ },
+ {
+  "text": "Vascular dementia following multiple strokes.",
+  "mustOpen": [
+   "neuro_dementia"
+  ]
+ },
+ {
+  "text": "No memory problems or dementia.",
+  "mustNotOpen": [
+   "neuro_dementia"
+  ]
+ },
+ {
+  "text": "Grandmother had dementia.",
+  "mustNotOpen": [
+   "neuro_dementia"
+  ]
+ },
+ {
+  "text": "Old head injury in a road traffic accident 2015, brief loss of consciousness.",
+  "mustOpen": [
+   "neuro_head_spinal_injury"
+  ]
+ },
+ {
+  "text": "H/O spinal cord injury, paraplegic since 2010.",
+  "mustOpen": [
+   "neuro_head_spinal_injury"
+  ]
+ },
+ {
+  "text": "No history of head trauma.",
+  "mustNotOpen": [
+   "neuro_head_spinal_injury"
+  ]
+ },
+ {
+  "text": "Old CVA with residual left hemiparesis, on aspirin.",
+  "mustOpen": [
+   "neuro_stroke",
+   "neuro",
+   "x_neuro_motor",
+   "x_neuro_reflexes"
+  ]
+ },
+ {
+  "text": "Known epileptic on Depakine.",
+  "mustOpen": [
+   "neuro_epilepsy",
+   "neuro"
+  ]
+ },
+ {
+  "text": "Known case of multiple sclerosis.",
+  "mustOpen": [
+   "neuro_ms",
+   "neuro"
+  ]
+ },
+ {
+  "text": "Known Parkinson's disease with tremor and unsteady gait.",
+  "mustOpen": [
+   "neuro_parkinsons",
+   "x_neuro_coordination",
+   "x_neuro_motor"
+  ]
+ },
+ {
+  "text": "Dementia with disorientation, family says he forgets names.",
+  "mustOpen": [
+   "neuro_dementia",
+   "x_neuro_mental"
+  ]
+ },
+ {
+  "text": "Old case of myasthenia gravis with ptosis and swallowing difficulty.",
+  "mustOpen": [
+   "neuro_myasthenia",
+   "x_neuro_cranial"
+  ]
+ },
+ {
+  "text": "CKD on HD, AVF in left arm, dialysis three times weekly.",
+  "mustOpen": [
+   "renal_dialysis",
+   "renal_crf"
+  ]
+ },
+ {
+  "text": "Renal transplant 2019, on tacrolimus.",
+  "mustOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "text": "ESRD on hemodialysis via tunneled catheter.",
+  "mustOpen": [
+   "renal_dialysis",
+   "renal_crf"
+  ]
+ },
+ {
+  "text": "Patient has HD (Hodgkin's disease) on chemotherapy.",
+  "mustNotOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "text": "No history of dialysis or kidney transplant.",
+  "mustNotOpen": [
+   "renal_dialysis"
+  ]
+ },
+ {
+  "text": "Recurrent renal colic, passed a stone last year.",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "text": "H/O ureteric stones, treated with lithotripsy.",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "text": "No history of renal stones.",
+  "mustNotOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "text": "He has had three episodes of ureteric colic in the past two years.",
+  "mustOpen": [
+   "renal_stones"
+  ]
+ },
+ {
+  "text": "Known BPH on tamsulosin, poor stream.",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "text": "Prostate cancer diagnosed 2020, s/p prostatectomy.",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "text": "Bilharzial bladder, hematuria for 6 months.",
+  "mustOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "text": "No urinary retention or prostate problems.",
+  "mustNotOpen": [
+   "renal_prostate_luts"
+  ]
+ },
+ {
+  "text": "CKD on HD for 3 years.",
+  "mustOpen": [
+   "renal_crf",
+   "renal_dialysis"
+  ]
+ },
+ {
+  "text": "ESKD, not yet on dialysis.",
+  "mustOpen": [
+   "renal_crf"
+  ]
+ },
+ {
+  "text": "Recurrent UTIs, last one treated 2 months ago.",
+  "mustOpen": [
+   "urinary"
+  ]
+ },
+ {
+  "text": "No history of UTI.",
+  "mustNotOpen": [
+   "urinary"
+  ]
+ },
+ {
+  "text": "Known IDA, on ferrous sulfate.",
+  "mustOpen": [
+   "heme_anemia"
+  ]
+ },
+ {
+  "text": "Megaloblastic anemia due to B12 deficiency, on replacement.",
+  "mustOpen": [
+   "heme_anemia"
+  ]
+ },
+ {
+  "text": "No history of anemia.",
+  "mustNotOpen": [
+   "heme_anemia"
+  ]
+ },
+ {
+  "text": "She has chronic iron deficiency anemia and has needed two blood transfusions.",
+  "mustOpen": [
+   "heme_anemia"
+  ]
+ },
+ {
+  "text": "Known case of beta thalassemia major, transfusion dependent.",
+  "mustOpen": [
+   "heme_inherited"
+  ]
+ },
+ {
+  "text": "Sickle cell disease, multiple painful crises.",
+  "mustOpen": [
+   "heme_inherited"
+  ]
+ },
+ {
+  "text": "G6PD deficiency (favism), avoids fava beans.",
+  "mustOpen": [
+   "heme_inherited"
+  ]
+ },
+ {
+  "text": "Known hemophilia A, on factor VIII replacement.",
+  "mustOpen": [
+   "heme_inherited"
+  ]
+ },
+ {
+  "text": "Sister has sickle cell trait.",
+  "mustNotOpen": [
+   "heme_inherited"
+  ]
+ },
+ {
+  "text": "AML diagnosed last year, on chemotherapy, last cycle 2 weeks ago.",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "text": "Known case of Hodgkin's lymphoma, completed radiotherapy.",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "text": "CML on imatinib.",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "text": "Multiple myeloma, in remission.",
+  "mustOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "text": "Brother has leukemia.",
+  "mustNotOpen": [
+   "heme_malignancy"
+  ]
+ },
+ {
+  "text": "Abdomen soft, all clear on examination, no masses felt.",
+  "mustNotOpen": [
+   "heme_malignancy"
+  ],
+  "why": "tests that ALL as an ordinary word is not read as acute lymphoblastic leukemia"
+ },
+ {
+  "text": "On warfarin for atrial fibrillation, last INR 2.3.",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "text": "On clopidogrel post coronary stent.",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "text": "Takes aspirin 75mg daily for secondary stroke prevention.",
+  "mustOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "text": "Not on any anticoagulant or antiplatelet medication.",
+  "mustNotOpen": [
+   "heme_anticoagulation"
+  ]
+ },
+ {
+  "text": "Known case of CML.",
+  "mustOpen": [
+   "heme_disorder"
+  ]
+ },
+ {
+  "text": "No blood disorders.",
+  "mustNotOpen": [
+   "heme_disorder"
+  ]
+ },
+ {
+  "text": "RA on methotrexate for 5 years.",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "text": "Known case of SLE, on hydroxychloroquine.",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "text": "Dilated RA on echo, moderate TR.",
+  "mustNotOpen": [
+   "rheum_ra_ctd"
+  ],
+  "why": "RA = right atrium in this cardiac context, not rheumatoid arthritis"
+ },
+ {
+  "text": "Patient breathing RA, sats 98%.",
+  "mustNotOpen": [
+   "rheum_ra_ctd"
+  ],
+  "why": "RA = room air in this respiratory context, not rheumatoid arthritis"
+ },
+ {
+  "text": "Mother has rheumatoid arthritis.",
+  "mustNotOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "text": "Known Behcet's disease with recurrent oral ulcers.",
+  "mustOpen": [
+   "rheum_ra_ctd"
+  ]
+ },
+ {
+  "text": "He has had systemic lupus erythematosus for ten years and is currently on steroids.",
+  "mustOpen": [
+   "rheum_ra_ctd",
+   "rheum_steroids"
+  ]
+ },
+ {
+  "text": "Recurrent gout attacks, on allopurinol.",
+  "mustOpen": [
+   "rheum_gout"
+  ]
+ },
+ {
+  "text": "Known case of gout affecting the big toe.",
+  "mustOpen": [
+   "rheum_gout"
+  ]
+ },
+ {
+  "text": "No history of gout.",
+  "mustNotOpen": [
+   "rheum_gout"
+  ]
+ },
+ {
+  "text": "On long-term prednisolone for 2 years for asthma.",
+  "mustOpen": [
+   "rheum_steroids"
+  ]
+ },
+ {
+  "text": "Chronic steroid use, recently tapered.",
+  "mustOpen": [
+   "rheum_steroids"
+  ]
+ },
+ {
+  "text": "Not on any steroids.",
+  "mustNotOpen": [
+   "rheum_steroids"
+  ]
+ },
+ {
+  "text": "Known osteoporosis, on bisphosphonates, previous hip fracture.",
+  "mustOpen": [
+   "rheum_osteoporosis"
+  ]
+ },
+ {
+  "text": "DEXA confirmed osteoporosis last year.",
+  "mustOpen": [
+   "rheum_osteoporosis"
+  ]
+ },
+ {
+  "text": "No history of osteoporosis.",
+  "mustNotOpen": [
+   "rheum_osteoporosis"
+  ]
+ },
+ {
+  "text": "Known case of ankylosing spondylitis with back stiffness.",
+  "mustOpen": [
+   "rheum",
+   "x_rheum_joints"
+  ]
+ },
+ {
+  "text": "History of rheumatoid arthritis with joint pain in both hands.",
+  "mustOpen": [
+   "rheum_ra_ctd",
+   "x_rheum_joints"
+  ]
+ },
+ {
+  "text": "G2P1, 32 weeks gestation, LMP unknown.",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "text": "Currently pregnant, EDD next month.",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "text": "Not pregnant.",
+  "mustNotOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "text": "She is 28 weeks pregnant with an uneventful antenatal course.",
+  "mustOpen": [
+   "gyn_pregnancy"
+  ]
+ },
+ {
+  "text": "P2, both by previous CS.",
+  "mustOpen": [
+   "gyn_obstetric_history"
+  ]
+ },
+ {
+  "text": "H/O 2 previous cesarean sections.",
+  "mustOpen": [
+   "gyn_obstetric_history"
+  ]
+ },
+ {
+  "text": "Wound swab sent for CS, pending result.",
+  "mustNotOpen": [
+   "gyn_obstetric_history"
+  ],
+  "why": "CS = culture and sensitivity in this lab-order context, not cesarean section"
+ },
+ {
+  "text": "No previous pregnancies.",
+  "mustNotOpen": [
+   "gyn_obstetric_history"
+  ]
+ },
+ {
+  "text": "H/O ectopic pregnancy treated with salpingectomy 2019.",
+  "mustOpen": [
+   "gyn_ectopic"
+  ]
+ },
+ {
+  "text": "No history of ectopic pregnancy.",
+  "mustNotOpen": [
+   "gyn_ectopic"
+  ]
+ },
+ {
+  "text": "Known case of PCOS, irregular cycles.",
+  "mustOpen": [
+   "gyn_pelvic_mass"
+  ]
+ },
+ {
+  "text": "Uterine fibroids diagnosed on ultrasound.",
+  "mustOpen": [
+   "gyn_pelvic_mass"
+  ]
+ },
+ {
+  "text": "No pelvic mass or fibroids.",
+  "mustNotOpen": [
+   "gyn_pelvic_mass"
+  ]
+ },
+ {
+  "text": "Known case of major depression, on sertraline.",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "text": "Schizophrenia diagnosed 10 years ago, on antipsychotics.",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "text": "H/O bipolar disorder, previous psychiatric admission.",
+  "mustOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "text": "No psychiatric history.",
+  "mustNotOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "text": "Mother has depression.",
+  "mustNotOpen": [
+   "psych_illness"
+  ]
+ },
+ {
+  "text": "Chronic alcohol dependence, drinks daily.",
+  "mustOpen": [
+   "psych_substance"
+  ]
+ },
+ {
+  "text": "IV drug user, heroin dependence for 5 years.",
+  "mustOpen": [
+   "psych_substance"
+  ]
+ },
+ {
+  "text": "Denies alcohol or drug use.",
+  "mustNotOpen": [
+   "psych_substance"
+  ]
+ },
+ {
+  "text": "Known HIV positive, on ART.",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "text": "Hepatitis C positive, untreated.",
+  "mustOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "text": "HIV negative.",
+  "mustNotOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "text": "No history of hepatitis.",
+  "mustNotOpen": [
+   "infect_hiv_hepatitis"
+  ]
+ },
+ {
+  "text": "Had COVID-19 last year, required oxygen.",
+  "mustOpen": [
+   "infect_covid"
+  ]
+ },
+ {
+  "text": "Previous COVID infection, fully vaccinated.",
+  "mustOpen": [
+   "infect_covid"
+  ]
+ },
+ {
+  "text": "No history of COVID-19.",
+  "mustNotOpen": [
+   "infect_covid"
+  ]
+ }
+]

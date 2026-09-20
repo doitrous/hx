@@ -1,0 +1,17 @@
+{
+  "name": "history-checker-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.mjs",
+    "migrate": "node migrate.mjs",
+    "seed": "node seed.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "pg": "^8.23.0"
+  }
+}

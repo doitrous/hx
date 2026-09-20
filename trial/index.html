@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History Checker</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f6f5f1; --card:#fff; --ink:#1c1b19; --mute:#77736b; --line:#e3e0d8; --ok:#1d7a4f; --warn:#a56a00; --miss:#b3261e; --accent:#1f4fd8; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#151514; --card:#1f1e1c; --ink:#ecebe6; --mute:#9a968d; --line:#33312d; --ok:#5fcf9a; --warn:#e6b052; --miss:#ff8a80; --accent:#8fb0ff; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 -apple-system, system-ui, sans-serif; }
+  header { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line); }
+  h1 { font-size:17px; margin:0; }
+  #status { color:var(--mute); font-size:13px; font-variant-numeric:tabular-nums; margin-left:auto; }
+  #mock { display:none; width:100%; background:var(--warn); color:#000; padding:6px 10px; border-radius:6px; font-size:13px; }
+  main { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; padding:16px; max-width:1300px; margin:auto; }
+  @media (max-width: 800px) { main { grid-template-columns:1fr; } }
+  .bar { display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+  button { font:inherit; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:7px 12px; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  #mic.on { background:var(--miss); color:#fff; border-color:transparent; }
+  textarea { width:100%; min-height:60vh; resize:vertical; padding:12px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:inherit; font:16px/1.55 inherit; }
+  #interim { color:var(--mute); min-height:1.5em; font-style:italic; padding:4px 2px; }
+  #side { position:sticky; top:12px; align-self:start; max-height:calc(100vh - 24px); overflow:auto; }
+  #progress { font-weight:600; margin-bottom:8px; font-variant-numeric:tabular-nums; }
+  h2 { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); margin:16px 0 6px; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:10px; margin-bottom:8px; }
+  details.fresh { animation:flash 1.6s ease-out; }
+  @keyframes flash { from { border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); } }
+  @media (prefers-reduced-motion: reduce) { details.fresh { animation:none; } }
+  summary { cursor:pointer; padding:8px 12px; font-weight:600; display:flex; justify-content:space-between; gap:8px; }
+  summary .n { color:var(--mute); font-weight:400; font-variant-numeric:tabular-nums; }
+  summary .n.full { color:var(--ok); }
+  .items { display:flex; flex-wrap:wrap; gap:6px; padding:0 12px 12px; }
+  .item { font-size:13px; padding:4px 9px; border-radius:999px; }
+  .item.missing { border-color:var(--miss); color:var(--miss); }
+  .item.maybe { border-color:var(--warn); color:var(--warn); border-style:dashed; }
+  .item.done { color:var(--mute); border-color:transparent; background:transparent; }
+  .item.done::before { content:"✓ "; color:var(--ok); }
+  .item.maybe::before { content:"? "; }
+  .item.na { color:var(--mute); border-color:transparent; text-decoration:line-through; }
+  .hint { color:var(--mute); font-size:12px; margin-top:8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>History Checker</h1>
+  <span id="status">idle</span>
+  <div id="mock">MOCK MODE: plain keyword matching, not Jev. It will wrongly fire on "denies vomiting" or "father is diabetic". Add TYPESAFE_API_KEY to .env and restart to use Jev.</div>
+</header>
+<main>
+  <section>
+    <div class="bar">
+      <button id="mic" aria-pressed="false">🎙 Dictate</button>
+      <button id="sample">Load sample</button>
+      <button id="clear">Clear</button>
+    </div>
+    <textarea id="note" aria-label="Clinical note" placeholder="Type or dictate the history and examination in English…"></textarea>
+    <div id="interim" aria-live="polite"></div>
+  </section>
+  <aside id="side">
+    <div id="progress"></div>
+    <div id="lists"></div>
+    <p class="hint">Red = not documented yet. Dashed = unclear. Click an item to mark it not relevant.</p>
+  </aside>
+</main>
+
+<script src="bundles.js"></script>
+<script src="logic.js"></script>
+<script>
+const DEBOUNCE_MS = 700;        // wait this long after the last keystroke before asking Jev
+const SPEECH_LANG = "en-US";    // try "en-GB" or "en-IN" if recognition of your accent is poor
+const USD_PER_MTOK = 0.042;     // estimate only; check your TypeSafe console for real spend
+
+const B = globalThis.BUNDLES, L = globalThis.Logic, $ = (id) => document.getElementById(id);
+const note = $("note");
+let answers = {}, active = L.activeIds(B, {}), na = new Set(), seen = new Set(active);
+let busy = false, dirty = false, timer, tokens = 0;
+
+async function ask(state, questions) {
+  const r = await fetch("/api/check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ state, questions }) });
+  const body = await r.json();
+  if (!r.ok) throw new Error(body.error || `HTTP ${r.status}`);
+  tokens += (body.usage?.input_tokens || 0) + (body.usage?.output_tokens || 0);
+  return Object.fromEntries(Object.entries(body.answers).map(([id, a]) => [id, a.noul]));
+}
+
+async function check() {
+  if (busy) { dirty = true; return; }
+  const text = note.value.trim();
+  if (!text) { answers = {}; active = L.activeIds(B, {}); render(); $("status").textContent = "idle"; return; }
+  busy = true;
+  try {
+    const t0 = performance.now();
+    // One round trip: every trigger plus the items of bundles already showing.
+    answers = await ask(text, { ...L.triggerQuestions(B), ...L.itemQuestions(B, active) });
+    const now = L.activeIds(B, answers);
+    const fresh = new Set([...now].filter((id) => !active.has(id)));
+    active = now;
+    // Second round trip only when a new bundle just fired.
+    if (fresh.size) Object.assign(answers, await ask(text, L.itemQuestions(B, fresh)));
+    $("status").textContent = `${Math.round(performance.now() - t0)} ms · ${tokens.toLocaleString()} tokens · est. $${(tokens / 1e6 * USD_PER_MTOK).toFixed(4)}`;
+    render();
+  } catch (e) {
+    $("status").textContent = "error: " + e.message;
+  } finally {
+    busy = false;
+    if (dirty) { dirty = false; check(); }
+  }
+}
+
+function render() {
+  let done = 0, total = 0, html = "";
+  for (const [list, heading] of [["history", "History"], ["exam", "Examination"]]) {
+    html += `<h2>${heading}</h2>`;
+    for (const b of B.filter((b) => b.list === list && active.has(b.id))) {
+      let d = 0;
+      const items = b.items.map((s, i) => {
+        const id = `i_${b.id}_${i}`;
+        const state = na.has(id) ? "na" : L.itemState(answers[id]);
+        if (state === "done" || state === "na") d++;
+        return `<button class="item ${state}" data-id="${id}" title="${answers[id] == null ? "" : "p = " + answers[id].toFixed(2)}">${L.parseItem(s).label}</button>`;
+      }).join("");
+      done += d; total += b.items.length;
+      const fresh = !seen.has(b.id); seen.add(b.id);
+      html += `<details ${d < b.items.length ? "open" : ""} class="${fresh ? "fresh" : ""}"><summary>${b.title}<span class="n ${d === b.items.length ? "full" : ""}">${d}/${b.items.length}</span></summary><div class="items">${items}</div></details>`;
+    }
+  }
+  for (const id of seen) if (!active.has(id)) seen.delete(id);
+  $("lists").innerHTML = html;
+  $("progress").textContent = `${done} of ${total} documented`;
+}
+
+$("lists").addEventListener("click", (e) => {
+  const id = e.target.closest(".item")?.dataset.id;
+  if (!id) return;
+  na.has(id) ? na.delete(id) : na.add(id);
+  render();
+});
+const schedule = () => { clearTimeout(timer); timer = setTimeout(check, DEBOUNCE_MS); };
+note.addEventListener("input", schedule);
+$("clear").onclick = () => { note.value = ""; na.clear(); check(); };
+$("sample").onclick = () => {
+  note.value = "45 year old male teacher from Giza, married with three children, smokes 20 cigarettes a day for 20 years, no alcohol. Known diabetic for 10 years on metformin, last HbA1c was 8.2. Presents with epigastric pain for 3 days, gradual onset and progressive course, burning in character, radiating to the back, increased by meals and relieved by antacids. He denies vomiting. No jaundice. His father is hypertensive. On examination he is alert, pulse 88, blood pressure 130 over 85, temperature 37.2. Abdomen is soft with epigastric tenderness, no guarding.";
+  check();
+};
+
+// Dictation: the browser's built-in speech recognition. Free. In Chrome the audio is sent to Google.
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec, listening = false;
+if (!SR) { $("mic").disabled = true; $("mic").title = "Dictation needs Chrome, Edge or Safari"; }
+$("mic").onclick = () => {
+  listening = !listening;
+  $("mic").classList.toggle("on", listening);
+  $("mic").setAttribute("aria-pressed", listening);
+  $("mic").textContent = listening ? "■ Stop" : "🎙 Dictate";
+  if (!listening) { rec?.stop(); $("interim").textContent = ""; return; }
+  rec = new SR();
+  rec.continuous = true; rec.interimResults = true; rec.lang = SPEECH_LANG;
+  rec.onresult = (e) => {
+    let interim = "";
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript.trim();
+      if (!e.results[i].isFinal) { interim += t + " "; continue; }
+      // ponytail: Chrome gives no punctuation, so a pause becomes a full stop. Swap in a real STT if this reads badly.
+      note.value += (note.value && !/\s$/.test(note.value) ? " " : "") + t.charAt(0).toUpperCase() + t.slice(1) + ". ";
+      schedule();
+    }
+    $("interim").textContent = interim;
+  };
+  rec.onerror = (e) => { if (e.error === "not-allowed" || e.error === "service-not-allowed") { $("status").textContent = "microphone blocked: " + e.error; if (listening) $("mic").click(); } };
+  rec.onend = () => { if (listening) rec.start(); }; // Chrome stops after silence; keep going until the user stops
+  rec.start();
+};
+
+fetch("/api/mode").then((r) => r.json()).then((m) => { if (m.mock) $("mock").style.display = "block"; });
+render();
+</script>
+</body>
+</html>

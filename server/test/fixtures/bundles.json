@@ -1,0 +1,91 @@
+{
+  "version": "test-fixture-1",
+  "bundles": [
+    {
+      "id": "general",
+      "title": "General examination",
+      "kind": "exam",
+      "system": "General",
+      "trigger": null,
+      "about": "the general examination",
+      "status": "reviewed",
+      "items": [
+        {
+          "id": "bp",
+          "label": "Blood pressure",
+          "phrase": "a blood pressure reading",
+          "type": "bp"
+        },
+        {
+          "id": "temp",
+          "label": "Temperature",
+          "phrase": "a temperature reading",
+          "type": "number C"
+        }
+      ]
+    },
+    {
+      "id": "diabetes",
+      "title": "Diabetes mellitus",
+      "kind": "history",
+      "system": "Endocrine",
+      "trigger": "The patient themself has diabetes mellitus",
+      "about": "the patient's diabetes",
+      "status": "reviewed",
+      "items": [
+        {
+          "id": "hba1c",
+          "label": "Latest HbA1c",
+          "phrase": "an HbA1c value, or that none is available",
+          "type": "number %"
+        },
+        {
+          "id": "foot",
+          "label": "Foot problems",
+          "phrase": "foot problems or foot care, or their absence",
+          "type": "presence"
+        },
+        {
+          "id": "mgmt",
+          "label": "Current management",
+          "phrase": "how it is managed now",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "cough",
+      "title": "Cough",
+      "kind": "history",
+      "system": "Chest",
+      "trigger": "The patient has a cough",
+      "about": "the patient's cough",
+      "status": "reviewed",
+      "items": [
+        {
+          "id": "duration",
+          "label": "Duration",
+          "phrase": "how long it has been present",
+          "type": "duration"
+        }
+      ]
+    },
+    {
+      "id": "named_diagnosis",
+      "title": "Named diagnosis",
+      "kind": "history",
+      "system": "General",
+      "trigger": "The note names a specific disease the patient themself has",
+      "about": "the named diagnosis",
+      "status": "draft",
+      "items": [
+        {
+          "id": "when",
+          "label": "When diagnosed",
+          "phrase": "when it was diagnosed",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+[
+  { "mode": "operative", "text": "Fistulotomy performed for a low anal fistula-in-ano.", "mustOpen": ["op_anal_fistula_surgery"] },
+  { "mode": "operative", "text": "LIFT procedure performed for a trans-sphincteric fistula tract.", "mustOpen": ["op_anal_fistula_surgery"] },
+  { "mode": "operative", "text": "Seton placed for a complex anal fistula with the internal opening at 6 o'clock.", "mustOpen": ["op_anal_fistula_surgery"] },
+
+  { "mode": "operative", "text": "Laparoscopic appendectomy for acute appendicitis.", "mustOpen": ["op_appendectomy"] },
+  { "mode": "operative", "text": "Lap appy performed, appendix retrocecal and inflamed.", "mustOpen": ["op_appendectomy"] },
+  { "mode": "operative", "text": "Open appy done through a Lanz incision for perforated appendicitis.", "mustOpen": ["op_appendectomy"] },
+  { "mode": "operative", "text": "Patient had an appendectomy in 2015. Today's operation was an open inguinal hernia repair with Lichtenstein mesh.", "mustNotOpen": ["op_appendectomy"], "mustOpen": ["op_inguinal_hernia_open"], "why": "Past history, not this operation; today's operative note describes an inguinal hernia repair." },
+
+  { "mode": "operative", "text": "Exploratory laparotomy performed for blunt abdominal trauma.", "mustOpen": ["op_exploratory_laparotomy"] },
+  { "mode": "operative", "text": "Ex-lap done, four quadrants explored, no active bleeding found.", "mustOpen": ["op_exploratory_laparotomy"] },
+
+  { "mode": "operative", "text": "Hartmann's procedure performed for perforated sigmoid diverticulitis with faeculent peritonitis.", "mustOpen": ["op_hartmanns_procedure"] },
+  { "mode": "operative", "text": "Hartmanns done, end colostomy fashioned in the left iliac fossa.", "mustOpen": ["op_hartmanns_procedure"] },
+
+  { "mode": "operative", "text": "Milligan-Morgan hemorrhoidectomy performed for grade III piles.", "mustOpen": ["op_hemorrhoidectomy"] },
+  { "mode": "operative", "text": "Stapled hemorrhoidopexy (PPH) performed.", "mustOpen": ["op_hemorrhoidectomy"] },
+
+  { "mode": "operative", "text": "I&D of a perianal abscess performed under general anaesthesia.", "mustOpen": ["op_incision_drainage_abscess"] },
+  { "mode": "operative", "text": "Incision and drainage of a large gluteal abscess, pus sent for culture.", "mustOpen": ["op_incision_drainage_abscess"] },
+
+  { "mode": "operative", "text": "TAPP repair of a right indirect inguinal hernia.", "mustOpen": ["op_inguinal_hernia_tapp_tep"] },
+  { "mode": "operative", "text": "TEP performed bilaterally with mesh placed extraperitoneally.", "mustOpen": ["op_inguinal_hernia_tapp_tep"] },
+
+  { "mode": "operative", "text": "Lichtenstein repair of a left inguinal hernia with polypropylene mesh.", "mustOpen": ["op_inguinal_hernia_open"] },
+  { "mode": "operative", "text": "Open inguinal hernia repair, Bassini technique, no mesh used.", "mustOpen": ["op_inguinal_hernia_open"] },
+  { "mode": "operative", "text": "Planned laparoscopic TAPP repair, but converted to an open Lichtenstein repair due to dense adhesions in the preperitoneal space.", "mustOpen": ["op_inguinal_hernia_open", "op_conversion"], "mustNotOpen": ["op_inguinal_hernia_tapp_tep"], "why": "The TAPP was planned but never carried out; only the open repair that was actually performed, and the conversion event, should open." },
+
+  { "mode": "operative", "text": "Laparoscopic cholecystectomy for symptomatic gallstones.", "mustOpen": ["op_lap_chole"] },
+  { "mode": "operative", "text": "Lap chole performed, critical view of safety achieved.", "mustOpen": ["op_lap_chole"] },
+  { "mode": "operative", "text": "LC done for acute cholecystitis.", "mustOpen": ["op_lap_chole"] },
+  { "mode": "operative", "text": "Patient's brother had a laparoscopic cholecystectomy last year; today's operation was an appendectomy.", "mustNotOpen": ["op_lap_chole"], "mustOpen": ["op_appendectomy"], "why": "The cholecystectomy applies to a relative, not the patient." },
+  { "mode": "operative", "text": "Patient counselled and listed for an elective laparoscopic cholecystectomy next month.", "mustNotOpen": ["op_lap_chole"], "why": "A future plan, not an operation that has been carried out in this note." },
+
+  { "mode": "operative", "text": "Sigmoid colectomy performed for diverticular stricture.", "mustOpen": ["op_left_sigmoid_colectomy"] },
+  { "mode": "operative", "text": "Low anterior resection (LAR) for a mid rectal tumour.", "mustOpen": ["op_left_sigmoid_colectomy"] },
+  { "mode": "operative", "text": "Plan for elective sigmoid colectomy in three months for recurrent diverticulitis.", "mustNotOpen": ["op_left_sigmoid_colectomy"], "why": "Planned but not yet performed." },
+
+  { "mode": "operative", "text": "Open cholecystectomy performed via a right subcostal incision for a hostile Calot's triangle.", "mustOpen": ["op_open_chole"] },
+  { "mode": "operative", "text": "Lap chole converted to open cholecystectomy due to dense adhesions obscuring Calot's triangle.", "mustOpen": ["op_lap_chole", "op_open_chole", "op_conversion"], "why": "The note documents both the laparoscopic attempt and the completed open operation, so both procedure bundles legitimately apply alongside the conversion event." },
+
+  { "mode": "operative", "text": "Graham patch repair of a perforated duodenal ulcer.", "mustOpen": ["op_perforated_pud_repair"] },
+  { "mode": "operative", "text": "Omental patch closure of a 1 cm gastric perforation.", "mustOpen": ["op_perforated_pud_repair"] },
+
+  { "mode": "operative", "text": "Karydakis flap for pilonidal sinus disease.", "mustOpen": ["op_pilonidal_sinus_excision"] },
+  { "mode": "operative", "text": "Excision of pilonidal sinus with midline closure.", "mustOpen": ["op_pilonidal_sinus_excision"] },
+
+  { "mode": "operative", "text": "Right hemicolectomy performed for a caecal tumour.", "mustOpen": ["op_right_hemicolectomy"] },
+  { "mode": "operative", "text": "Rt hemi performed for a caecal mass, ileocolic anastomosis fashioned.", "mustOpen": ["op_right_hemicolectomy"], "why": "\"Rt hemi\" with an ileocolic anastomosis and caecal mass context clearly means right hemicolectomy." },
+  { "mode": "operative", "text": "Hemi performed today.", "mustNotOpen": ["op_right_hemicolectomy"], "why": "\"Hemi\" alone with no other context is genuinely ambiguous between hemicolectomy, hip hemiarthroplasty and hemithyroidectomy. Live testing shows Jev leans towards reading bare \"hemi\" as hemiarthroplasty or hemithyroidectomy rather than hemicolectomy; only the hemicolectomy exclusion is asserted here, and the ambiguity is otherwise left as a documented judgment call rather than a hard expectation." },
+  { "mode": "operative", "text": "Right hip hemiarthroplasty performed for a displaced neck of femur fracture.", "mustOpen": ["op_hip_arthroplasty"], "mustNotOpen": ["op_right_hemicolectomy"], "why": "A lookalike test: \"hemi\" here means hip hemiarthroplasty, not hemicolectomy." },
+
+  { "mode": "operative", "text": "Small bowel resection performed for ischaemic bowel from a strangulated hernia.", "mustOpen": ["op_small_bowel_resection"] },
+
+  { "mode": "operative", "text": "Laparoscopic splenectomy for ITP.", "mustOpen": ["op_splenectomy"] },
+  { "mode": "operative", "text": "Splenectomy performed for a grade IV splenic injury after trauma.", "mustOpen": ["op_splenectomy"] },
+
+  { "mode": "operative", "text": "Repair of a large incisional hernia with sublay mesh.", "mustOpen": ["op_ventral_hernia_repair"] },
+  { "mode": "operative", "text": "Umbilical hernia repair performed with primary suture closure.", "mustOpen": ["op_ventral_hernia_repair"] },
+  { "mode": "operative", "text": "No drains, no mesh and no stoma were used in this straightforward umbilical hernia repair.", "mustOpen": ["op_ventral_hernia_repair"], "mustNotOpen": ["op_drain", "op_implant", "op_stoma"], "why": "All three adjuncts are explicitly stated negatives." },
+
+  { "mode": "operative", "text": "APR performed for a low rectal cancer involving the sphincter complex.", "mustOpen": ["op_abdominoperineal_resection"] },
+  { "mode": "operative", "text": "Abdominoperineal resection performed with extralevator perineal excision and a permanent end colostomy.", "mustOpen": ["op_abdominoperineal_resection"], "why": "A dictated-style sentence naming the full procedure and its permanent stoma." },
+  { "mode": "operative", "text": "History of an APR for rectal cancer in 2019; today's operation is a parastomal hernia repair.", "mustNotOpen": ["op_abdominoperineal_resection"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "Laparoscopic sleeve gastrectomy performed for morbid obesity.", "mustOpen": ["op_bariatric_surgery"] },
+  { "mode": "operative", "text": "Roux-en-Y gastric bypass (RYGB) performed.", "mustOpen": ["op_bariatric_surgery"] },
+
+  { "mode": "operative", "text": "Diagnostic laparoscopy performed for chronic pelvic pain, no pathology found.", "mustOpen": ["op_diagnostic_laparoscopy"] },
+  { "mode": "operative", "text": "Diagnostic laparoscopy converted to open appendectomy after a perforated appendix was found.", "mustOpen": ["op_appendectomy", "op_conversion"], "mustNotOpen": ["op_diagnostic_laparoscopy"], "why": "Revised after live testing: when a diagnostic laparoscopy immediately proceeds to treat the pathology it finds, it is conventionally documented as just the therapeutic procedure (here, an appendectomy converted to open) rather than as a separate diagnostic laparoscopy in its own right; the diagnostic-laparoscopy bundle is reserved for when no therapeutic procedure follows." },
+
+  { "mode": "operative", "text": "Whipple procedure performed for a periampullary tumour.", "mustOpen": ["op_whipple_procedure"] },
+  { "mode": "operative", "text": "Pylorus-preserving Whipple (PPPD) performed with a pancreaticojejunostomy.", "mustOpen": ["op_whipple_procedure"] },
+  { "mode": "operative", "text": "History of a Whipple procedure for pancreatic cancer in 2021; presenting today for an incisional hernia repair.", "mustNotOpen": ["op_whipple_procedure"], "mustOpen": ["op_ventral_hernia_repair"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "Right hepatectomy performed for a solitary liver metastasis.", "mustOpen": ["op_liver_resection"] },
+  { "mode": "operative", "text": "Liver resection, segment 6 wedge resection performed.", "mustOpen": ["op_liver_resection"] },
+
+  { "mode": "operative", "text": "Subtotal gastrectomy with Billroth II reconstruction for gastric cancer.", "mustOpen": ["op_gastrectomy"] },
+  { "mode": "operative", "text": "Total gastrectomy performed with Roux-en-Y reconstruction.", "mustOpen": ["op_gastrectomy"] },
+
+  { "mode": "operative", "text": "Colonoscopy performed to the caecum, Boston prep score 8.", "mustOpen": ["op_colonoscopy"] },
+  { "mode": "operative", "text": "Scope done to the caecum, terminal ileum intubated, no polyps seen.", "mustOpen": ["op_colonoscopy"], "mustNotOpen": ["op_polypectomy"], "why": "\"No polyps seen\" is a stated negative for polypectomy." },
+  { "mode": "operative", "text": "History of a colonoscopy with polypectomy in 2020; today's procedure was an OGD.", "mustNotOpen": ["op_colonoscopy", "op_polypectomy"], "mustOpen": ["op_ugi_endoscopy"], "why": "Past history, not today's procedure." },
+
+  { "mode": "operative", "text": "ERCP performed with cannulation of the CBD and stone extraction.", "mustOpen": ["op_ercp"] },
+
+  { "mode": "operative", "text": "PEG tube inserted using the pull technique for dysphagia.", "mustOpen": ["op_peg_insertion"] },
+
+  { "mode": "operative", "text": "Colonoscopy performed with polypectomy of two sigmoid polyps using a hot snare.", "mustOpen": ["op_colonoscopy", "op_polypectomy"] },
+  { "mode": "operative", "text": "Polypectomy of a 12mm sigmoid polyp using a hot snare, retrieved for histology.", "mustOpen": ["op_polypectomy"] },
+
+  { "mode": "operative", "text": "Emergency endoscopy for a bleeding duodenal ulcer, adrenaline injected and clipped, hemostasis achieved.", "mustOpen": ["op_ugi_bleed_endoscopy"] },
+
+  { "mode": "operative", "text": "OGD performed for dyspepsia, biopsies taken from the antrum.", "mustOpen": ["op_ugi_endoscopy"] },
+  { "mode": "operative", "text": "EGD done, no abnormality seen.", "mustOpen": ["op_ugi_endoscopy"] },
+  { "mode": "operative", "text": "Gastroscopy performed, H. pylori rapid urease test taken.", "mustOpen": ["op_ugi_endoscopy"] },
+
+  { "mode": "operative", "text": "Endoscopic variceal band ligation performed for oesophageal varices with red wale signs.", "mustOpen": ["op_variceal_management"] },
+
+  { "mode": "operative", "text": "Carpal tunnel release (CTR) performed under local anaesthesia and tourniquet.", "mustOpen": ["op_carpal_tunnel_release"] },
+
+  { "mode": "operative", "text": "Closed reduction and casting of a distal radius fracture under sedation.", "mustOpen": ["op_closed_reduction_casting"] },
+  { "mode": "operative", "text": "MUA and below-elbow cast applied for a Colles fracture.", "mustOpen": ["op_closed_reduction_casting"] },
+
+  { "mode": "operative", "text": "DHS fixation of an intertrochanteric femur fracture.", "mustOpen": ["op_dynamic_hip_screw"] },
+  { "mode": "operative", "text": "Dynamic hip screw inserted for a stable intertrochanteric fracture.", "mustOpen": ["op_dynamic_hip_screw"] },
+
+  { "mode": "operative", "text": "Ex-fix applied to an open tibial fracture.", "mustOpen": ["op_external_fixator"] },
+
+  { "mode": "operative", "text": "Four-compartment fasciotomy performed for compartment syndrome of the leg.", "mustOpen": ["op_fasciotomy"] },
+
+  { "mode": "operative", "text": "Right hip hemiarthroplasty performed for a displaced intracapsular neck of femur fracture.", "mustOpen": ["op_hip_arthroplasty"] },
+  { "mode": "operative", "text": "Total hip replacement (THR) performed via a posterior approach.", "mustOpen": ["op_hip_arthroplasty"] },
+  { "mode": "operative", "text": "Patient had a THR five years ago on the left; today's operation was a right knee arthroscopy.", "mustNotOpen": ["op_hip_arthroplasty"], "mustOpen": ["op_knee_arthroscopy"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "IMN tibia performed for a closed tibial shaft fracture.", "mustOpen": ["op_im_nailing"] },
+  { "mode": "operative", "text": "Intramedullary nail inserted for a femoral shaft fracture, statically locked.", "mustOpen": ["op_im_nailing"] },
+
+  { "mode": "operative", "text": "K-wire fixation of a displaced supracondylar fracture in a child.", "mustOpen": ["op_kwire_fixation"] },
+
+  { "mode": "operative", "text": "Knee arthroscopy performed with partial medial meniscectomy.", "mustOpen": ["op_knee_arthroscopy"] },
+  { "mode": "operative", "text": "Plan for elective ACL reconstruction was discussed with the patient, but today only a knee arthroscopy and washout was performed.", "mustNotOpen": ["op_acl_reconstruction"], "mustOpen": ["op_knee_arthroscopy"], "why": "The ACL reconstruction is a plan for the future, not carried out today." },
+
+  { "mode": "operative", "text": "ORIF DR performed with a volar locking plate.", "mustOpen": ["op_orif_general"] },
+  { "mode": "operative", "text": "ORIF of the ankle with a lateral plate and syndesmotic screw.", "mustOpen": ["op_orif_general"] },
+  { "mode": "operative", "text": "Plating of a distal humerus fracture performed through a posterior approach.", "mustOpen": ["op_orif_general"], "why": "\"Plating of a fracture\" is included as ORIF shorthand in the trigger." },
+
+  { "mode": "operative", "text": "Flexor tendon repair, zone II, 4-strand core suture.", "mustOpen": ["op_tendon_repair"] },
+
+  { "mode": "operative", "text": "TKR performed, cemented components.", "mustOpen": ["op_total_knee_replacement"] },
+  { "mode": "operative", "text": "Total knee replacement performed for end-stage osteoarthritis.", "mustOpen": ["op_total_knee_replacement"] },
+
+  { "mode": "operative", "text": "L4/5 microdiscectomy performed for a herniated disc.", "mustOpen": ["op_laminectomy_discectomy"] },
+  { "mode": "operative", "text": "Lumbar laminectomy performed for spinal stenosis.", "mustOpen": ["op_laminectomy_discectomy"] },
+
+  { "mode": "operative", "text": "Shoulder arthroscopy with rotator cuff repair performed.", "mustOpen": ["op_shoulder_arthroscopy"] },
+
+  { "mode": "operative", "text": "ACL reconstruction performed using a hamstring graft.", "mustOpen": ["op_acl_reconstruction"] },
+
+  { "mode": "operative", "text": "Excision of a lipoma from the back.", "mustOpen": ["op_lump_cyst_lipoma_excision"] },
+
+  { "mode": "operative", "text": "Modified radical mastectomy (MRM) with axillary clearance for breast cancer.", "mustOpen": ["op_mastectomy"] },
+  { "mode": "operative", "text": "Skin-sparing mastectomy with immediate reconstruction performed.", "mustOpen": ["op_mastectomy"] },
+  { "mode": "operative", "text": "History of mastectomy for breast cancer in 2019; today's operation was excision of a skin lesion on the scalp.", "mustNotOpen": ["op_mastectomy"], "mustOpen": ["op_skin_lesion_excision"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "Excision biopsy of a level II neck node.", "mustOpen": ["op_neck_node_dissection"] },
+  { "mode": "operative", "text": "Formal neck dissection performed for metastatic squamous cell carcinoma.", "mustOpen": ["op_neck_node_dissection"] },
+
+  { "mode": "operative", "text": "Parathyroidectomy performed for a solitary adenoma with intraoperative PTH monitoring.", "mustOpen": ["op_parathyroidectomy"] },
+
+  { "mode": "operative", "text": "Superficial parotidectomy performed with facial nerve monitoring.", "mustOpen": ["op_parotidectomy"] },
+
+  { "mode": "operative", "text": "Sentinel lymph node biopsy (SLNB) performed using blue dye.", "mustOpen": ["op_sentinel_node_axillary_clearance"] },
+  { "mode": "operative", "text": "WLE + SLNB performed for breast cancer.", "mustOpen": ["op_wide_local_excision", "op_sentinel_node_axillary_clearance"], "why": "The note documents two distinct procedures performed together: a wide local excision and a sentinel node biopsy." },
+
+  { "mode": "operative", "text": "Excision of a suspicious skin lesion on the forearm with 4mm margins.", "mustOpen": ["op_skin_lesion_excision"] },
+
+  { "mode": "operative", "text": "Total thyroidectomy performed for multinodular goitre.", "mustOpen": ["op_thyroidectomy"] },
+  { "mode": "operative", "text": "Hemithyroidectomy performed for a solitary thyroid nodule.", "mustOpen": ["op_thyroidectomy"] },
+  { "mode": "operative", "text": "Thyroid lobectomy performed on the right side with nerve monitoring.", "mustOpen": ["op_thyroidectomy"], "why": "A thyroid lobectomy is the same operation as a hemithyroidectomy, covered by this combined bundle." },
+
+  { "mode": "operative", "text": "WLE of a breast lump performed with wire localisation.", "mustOpen": ["op_wide_local_excision"] },
+
+  { "mode": "operative", "text": "Split-thickness skin graft (SSG) taken from the thigh and applied to a leg wound.", "mustOpen": ["op_skin_graft"] },
+  { "mode": "operative", "text": "The wound was closed primarily with no skin graft required.", "mustNotOpen": ["op_skin_graft"], "why": "Stated negative for skin graft." },
+
+  { "mode": "operative", "text": "Surgical debridement of necrotising fasciitis of the perineum, wound left open.", "mustOpen": ["op_wound_debridement"] },
+  { "mode": "operative", "text": "Sharp debridement of a diabetic foot ulcer with bone sampling.", "mustOpen": ["op_toe_ray_amputation_debridement"], "mustNotOpen": ["op_wound_debridement"], "why": "Debridement of a diabetic foot is specifically covered by the diabetic foot bundle, which the general wound debridement trigger excludes." },
+
+  { "mode": "operative", "text": "Radiocephalic AV fistula creation for dialysis access.", "mustOpen": ["op_av_fistula_creation"] },
+
+  { "mode": "operative", "text": "Below-knee amputation (BKA) performed for critical limb ischaemia.", "mustOpen": ["op_bka_aka_amputation"] },
+  { "mode": "operative", "text": "Above-knee amputation (AKA) performed for an unreconstructable arterial occlusion.", "mustOpen": ["op_bka_aka_amputation"] },
+
+  { "mode": "operative", "text": "Endovenous laser ablation (EVLA) of the great saphenous vein.", "mustOpen": ["op_endovenous_ablation"] },
+
+  { "mode": "operative", "text": "Femoral embolectomy performed with a Fogarty catheter for acute limb ischaemia.", "mustOpen": ["op_femoral_embolectomy"] },
+
+  { "mode": "operative", "text": "Ray amputation of the second toe for diabetic foot infection.", "mustOpen": ["op_toe_ray_amputation_debridement"] },
+
+  { "mode": "operative", "text": "High tie and strip of the long saphenous vein for varicose veins.", "mustOpen": ["op_varicose_vein_surgery"] },
+
+  { "mode": "operative", "text": "Circumcision performed under general anaesthesia for phimosis.", "mustOpen": ["op_circumcision"] },
+
+  { "mode": "operative", "text": "Varicocelectomy performed via a subinguinal approach.", "mustOpen": ["op_hydrocele_varicocele_repair"] },
+  { "mode": "operative", "text": "Jaboulay's procedure performed for a large hydrocele.", "mustOpen": ["op_hydrocele_varicocele_repair"] },
+  { "mode": "operative", "text": "History of bilateral orchidopexy in childhood; today's operation was a varicocelectomy.", "mustNotOpen": ["op_orchidopexy"], "mustOpen": ["op_hydrocele_varicocele_repair"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "Orchidopexy performed for a palpable undescended testis.", "mustOpen": ["op_orchidopexy"] },
+
+  { "mode": "operative", "text": "Percutaneous dilatational tracheostomy performed at the bedside.", "mustOpen": ["op_tracheostomy"] },
+  { "mode": "operative", "text": "Patient had a tracheostomy in the ICU three months ago, now decannulated; today's operation was a thyroid lobectomy.", "mustNotOpen": ["op_tracheostomy"], "mustOpen": ["op_thyroidectomy"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "Right internal jugular central line inserted under ultrasound guidance.", "mustOpen": ["op_central_line_port_insertion"] },
+  { "mode": "operative", "text": "Portacath inserted for chemotherapy access.", "mustOpen": ["op_central_line_port_insertion"] },
+  { "mode": "operative", "text": "No central line was required; peripheral access was adequate.", "mustNotOpen": ["op_central_line_port_insertion"], "why": "Stated negative." },
+
+  { "mode": "operative", "text": "Chest tube inserted in the 5th intercostal space for a traumatic pneumothorax.", "mustOpen": ["op_chest_tube_insertion"] },
+  { "mode": "operative", "text": "No chest tube was inserted; the small pneumothorax was managed conservatively.", "mustNotOpen": ["op_chest_tube_insertion"], "why": "Stated negative." },
+
+  { "mode": "operative", "text": "Caesarean section performed for failure to progress.", "mustOpen": ["op_caesarean_section"] },
+  { "mode": "operative", "text": "C-section performed under spinal anaesthesia for fetal distress.", "mustOpen": ["op_caesarean_section"] },
+  { "mode": "operative", "text": "Patient's sister had a caesarean section last year; today's patient had an open appendectomy during pregnancy.", "mustNotOpen": ["op_caesarean_section"], "mustOpen": ["op_appendectomy"], "why": "The caesarean applies to a relative, not the patient." },
+
+  { "mode": "operative", "text": "Total laparoscopic hysterectomy (TLH) performed for fibroids.", "mustOpen": ["op_hysterectomy"] },
+  { "mode": "operative", "text": "Abdominal hysterectomy with bilateral salpingo-oophorectomy performed.", "mustOpen": ["op_hysterectomy"] },
+  { "mode": "operative", "text": "Patient's obstetric history includes two previous caesarean sections; today's operation was a diagnostic laparoscopy for pelvic pain.", "mustNotOpen": ["op_caesarean_section"], "mustOpen": ["op_diagnostic_laparoscopy"], "why": "Past history, not today's operation." },
+
+  { "mode": "operative", "text": "Dense adhesions from previous surgery were divided sharply to access the peritoneal cavity.", "mustOpen": ["op_adhesions"] },
+  { "mode": "operative", "text": "Lysis of adhesions (LOA) performed to free the small bowel from the anterior abdominal wall.", "mustOpen": ["op_adhesions"] },
+  { "mode": "operative", "text": "No adhesions were encountered during the procedure.", "mustNotOpen": ["op_adhesions"] },
+
+  { "mode": "operative", "text": "Brisk bleeder from the cystic artery bed controlled with a clip.", "mustOpen": ["op_bleeding"] },
+  { "mode": "operative", "text": "Oozing from the liver bed controlled with diathermy.", "mustOpen": ["op_bleeding"] },
+  { "mode": "operative", "text": "No bleeding was encountered during the procedure.", "mustNotOpen": ["op_bleeding"] },
+  { "mode": "operative", "text": "Estimated blood loss 1500 mL.", "mustOpen": ["op_bleeding"], "why": "A blood loss this large is itself a noteworthy bleeding event even without further narrative." },
+  { "mode": "operative", "text": "Estimated blood loss 50 mL.", "mustNotOpen": ["op_bleeding"], "why": "A routine, minimal blood loss figure alone does not describe a noteworthy bleeding event; it is only documented in the core closure/counts bundle." },
+
+  { "mode": "operative", "text": "2 units of PRBCs transfused intraoperatively for ongoing blood loss.", "mustOpen": ["op_transfusion"] },
+  { "mode": "operative", "text": "No transfusion was required.", "mustNotOpen": ["op_transfusion"] },
+
+  { "mode": "operative", "text": "Patient desaturated to 85% during insufflation, resolved with reduced pneumoperitoneum pressure.", "mustOpen": ["op_anaesthetic_event"] },
+  { "mode": "operative", "text": "The patient remained haemodynamically stable throughout with no cardiorespiratory events.", "mustNotOpen": ["op_anaesthetic_event"] },
+
+  { "mode": "operative", "text": "Faeculent contamination noted, abdomen washed out with 3 litres of warm saline.", "mustOpen": ["op_washout"] },
+  { "mode": "operative", "text": "No contamination was encountered and no washout was required.", "mustNotOpen": ["op_washout"] },
+
+  { "mode": "operative", "text": "Procedure converted to open due to failure to progress laparoscopically.", "mustOpen": ["op_conversion"] },
+  { "mode": "operative", "text": "The procedure was completed laparoscopically with no conversion.", "mustNotOpen": ["op_conversion"] },
+  { "mode": "operative", "text": "Consent was obtained for possible conversion to open cholecystectomy if needed; the procedure was completed laparoscopically without conversion.", "mustOpen": ["op_lap_chole"], "mustNotOpen": ["op_conversion", "op_open_chole"], "why": "Consent for a possible future conversion is not the same as a conversion actually happening." },
+
+  { "mode": "operative", "text": "The procedure was abandoned due to dense unresectable adhesions; the abdomen was closed and the patient referred to a specialist centre.", "mustOpen": ["op_abandoned"] },
+  { "mode": "operative", "text": "A difficult dissection was encountered but the planned procedure was completed in full.", "mustNotOpen": ["op_abandoned"], "why": "Difficulty alone, without abandonment or a change of plan, should not fire this event." },
+  { "mode": "operative", "text": "Planned right hemicolectomy was abandoned intraoperatively due to peritoneal carcinomatosis; only a biopsy was taken.", "mustNotOpen": ["op_right_hemicolectomy"], "mustOpen": ["op_abandoned"], "why": "The hemicolectomy was planned but not carried out; only the abandonment event reflects what actually happened." },
+
+  { "mode": "operative", "text": "A 14Fr Redivac drain was placed in the pelvis.", "mustOpen": ["op_drain"] },
+  { "mode": "operative", "text": "Penrose drain left in the wound.", "mustOpen": ["op_drain"] },
+  { "mode": "operative", "text": "No drain was left at the end of the procedure.", "mustNotOpen": ["op_drain"] },
+  { "mode": "operative", "text": "An NGT was passed at the end of the procedure.", "mustNotOpen": ["op_drain"], "why": "A nasogastric tube is not a surgical drain, even though both are tubes left in the patient." },
+
+  { "mode": "operative", "text": "A plate and six screws were used to fix the fracture.", "mustOpen": ["op_fixation"] },
+
+  { "mode": "operative", "text": "Inadvertent enterotomy occurred during adhesiolysis and was repaired primarily.", "mustOpen": ["op_injury"] },
+  { "mode": "operative", "text": "CBD injury identified and repaired with a T-tube.", "mustOpen": ["op_injury"] },
+  { "mode": "operative", "text": "No iatrogenic injury occurred.", "mustNotOpen": ["op_injury"] },
+  { "mode": "operative", "text": "An enterotomy was made in the jejunum to fashion the anastomosis.", "mustNotOpen": ["op_injury"], "why": "This enterotomy is an intentional step in forming the anastomosis, not an injury." },
+
+  { "mode": "operative", "text": "On-table cholangiogram performed showing no filling defects.", "mustOpen": ["op_imaging"] },
+  { "mode": "operative", "text": "C-arm used to confirm nail position.", "mustOpen": ["op_imaging"] },
+  { "mode": "operative", "text": "II used intraoperatively to check reduction.", "mustOpen": ["op_imaging"], "why": "\"II\" (image intensifier) is standard shorthand for fluoroscopy." },
+  { "mode": "operative", "text": "No intraoperative imaging was used.", "mustNotOpen": ["op_imaging"] },
+
+  { "mode": "operative", "text": "Pneumoperitoneum established with a Veress needle, three 5mm ports inserted.", "mustOpen": ["op_lap_access"] },
+
+  { "mode": "operative", "text": "A 15x15cm prolene mesh placed in the sublay position.", "mustOpen": ["op_implant"] },
+  { "mode": "operative", "text": "No mesh was used.", "mustNotOpen": ["op_implant"] },
+
+  { "mode": "operative", "text": "Bowel resected and a stapled end-to-end anastomosis fashioned.", "mustOpen": ["op_anastomosis"] },
+
+  { "mode": "operative", "text": "Specimen sent for frozen section, reported as benign.", "mustOpen": ["op_specimen"] },
+  { "mode": "operative", "text": "No specimen was taken.", "mustNotOpen": ["op_specimen"] },
+
+  { "mode": "operative", "text": "A loop ileostomy was fashioned and matured in the right iliac fossa.", "mustOpen": ["op_stoma"] },
+  { "mode": "operative", "text": "No stoma was formed.", "mustNotOpen": ["op_stoma"] },
+  { "mode": "operative", "text": "Consent was obtained for possible stoma formation if the anastomosis was unsafe; a primary anastomosis was performed and no stoma was needed.", "mustNotOpen": ["op_stoma"], "mustOpen": ["op_anastomosis"], "why": "Consent for a possible stoma is not the same as one being formed." },
+
+  { "mode": "operative", "text": "Tourniquet inflated to 250 mmHg for 60 minutes.", "mustOpen": ["op_tourniquet"] },
+  { "mode": "operative", "text": "The procedure was performed without a tourniquet.", "mustNotOpen": ["op_tourniquet"] },
+
+  { "mode": "operative", "text": "Patient's father underwent a hip hemiarthroplasty last year; this note documents a total knee replacement.", "mustNotOpen": ["op_hip_arthroplasty"], "mustOpen": ["op_total_knee_replacement"], "why": "The hemiarthroplasty applies to a relative, not the patient." },
+  { "mode": "operative", "text": "Plan for an elective parathyroidectomy pending repeat calcium levels; no operation has been performed yet.", "mustNotOpen": ["op_parathyroidectomy"], "why": "A future plan, not an operation carried out in this note." },
+  { "mode": "operative", "text": "History of an AV fistula creation for dialysis in 2020; today's operation was a below-knee amputation.", "mustNotOpen": ["op_av_fistula_creation"], "mustOpen": ["op_bka_aka_amputation"], "why": "Past history, not today's operation." },
+  { "mode": "operative", "text": "No fixation hardware was used; the fracture was treated conservatively in a cast.", "mustNotOpen": ["op_fixation", "op_orif_general"], "why": "Stated negative for both implanted hardware and ORIF." }
+]

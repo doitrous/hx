@@ -1,0 +1,10 @@
+.env
+.env.*
+node_modules
+**/node_modules
+web/dist
+server/web-dist
+*.log
+.DS_Store
+vault/.obsidian/workspace*.json
+vault/.obsidian/cache

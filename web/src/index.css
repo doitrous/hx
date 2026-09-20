@@ -1,0 +1,515 @@
+@import "tailwindcss";
+@import "@fontsource-variable/source-serif-4";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* =========================================================================
+   CLINICAL NOTES · "The Clinical Chart" design system
+   Ported from the owner's other product's design system of the same name.
+   The visual language of medicine's own instruments: ruled vitals charts,
+   graph/ECG paper, formulary tables, fine anatomical line-work. Light-first,
+   built for long reading. No glass, no decorative gradients, no glow.
+
+   A restrained two-hue brand: crimson is the working accent (actions, active
+   navigation, selection, meters); blue is the secondary, structural one
+   (sources, links, categorical marks). The blue lives in the ground, the red
+   in the controls. Roughly 70% neutral / 25% crimson / 5% blue per screen.
+   Never a red->blue gradient, never the two hues at equal weight.
+
+   Source of truth for tokens: this file (`@theme`). No brand mark, wordmark
+   or logotype ships here — see src/lib/constants.ts for the app name.
+   ========================================================================= */
+
+@theme {
+  /* ---- Type ------------------------------------------------------------
+     Serif for page titles (character), Geist for UI (crisp neo-grotesque),
+     Geist Mono with tabular figures for every number that has to align. */
+  --font-serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* ---- Ground & ink ------------------------------------------------------ */
+  --color-paper: #f5f7fb;      /* page ground — a very light hint of the brand blue */
+  --color-surface: #ffffff;    /* card / panel field */
+  --color-surface-2: #eef1f7;  /* raised-but-quiet fill */
+  --color-inset: #e4e9f2;      /* recessed track / meter bed */
+
+  --color-ink: #161920;        /* near-black, faintly cool */
+  --color-ink-2: #5d636f;      /* body-safe muted, >=4.5:1 on paper */
+  --color-ink-3: #5f6778;      /* faint — still >=4.5:1 on every light surface (WCAG AA) */
+
+  --color-line: #e3e7ef;       /* hairline */
+  --color-line-2: #ccd3e0;     /* stronger rule / control border */
+  --color-grid: #e8ecf4;       /* faint chart grid */
+  --color-grid-major: #dbe1ec; /* graph-paper major line */
+
+  /* ---- Primary · crimson (the working accent) -----------------------------
+     #d13a63 is the lightest, pinkest rose that still clears AA with a white
+     label (4.67:1). Anything lighter forces a dark label, and a dark label on
+     a coloured button reads as a warning rather than an action. A lighter
+     button becomes a *tinted* button, never a lighter fill. */
+  --color-primary: #d13a63;
+  --color-primary-hover: #b62d55;  /* filled control on hover / press */
+  --color-primary-strong: #a82449; /* label text ON a tint, hairlines */
+  --color-primary-tint: #fff5f5;   /* pills, chips, selected nav/tabs — never a background */
+  --color-primary-line: #f4c8d6;
+  --color-on-primary: #ffffff;
+
+  /* ---- Accent · blue (secondary, structural) ------------------------------
+     Quiet emphasis, not action: links inside dense data, categorical marks,
+     answered-state markers. */
+  --color-accent: #1553b3;
+  --color-accent-strong: #0e3f8c;
+  --color-accent-tint: #eaf1fd;
+  --color-accent-line: #c4d9f7;
+  --color-on-accent: #f8fbff;
+
+  /* ---- Signals ------------------------------------------------------------
+     Danger shares the brand's red family, so it is never told apart by hue
+     alone: it arrives as tint + dot + word, never as a second filled action. */
+  --color-success: #1a6e56;
+  --color-success-tint: #e3f2ec;
+  --color-warning: #8a5a0a;
+  --color-warning-tint: #fbf0d9;
+  --color-danger: #a8121e;
+  --color-danger-tint: #fce7e9;
+
+  --color-on-success: #f4fbf8;
+  --color-on-warning: #fffaf0;
+  --color-on-danger: #fff7f7;
+
+  /* Heatmap ramp (ground -> crimson), used for dashboard intensity only. */
+  --color-scale-0: #e8ecf4;
+  --color-scale-1: #fbdde3;
+  --color-scale-2: #f5b4c2;
+  --color-scale-3: #e37fa0;
+  --color-scale-4: #d13a63;
+  --color-scale-5: #a82449;
+
+  /* ---- Radius -------------------------------------------------------------
+     Restrained, never pill-rounded cards. */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  /* ---- Elevation (offset + soft blur; never a flat halo) ------------------ */
+  --shadow-panel: 0 1px 2px rgba(22, 25, 32, 0.05), 0 1px 1px rgba(22, 25, 32, 0.03);
+  --shadow-raised: 0 4px 16px -6px rgba(22, 25, 32, 0.13), 0 1px 2px rgba(22, 25, 32, 0.05);
+  --shadow-pop: 0 14px 34px -12px rgba(22, 25, 32, 0.22), 0 3px 8px rgba(22, 25, 32, 0.08);
+  --shadow-control: 0 1px 1px rgba(22, 25, 32, 0.04);
+  /* On the primary the shadow is tinted with the action colour, not black. */
+  --shadow-action: 0 1px 2px rgba(168, 36, 73, 0.22);
+  --shadow-action-hover: 0 2px 6px rgba(168, 36, 73, 0.24);
+
+  /* ---- Motion --------------------------------------------------------- */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --spacing-sidebar: 15rem;
+  --spacing-sidebar-collapsed: 4.25rem;
+}
+
+/* Background images and raw durations — not scale values, so they stay out
+   of @theme (which would otherwise emit meaningless utilities for them). */
+:root {
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+
+  --dur-instant: 100ms;
+  --dur-fast: 150ms;
+  --dur-base: 180ms;
+  --dur-slow: 250ms;
+  --dur-screen: 260ms;
+  --dur-collapse: 280ms;
+  --dur-calibrate: 900ms;
+  --stagger-step: 26ms;
+
+  /* A focused field takes a soft crimson ring as well as a crimson border. */
+  --ring-field: 0 0 0 2px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+/* =========================================================================
+   DARK THEME
+   Applies from the OS preference (prefers-color-scheme), or forced by
+   data-theme="dark" / "light" on <html> (see src/lib/theme.ts). The ground
+   is not black (#0d1117 carries the same blue cast the light paper carries).
+   Elevation inverts: separation comes from the fill plus a hairline, not a
+   shadow. Saturated brand colour is held as a FILL and lifted as TEXT. Pure
+   white is never used for body ink.
+   ========================================================================= */
+/* Custom properties, not @theme entries: this cascades on selectors that
+   depend on runtime state (OS preference / explicit override), which @theme
+   cannot express — @theme only ever generates the light-mode utility values. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-paper: #0d1117;
+    --color-surface: #151b24;
+    --color-surface-2: #1d2531;
+    --color-inset: #0a0e14;
+
+    --color-ink: #e8ecf3;
+    --color-ink-2: #a2abbb;
+    --color-ink-3: #8791a2;
+
+    --color-line: #232b37;
+    --color-line-2: #38424f;
+    --color-grid: #1b2330;
+    --color-grid-major: #232c39;
+
+    --color-primary: #d13a63;
+    --color-primary-hover: #e0537a;
+    --color-primary-strong: #f193ab;
+    --color-primary-tint: #2a141d;
+    --color-primary-line: #4a2130;
+    --color-on-primary: #ffffff;
+
+    --color-accent: #6fa5ff;
+    --color-accent-strong: #a3c5ff;
+    --color-accent-tint: #11203a;
+    --color-accent-line: #24406b;
+    --color-on-accent: #0a1120;
+
+    --color-success: #4dc79b;
+    --color-success-tint: #0e2b23;
+    --color-warning: #e3a83f;
+    --color-warning-tint: #2e2410;
+    --color-danger: #ff6b6b;
+    --color-danger-tint: #331416;
+
+    --color-on-success: #06130f;
+    --color-on-warning: #1a1305;
+    --color-on-danger: #1a0708;
+
+    --color-scale-0: #1a212b;
+    --color-scale-1: #3b1d29;
+    --color-scale-2: #5f2739;
+    --color-scale-3: #8d3253;
+    --color-scale-4: #bb416b;
+    --color-scale-5: #e8759a;
+
+    --shadow-panel: 0 1px 0 rgba(0, 0, 0, 0.5);
+    --shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55);
+    --shadow-pop: 0 14px 34px rgba(0, 0, 0, 0.65);
+    --shadow-control: 0 1px 1px rgba(0, 0, 0, 0.45);
+    --shadow-action: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-action-hover: 0 2px 6px rgba(0, 0, 0, 0.55);
+
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --color-paper: #0d1117;
+  --color-surface: #151b24;
+  --color-surface-2: #1d2531;
+  --color-inset: #0a0e14;
+
+  --color-ink: #e8ecf3;
+  --color-ink-2: #a2abbb;
+  --color-ink-3: #8791a2;
+
+  --color-line: #232b37;
+  --color-line-2: #38424f;
+  --color-grid: #1b2330;
+  --color-grid-major: #232c39;
+
+  --color-primary: #d13a63;
+  --color-primary-hover: #e0537a;
+  --color-primary-strong: #f193ab;
+  --color-primary-tint: #2a141d;
+  --color-primary-line: #4a2130;
+  --color-on-primary: #ffffff;
+
+  --color-accent: #6fa5ff;
+  --color-accent-strong: #a3c5ff;
+  --color-accent-tint: #11203a;
+  --color-accent-line: #24406b;
+  --color-on-accent: #0a1120;
+
+  --color-success: #4dc79b;
+  --color-success-tint: #0e2b23;
+  --color-warning: #e3a83f;
+  --color-warning-tint: #2e2410;
+  --color-danger: #ff6b6b;
+  --color-danger-tint: #331416;
+
+  --color-on-success: #06130f;
+  --color-on-warning: #1a1305;
+  --color-on-danger: #1a0708;
+
+  --color-scale-0: #1a212b;
+  --color-scale-1: #3b1d29;
+  --color-scale-2: #5f2739;
+  --color-scale-3: #8d3253;
+  --color-scale-4: #bb416b;
+  --color-scale-5: #e8759a;
+
+  --shadow-panel: 0 1px 0 rgba(0, 0, 0, 0.5);
+  --shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55);
+  --shadow-pop: 0 14px 34px rgba(0, 0, 0, 0.65);
+  --shadow-control: 0 1px 1px rgba(0, 0, 0, 0.45);
+  --shadow-action: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-action-hover: 0 2px 6px rgba(0, 0, 0, 0.55);
+
+  color-scheme: dark;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-line-2) transparent;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--color-paper);
+    /* Faint paper grain — what makes the light palette feel premium rather
+       than blank. Dropped in dark: the same texture on a dark ground reads
+       as sensor noise. */
+    background-image: var(--paper-grain);
+    background-attachment: fixed;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme='light']) body { background-image: none; }
+  }
+  :root[data-theme='dark'] body { background-image: none; }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-serif);
+    font-weight: 560;
+    letter-spacing: -0.011em;
+    line-height: 1.14;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: var(--color-primary-tint);
+    color: var(--color-primary-strong);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-2);
+    border: 3px solid var(--color-paper);
+    border-radius: 999px;
+  }
+}
+
+/* Faint graph-paper grid — a specific clinical material, used sparingly:
+   measurement/blueprint surfaces only. Never a dashboard. */
+@utility grid-chart {
+  background-image:
+    linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Vitals-chart grid with a major line every fifth cell, like ECG paper. */
+@utility grid-chart-major {
+  background-image:
+    linear-gradient(to right, var(--color-grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+  background-size: 110px 110px, 110px 110px, 22px 22px, 22px 22px;
+}
+
+/* Aligned figures for every number that sits in a column or meter. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* =========================================================================
+   MOTION
+   Interface response is 100-250ms on --ease-out-quint. One authored moment
+   sits above it: meters fill on mount, like an instrument calibrating. No
+   bounce, no spring, no parallax, no scroll-driven animation, no looping
+   ambient motion. Everything below respects prefers-reduced-motion.
+   ========================================================================= */
+
+/* Overlay entrances (dialog, popover, drawer) — mounted by a user action in a
+   live document, so these may use opacity; they are never page content. */
+@keyframes cn-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cn-pop {
+  from { opacity: 0; transform: translateY(6px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cn-slide-x {
+  from { transform: translateX(-100%); }
+  to { transform: none; }
+}
+
+@utility animate-fade {
+  animation: cn-fade var(--dur-fast) var(--ease-out-quint) backwards;
+}
+@utility animate-pop {
+  animation: cn-pop var(--dur-base) var(--ease-out-quint) backwards;
+}
+@utility animate-slide-x {
+  animation: cn-slide-x var(--dur-slow) var(--ease-out-quint) backwards;
+}
+
+/* ---- Screen and list entrances -----------------------------------------
+   THE HARD RULE: a screen or list entrance animates transform only, never
+   opacity. A keyframe starting at opacity:0 with a fill mode leaves the
+   element permanently invisible in any document whose timeline never
+   advances — a background tab, an offscreen thumbnail iframe, a print pass,
+   a DOM-capture screenshot. Motion may refine how content arrives; it may
+   never be the thing that makes content visible. */
+@keyframes cn-screen-in {
+  from { transform: translateY(8px); }
+  to { transform: none; }
+}
+
+@utility animate-screen-in {
+  animation: cn-screen-in var(--dur-screen) var(--ease-out-quint) backwards;
+}
+
+/* A list or grid whose rows settle in sequence. Capped at 8 — past that the
+   last row arrives late enough to feel broken rather than composed. */
+@utility stagger {
+  & > * {
+    animation: cn-screen-in var(--dur-screen) var(--ease-out-quint) backwards;
+  }
+  & > *:nth-child(1) { animation-delay: 0ms; }
+  & > *:nth-child(2) { animation-delay: calc(var(--stagger-step) * 1); }
+  & > *:nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
+  & > *:nth-child(4) { animation-delay: calc(var(--stagger-step) * 3); }
+  & > *:nth-child(5) { animation-delay: calc(var(--stagger-step) * 4); }
+  & > *:nth-child(6) { animation-delay: calc(var(--stagger-step) * 5); }
+  & > *:nth-child(7) { animation-delay: calc(var(--stagger-step) * 6); }
+  & > *:nth-child(n+8) { animation-delay: calc(var(--stagger-step) * 7); }
+}
+
+/* ---- Disclosure ----------------------------------------------------------
+   The height is measured and set inline by the Collapse component, because a
+   transition to `auto` does not animate. This owns only the easing and the
+   fade of the content inside. */
+.cn-collapse {
+  overflow: hidden;
+  transition: height var(--dur-collapse) var(--ease-out-quint);
+}
+.cn-collapse > * {
+  transition: opacity var(--dur-collapse) var(--ease-out-quint);
+}
+.cn-collapse[data-open='false'] > * { opacity: 0; }
+.cn-collapse[data-open='true'] > * { opacity: 1; }
+
+/* A disclosure chevron turns rather than swapping glyph. */
+@utility chevron-turn {
+  transition: transform var(--dur-collapse) var(--ease-out-quint);
+  &[data-open='true'] { transform: rotate(90deg); }
+}
+
+/* A selected list row — sidebar nav, option row, picker item. The tint is
+   near-white against the paper, so selection is never carried by the fill
+   alone: it also takes a hairline and a 2px spine in the working colour. */
+@utility nav-selected {
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary-strong);
+  box-shadow:
+    inset 0 0 0 1px var(--color-primary-line),
+    inset 2px 0 0 0 var(--color-primary);
+}
+
+/* One rule that *slides* between tabs rather than one rule per tab appearing
+   and disappearing — the movement is what tells you where the selection
+   went. Position and width are measured from the active button in JS. */
+.cn-tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  transition:
+    transform var(--dur-base) var(--ease-out-quint),
+    width var(--dur-base) var(--ease-out-quint);
+}
+
+/* ---- The authored moment -------------------------------------------------
+   A meter or range-scale fills once on mount, like a calibrated instrument
+   settling on its reading. The final value remains visible after motion. */
+@keyframes cn-meter-fill {
+  from { width: 0%; }
+}
+.cn-meter-fill {
+  animation: cn-meter-fill var(--dur-calibrate) var(--ease-out-quint) 0.12s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cn-collapse,
+  .cn-collapse > *,
+  .chevron-turn,
+  .cn-tab-indicator {
+    transition: none !important;
+  }
+}
+
+/* =========================================================================
+   FORCED COLORS (Windows High Contrast)
+   box-shadow and background-image are not recoloured by forced-colors, so
+   the pieces that carry real meaning through them are redeclared in system
+   colour keywords, and the purely decorative ones drop out cleanly. */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .nav-selected {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+
+  .cn-tab-indicator {
+    background: Highlight;
+  }
+
+  body,
+  .grid-chart,
+  .grid-chart-major {
+    background-image: none;
+  }
+}
