@@ -5,7 +5,7 @@ import { Meter } from '@/components/ui/Meter'
 import { systemColor } from '@/lib/systems'
 import { cn } from '@/lib/cn'
 import type { Bundle, Item, Sheet } from '@/lib/types'
-import { countBundleItems, type BundleNode } from './bundleTree'
+import { countBundleItems, displayTitle, type BundleNode } from './bundleTree'
 import { EditControl } from './FieldRow'
 
 type FieldEntry = Sheet[string]
@@ -26,9 +26,12 @@ export function QuestionBundle({
   onHover,
   onSelect,
   registerRef,
+  idle,
   depth = 0,
 }: {
   node: BundleNode
+  /** Nothing written yet: questions wait quietly instead of demanding. */
+  idle?: boolean
   sheet: Sheet
   activeFieldKeys: ReadonlySet<string>
   selectedKey: string | null
@@ -55,10 +58,10 @@ export function QuestionBundle({
         {depth > 0 && parents[0] && (
           <span title={parents[0].item.reason ?? undefined} className="inline-flex items-center gap-1 text-[11.5px] text-ink-3">
             <Icon icon={CornerDownRight} size={12} />
-            {parents[0].bundle.title}
+            {displayTitle(parents[0].bundle.title)}
           </span>
         )}
-        <h3 className={cn('font-sans text-[13.5px] font-bold tracking-[-0.012em]', done ? 'text-ink-2' : 'text-ink')}>{bundle.title}</h3>
+        <h3 className={cn('font-sans text-[13.5px] font-bold tracking-[-0.012em]', done ? 'text-ink-2' : 'text-ink')}>{displayTitle(bundle.title)}</h3>
         {done ? (
           <span className="animate-screen-in inline-flex items-center gap-1 text-[11.5px] font-medium text-accent">
             <Icon icon={Check} size={13} />
@@ -67,9 +70,9 @@ export function QuestionBundle({
         ) : (
           <>
             <span className="tnum font-mono text-[11.5px] text-ink-3">
-              {empty + unclear} left
+              {idle ? `${total} questions` : `${empty + unclear} left`}
             </span>
-            <Meter value={total === 0 ? 0 : (filled / total) * 100} size="sm" className="w-16" />
+            <Meter value={total === 0 ? 0 : (filled / total) * 100} size="sm" tone="accent" className="w-16" />
           </>
         )}
       </div>
@@ -83,6 +86,7 @@ export function QuestionBundle({
             entry={sheet[key]}
             active={activeFieldKeys.has(key)}
             selected={selectedKey === key}
+            idle={idle}
             onHover={onHover}
             onSelect={onSelect}
           />
@@ -101,6 +105,7 @@ export function QuestionBundle({
               onHover={onHover}
               onSelect={onSelect}
               registerRef={registerRef}
+              idle={idle}
               depth={depth + 1}
             />
           ))}
@@ -116,9 +121,11 @@ function QuestionChip({
   entry,
   active,
   selected,
+  idle,
   onHover,
   onSelect,
 }: {
+  idle?: boolean
   fieldKey: string
   item: Item
   entry: FieldEntry | undefined
@@ -153,9 +160,9 @@ function QuestionChip({
       onBlur={() => onHover(null)}
       onClick={() => onSelect(fieldKey)}
       className={cn(
-        'inline-flex h-7 max-w-full items-center gap-1.5 rounded-md border px-2 text-[12.5px] outline-none transition-colors duration-500',
+        'inline-flex h-7 max-w-full items-center gap-1.5 rounded-md border px-2 text-[12.5px] outline-none transition-colors duration-500 pointer-coarse:h-9 pointer-coarse:px-3 pointer-coarse:text-[13.5px]',
         'focus-visible:ring-2 focus-visible:ring-[var(--ring-field)]',
-        state === 'empty' && 'border-line-2 bg-surface font-medium text-ink hover:border-primary-line',
+        state === 'empty' && (idle ? 'border-line bg-surface text-ink-2 hover:border-line-2' : 'border-line-2 bg-surface font-medium text-ink hover:border-primary-line'),
         state === 'unclear' && 'border-dashed border-line-2 bg-surface font-medium text-ink-2 hover:border-primary-line',
         state === 'filled' && 'border-transparent text-ink-3 hover:bg-accent-tint/60 hover:text-ink',
         state === 'dismissed' && 'border-transparent text-ink-3 line-through decoration-line-2 hover:text-ink-2',
@@ -163,7 +170,7 @@ function QuestionChip({
         selected && 'border-ink-3 text-ink',
       )}
     >
-      {state === 'empty' && <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-primary" />}
+      {state === 'empty' && <span aria-hidden className={cn('size-1.5 shrink-0 rounded-full transition-colors duration-500', idle ? 'bg-line-2' : 'bg-primary')} />}
       {state === 'unclear' && <span aria-hidden className="font-mono text-[11px] text-ink-3">?</span>}
       {state === 'filled' &&
         (entry?.source === 'doctor' ? (
@@ -249,7 +256,7 @@ export function Inspector({
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-3">
-            {bundle.title} · {item.label}
+            {displayTitle(bundle.title)} · {item.label}
           </p>
           {editing ? (
             <div className="mt-1.5 max-w-md">

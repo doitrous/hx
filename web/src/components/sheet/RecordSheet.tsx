@@ -4,7 +4,7 @@ import { Icon } from '@/components/ui/Icon'
 import { cn } from '@/lib/cn'
 import { track } from '@/lib/analytics'
 import type { Bundle, Sheet } from '@/lib/types'
-import { aggregateCounts, buildBundleForest, groupForest, orderedOpenBundles } from './bundleTree'
+import { aggregateCounts, buildBundleForest, displayTitle, groupForest, orderedOpenBundles } from './bundleTree'
 import { BundleSection } from './BundleSection'
 import { NextToDocument } from './NextToDocument'
 import { Inspector, QuestionBundle } from './QuestionBoard'
@@ -60,6 +60,7 @@ export function RecordSheet({
   const forest = buildBundleForest(openBundles)
   const sections = groupForest(mode, forest)
   const counts = aggregateCounts(openBundles, sheet)
+  const idle = !noteText.trim() && counts.filled === 0 && counts.unclear === 0
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const nodeRefs = useRef(new Map<string, HTMLElement>())
@@ -118,7 +119,7 @@ export function RecordSheet({
       setLive({ id: ++eventId.current, kind: 'filled', label: item?.label ?? key, detail: value, more: fresh.length - 1 })
     } else {
       const bundle = byId.get(added[added.length - 1])
-      if (bundle) setLive({ id: ++eventId.current, kind: 'opened', label: bundle.title, detail: `${bundle.items.length} questions`, more: added.length - 1 })
+      if (bundle) setLive({ id: ++eventId.current, kind: 'opened', label: displayTitle(bundle.title), detail: `${bundle.items.length} questions`, more: added.length - 1 })
     }
 
     requestAnimationFrame(() => {
@@ -127,6 +128,7 @@ export function RecordSheet({
         if (off.length) setPendingIds((prev) => [...new Set([...prev, ...off])])
         return
       }
+      if (fresh.length > 4 || added.length > 2) return
       const target = added.length ? nodeRefs.current.get(added[0]) : document.getElementById(`field-${fresh[0]}`)
       scrollWithin(scrollRef.current, target)
     })
@@ -184,7 +186,7 @@ export function RecordSheet({
                   </span>
                 </p>
               ) : (
-                <p className="text-ink-3">{counts.total === 0 ? 'Waiting for the note.' : 'Up to date with the note.'}</p>
+                <p className="text-ink-3">{idle ? 'Waiting for the note.' : 'Up to date with the note.'}</p>
               )}
             </div>
           </div>
@@ -212,7 +214,7 @@ export function RecordSheet({
             {headerExtra}
           </div>
         </div>
-        <Tally counts={counts} />
+        <Tally counts={counts} idle={idle} />
         {pending && (
           <span aria-hidden className="absolute inset-x-0 -bottom-px h-0.5 overflow-hidden">
             <span className="cn-scan block h-full w-1/3 bg-accent" />
@@ -222,7 +224,7 @@ export function RecordSheet({
 
       {view === 'record' && <NextToDocument openBundles={openBundles} sheet={sheet} onJumpTo={jumpTo} />}
 
-      <div ref={scrollRef} onScroll={handleScroll} className="@container relative min-h-0 flex-1 overflow-y-auto px-5 py-4">
+      <div ref={scrollRef} onScroll={handleScroll} className="@container relative min-h-0 flex-1 overflow-y-auto bg-paper px-5 py-4">
         <div className="flex flex-col gap-7">
           {sections.map(
             (section) =>
@@ -230,7 +232,7 @@ export function RecordSheet({
                 <div key={section.title} className="flex flex-col gap-4">
                   <h3 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-3">{section.title}</h3>
                   {/* Two columns once the sheet is wide enough to waste a single one. */}
-                  <div className="gap-x-10 @[860px]:columns-2 [&>*]:mb-5">
+                  <div className="gap-x-10 @[700px]:columns-2 [&>*]:mb-5">
                     {section.nodes.map((node) =>
                       view === 'questions' ? (
                         <QuestionBundle
@@ -242,6 +244,7 @@ export function RecordSheet({
                           onHover={hover}
                           onSelect={(k) => setSelectedKey((cur) => (cur === k ? null : k))}
                           registerRef={registerRef}
+                          idle={idle}
                         />
                       ) : (
                         <BundleSection
@@ -320,7 +323,7 @@ export function RecordSheet({
 }
 
 /** Filled / unclear / empty as one proportional bar. Blue is answered, crimson is still owed. */
-function Tally({ counts }: { counts: { filled: number; unclear: number; empty: number; total: number } }) {
+function Tally({ counts, idle }: { counts: { filled: number; unclear: number; empty: number; total: number }; idle?: boolean }) {
   const share = (n: number) => (counts.total === 0 ? 0 : (n / counts.total) * 100)
   return (
     <div>
@@ -328,6 +331,11 @@ function Tally({ counts }: { counts: { filled: number; unclear: number; empty: n
         <span className="h-full bg-accent transition-[width] duration-500 ease-out" style={{ width: `${share(counts.filled)}%` }} />
         <span className="h-full bg-ink-3/50 transition-[width] duration-500 ease-out" style={{ width: `${share(counts.unclear)}%` }} />
       </div>
+      {idle ? (
+        <p className="mt-1.5 text-[12px] text-ink-2">
+          <b className="tnum font-semibold text-ink">{counts.total}</b> questions every note gets. More appear as you write.
+        </p>
+      ) : (
       <div className="mt-1.5 flex flex-wrap gap-x-4 text-[12px] text-ink-2">
         <span className="tnum"><b className="font-semibold text-ink">{counts.filled}</b> filled</span>
         {counts.unclear > 0 && <span className="tnum"><b className="font-semibold text-ink">{counts.unclear}</b> unclear</span>}
@@ -335,6 +343,7 @@ function Tally({ counts }: { counts: { filled: number; unclear: number; empty: n
           <b className={cn('font-semibold', counts.empty > 0 ? 'text-primary-strong' : 'text-ink')}>{counts.empty}</b> still to document
         </span>
       </div>
+      )}
     </div>
   )
 }

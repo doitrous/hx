@@ -124,3 +124,9 @@ export function aggregateCounts(openBundles: Bundle[], sheet: Record<string, { s
   }
   return { filled, unclear, empty, total: filled + unclear + empty }
 }
+
+/** Vault notes carry a filing prefix ("Op - Core - ", "Neuro - "). Readers of the sheet do not need it. */
+export function displayTitle(title: string): string {
+  const t = title.replace(/^(Op - Core|Op|Neuro|Rheum|Abdominal|Vascular|Breast|Renal|Heme|Gyn|General surgery) - /, '')
+  return t.charAt(0).toUpperCase() + t.slice(1)
+}

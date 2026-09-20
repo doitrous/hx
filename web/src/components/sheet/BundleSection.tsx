@@ -6,7 +6,7 @@ import { Tooltip } from '@/components/ui/Popover'
 import { systemColor } from '@/lib/systems'
 import { cn } from '@/lib/cn'
 import type { Bundle, Sheet } from '@/lib/types'
-import { countBundleItems, type BundleNode } from './bundleTree'
+import { countBundleItems, displayTitle, type BundleNode } from './bundleTree'
 import { FieldRow } from './FieldRow'
 
 export function BundleSection({
@@ -52,9 +52,9 @@ export function BundleSection({
           {parents.length > 0 ? (
             <>
               <span className="font-medium text-ink-2">
-                Opened because · <span className="text-ink">{parents[0].bundle.title}</span>
+                Opened because · <span className="text-ink">{displayTitle(parents[0].bundle.title)}</span>
                 {' → '}
-                <span className="text-ink">{bundle.title}</span>
+                <span className="text-ink">{displayTitle(bundle.title)}</span>
               </span>
               {parents[0].item.reason && <p className="mt-0.5 text-ink-2">{parents[0].item.reason}</p>}
             </>
@@ -77,7 +77,7 @@ export function BundleSection({
       )}
 
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <h3 className="font-sans text-[13.5px] font-bold tracking-[-0.012em] text-ink">{bundle.title}</h3>
+        <h3 className="font-sans text-[13.5px] font-bold tracking-[-0.012em] text-ink">{displayTitle(bundle.title)}</h3>
         <span className="tnum font-mono text-[11.5px] text-ink-3">
           {filled} / {total}
         </span>
@@ -87,7 +87,7 @@ export function BundleSection({
             Complete
           </span>
         ) : (
-          <Meter value={total === 0 ? 0 : (filled / total) * 100} size="sm" className="min-w-20 max-w-28 flex-1" />
+          <Meter value={total === 0 ? 0 : (filled / total) * 100} size="sm" tone="accent" className="min-w-20 max-w-28 flex-1" />
         )}
       </div>
 

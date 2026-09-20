@@ -45,6 +45,9 @@ export type UseAnalyzeResult = {
   dismissField: (key: FieldKey) => void
   /** One level of undo for a dismissed (or edited) field — powers the dismiss toast's "Undo". */
   restoreField: (key: FieldKey) => void
+  /** Landing-page example playback: merge a recorded response, and gate live analysis while it plays. */
+  applyResponse: (res: Pick<AnalyzeResponse, 'bundles' | 'fields'>) => void
+  setReplaying: (on: boolean) => void
 }
 
 function modeBundles(bundles: Bundle[], mode: 'clinical' | 'operative'): Bundle[] {
@@ -114,6 +117,37 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
     }
   }, [mode])
 
+  // While the landing page replays a recorded example, typing must not reach the server at all.
+  const replaying = useRef(false)
+  const setReplaying = useCallback((on: boolean) => {
+    replaying.current = on
+  }, [])
+
+  const applyResponse = useCallback((res: Pick<AnalyzeResponse, 'bundles' | 'fields'>) => {
+    // A bundle catalogue can include both note types (op-core bundles are
+    // always-on, for instance) — only ever surface the ones that belong to
+    // this encounter's own mode, regardless of what the response sends.
+    setSheet((prev) => {
+      const next: Sheet = { ...prev }
+      for (const [key, field] of Object.entries(res.fields)) {
+        const bundleId = key.slice(0, key.lastIndexOf('.'))
+        if (!scopedIdsRef.current.has(bundleId)) continue
+        const existing = next[key]
+        if (existing && (existing.source === 'doctor' || existing.state === 'dismissed')) continue
+        next[key] = { value: field.value, unit: field.unit, state: field.state, source: 'jev', p: field.p, evidence: field.evidence }
+      }
+      return next
+    })
+    setOpenBundleIds((prev) => {
+      const keep = new Set(prev)
+      for (const id of alwaysOnRef.current) keep.add(id)
+      for (const b of res.bundles) if (b.open && scopedIdsRef.current.has(b.id)) keep.add(b.id)
+      const merged = prev.filter((id) => keep.has(id))
+      for (const id of keep) if (!merged.includes(id)) merged.push(id)
+      return merged
+    })
+  }, [])
+
   const runAnalyze = useCallback(async () => {
     if (inFlight.current) {
       dirty.current = true
@@ -148,28 +182,7 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
       if (epoch.current !== myEpoch) return // superseded by a reset while this was in flight
       clauseHash.current = res.clausesHash
 
-      // A bundle catalogue can include both note types (op-core bundles are
-      // always-on, for instance) — only ever surface the ones that belong to
-      // this encounter's own mode, regardless of what the response sends.
-      setSheet((prev) => {
-        const next: Sheet = { ...prev }
-        for (const [key, field] of Object.entries(res.fields)) {
-          const bundleId = key.slice(0, key.lastIndexOf('.'))
-          if (!scopedIdsRef.current.has(bundleId)) continue
-          const existing = next[key]
-          if (existing && (existing.source === 'doctor' || existing.state === 'dismissed')) continue
-          next[key] = { value: field.value, unit: field.unit, state: field.state, source: 'jev', p: field.p, evidence: field.evidence }
-        }
-        return next
-      })
-      setOpenBundleIds((prev) => {
-        const keep = new Set(prev)
-        for (const id of alwaysOnRef.current) keep.add(id)
-        for (const b of res.bundles) if (b.open && scopedIdsRef.current.has(b.id)) keep.add(b.id)
-        const merged = prev.filter((id) => keep.has(id))
-        for (const id of keep) if (!merged.includes(id)) merged.push(id)
-        return merged
-      })
+      applyResponse(res)
       setLastMs(res.ms)
       if (!firstTracked) {
         firstTracked = true
@@ -188,7 +201,7 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
         runAnalyze()
       }
     }
-  }, [mode, demo, patientId])
+  }, [mode, demo, patientId, applyResponse])
 
   // Fire on a finished clause (fast), fall back to an idle pause otherwise.
   // A paste or a loaded example almost always ends on punctuation already,
@@ -206,6 +219,7 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
       setErrorMessage(null)
       return
     }
+    if (replaying.current) return
     if (inFlight.current) {
       dirty.current = true
       return
@@ -255,5 +269,5 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
     })
   }, [])
 
-  return { text, setText, sheet, openBundleIds, status, errorMessage, lastMs, editField, dismissField, restoreField }
+  return { text, setText, sheet, openBundleIds, status, errorMessage, lastMs, editField, dismissField, restoreField, applyResponse, setReplaying }
 }

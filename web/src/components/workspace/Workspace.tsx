@@ -5,13 +5,16 @@ import { aggregateCounts, orderedOpenBundles } from '@/components/sheet/bundleTr
 import { cn } from '@/lib/cn'
 import { useAnalyze } from '@/lib/useAnalyze'
 import { useDictation } from '@/lib/useDictation'
-import type { Bundle, Sheet } from '@/lib/types'
+import type { AnalyzeResponse, Bundle, Sheet } from '@/lib/types'
 import { NotePane } from './NotePane'
 import { sentenceIndexForRange, splitSentences } from './sentences'
 
 export type WorkspaceHandle = {
   /** Drives text in imperatively — used by the demo landing's "type an example" control. */
   setText: (text: string) => void
+  /** Recorded-example playback: no request is made while replaying is on. */
+  setReplaying: (on: boolean) => void
+  applyResponse: (res: Pick<AnalyzeResponse, 'bundles' | 'fields'>) => void
 }
 
 export type WorkspaceProps = {
@@ -27,7 +30,7 @@ export type WorkspaceProps = {
   readOnly?: boolean
   /** Product-only chrome (autosave state, Finalize button) rendered into the sheet header. */
   headerExtra?: ReactNode
-  onChange?: (state: { text: string; sheet: Sheet }) => void
+  onChange?: (state: { text: string; sheet: Sheet; counts: { filled: number; unclear: number; empty: number; total: number } }) => void
   className?: string
 }
 
@@ -44,10 +47,15 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
   const analyze = useAnalyze({ mode, bundles, demo, patientId, initialText, initialSheet, initialOpenBundles })
   const dictation = useDictation((chunk) => {
     if (readOnly) return
+    analyze.setReplaying(false)
     analyze.setText(analyze.text.length && !/\s$/.test(analyze.text) ? `${analyze.text} ${chunk}` : `${analyze.text}${chunk}`)
   })
 
-  useImperativeHandle(ref, () => ({ setText: analyze.setText }), [analyze.setText])
+  useImperativeHandle(
+    ref,
+    () => ({ setText: analyze.setText, setReplaying: analyze.setReplaying, applyResponse: analyze.applyResponse }),
+    [analyze.setText, analyze.setReplaying, analyze.applyResponse],
+  )
 
   const [hoveredField, setHoveredField] = useState<string | null>(null)
   const [hoveredSentence, setHoveredSentence] = useState<number | null>(null)
@@ -74,15 +82,18 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
     return keys
   }, [hoveredField, hoveredSentence, analyze.sheet, sentences])
 
+  const openBundles = orderedOpenBundles(analyze.openBundleIds, bundles)
+  const counts = aggregateCounts(openBundles, analyze.sheet)
+
   const mounted = useRef(false)
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true
       return
     }
-    onChange?.({ text: analyze.text, sheet: analyze.sheet })
+    onChange?.({ text: analyze.text, sheet: analyze.sheet, counts })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analyze.text, analyze.sheet])
+  }, [analyze.text, analyze.sheet, analyze.openBundleIds])
 
   const statusText =
     analyze.status === 'error'
@@ -93,8 +104,6 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
           ? `${analyze.lastMs} ms`
           : ''
 
-  const openBundles = orderedOpenBundles(analyze.openBundleIds, bundles)
-  const counts = aggregateCounts(openBundles, analyze.sheet)
 
   return (
     <div className={cn('flex min-h-0 flex-1 flex-col', className)}>
@@ -117,7 +126,10 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
           <NotePane
             className="h-full w-full"
             text={analyze.text}
-            onTextChange={analyze.setText}
+            onTextChange={(t) => {
+              analyze.setReplaying(false) // a real edit ends any example playback and resumes live analysis
+              analyze.setText(t)
+            }}
             activeSentence={activeSentenceIndex}
             onHoverSentence={setHoveredSentence}
             readOnly={readOnly}

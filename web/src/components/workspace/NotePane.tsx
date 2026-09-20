@@ -75,7 +75,7 @@ export function NotePane({
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }, [])
 
   return (
-    <div className={cn('flex min-h-0 flex-col bg-paper', className)}>
+    <div className={cn('flex min-h-0 flex-col bg-surface', className)}>
       <div className="relative min-h-0 flex-1 overflow-hidden">
         <div
           ref={backdropRef}

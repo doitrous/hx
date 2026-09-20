@@ -1,17 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Sparkles, SquarePlay } from 'lucide-react'
+import { Pause, Play, SkipForward, Sparkles } from 'lucide-react'
 import { Tabs } from '@/components/ui/Tabs'
 import { Button } from '@/components/ui/Button'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Workspace, type WorkspaceHandle } from '@/components/workspace/Workspace'
 import { GitHubStar } from '@/components/landing/GitHubStar'
+import { Charts, type TracePoint } from '@/components/landing/Charts'
 import { BelowDemo } from '@/components/landing/BelowDemo'
 import { useAccounts } from '@/lib/accounts'
 import { track } from '@/lib/analytics'
 import { Logo } from '@/components/ui/Logo'
 import { client } from '@/lib/client'
 import { EXAMPLES, type ExampleId } from '@/lib/examples'
+import FRAMES from '@/lib/example-frames.json'
+import type { AnalyzeResponse } from '@/lib/types'
+
+type Frame = { at: number; res: Pick<AnalyzeResponse, 'bundles' | 'fields'> }
 import type { Bundles } from '@/lib/types'
 
 const TYPE_CHARS_PER_TICK = 6
@@ -31,6 +36,9 @@ export function Landing() {
   const [loadError, setLoadError] = useState(false)
   const [mode, setMode] = useState<ExampleId>(params.get('example') === 'operative' ? 'operative' : 'clinical')
   const [typing, setTyping] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const [trace, setTrace] = useState<TracePoint[]>([])
+  const pausedRef = useRef(false)
   const workspaceRef = useRef<WorkspaceHandle>(null)
   const typeTimer = useRef<ReturnType<typeof setInterval> | null>(null)
   const beginTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -55,44 +63,62 @@ export function Landing() {
   function stopTyping() {
     if (typeTimer.current) clearInterval(typeTimer.current)
     typeTimer.current = null
+    pausedRef.current = false
+    setPaused(false)
     setTyping(false)
   }
 
+  /**
+   * Plays a recorded example. The text types itself in and the sheet fills
+   * from responses captured once by scripts/record-examples.mjs, so a visitor
+   * pressing this button costs nothing. Live analysis resumes the moment they
+   * edit the note themselves.
+   */
   function runExample(id: ExampleId = mode, immediate = false) {
     stopTyping()
+    setTrace([])
     track('example_run', { mode: id })
     if (beginTimer.current) clearTimeout(beginTimer.current)
     const modeChanged = id !== mode
     setMode(id)
     const full = EXAMPLES[id].text
-    // Clear first — on the same mode this just resets the current instance's
-    // sheet via useAnalyze's own empty-text branch; on a mode change it targets
-    // the about-to-unmount instance, which is harmless. Either way, filling
-    // the real text happens on a short delay so a mode-triggered remount (a
-    // new `key`) has time to commit and re-point the ref at the new instance.
+    const frames = (FRAMES as unknown as Record<ExampleId, Frame[]>)[id] ?? []
+    workspaceRef.current?.setReplaying(true)
     workspaceRef.current?.setText('')
     const begin = () => {
-      if (immediate) {
-        workspaceRef.current?.setText(full)
-        return
+      const ws = () => workspaceRef.current
+      ws()?.setReplaying(true)
+      let applied = 0
+      const show = (upTo: number) => {
+        ws()?.setText(full.slice(0, upTo))
+        while (applied < frames.length && frames[applied].at <= upTo) ws()?.applyResponse(frames[applied++].res)
       }
+      const finish = () => {
+        show(full.length)
+        stopTyping()
+        // The replay gate stays shut here. Workspace opens it when the visitor edits the note.
+      }
+      if (immediate) return finish()
       setTyping(true)
       let i = 0
       typeTimer.current = setInterval(() => {
+        if (pausedRef.current) return
         i += TYPE_CHARS_PER_TICK
-        if (i >= full.length) {
-          workspaceRef.current?.setText(full)
-          stopTyping()
-          return
-        }
-        workspaceRef.current?.setText(full.slice(0, i))
+        if (i >= full.length) return finish()
+        show(i)
       }, TYPE_TICK_MS)
     }
+    // A mode change remounts the workspace (new `key`); wait for the ref to point at the new one.
     beginTimer.current = setTimeout(begin, modeChanged ? 60 : 0)
   }
 
+  function togglePause() {
+    pausedRef.current = !pausedRef.current
+    setPaused(pausedRef.current)
+  }
+
   useEffect(() => {
-    if (!bundles || startedFromQuery.current || !params.get('example')) return
+    if (!import.meta.env.DEV || !bundles || startedFromQuery.current || !params.get('example')) return
     startedFromQuery.current = true
     runExample(mode, instant)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +127,7 @@ export function Landing() {
   return (
     <div className="flex min-h-dvh flex-col bg-paper">
       <header className="mx-auto flex w-full max-w-[1680px] items-center justify-between px-4 py-4 sm:px-8">
-        <Logo className="h-[24px]" />
+        <Logo className="h-[30px]" />
         <GitHubStar />
       </header>
 
@@ -113,40 +139,62 @@ export function Landing() {
                 The record fills itself in while you write.
               </h1>
             </div>
-            <div className="flex shrink-0 flex-wrap items-center gap-2.5">
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-[1680px] px-4 sm:px-8">
+          <div className="flex h-[calc(100dvh-5rem)] max-h-[940px] min-h-[620px] flex-col overflow-hidden rounded-xl border border-line shadow-panel">
+            {/* The controls live on the thing they control. */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-surface-2 px-3 py-1.5 sm:px-4">
               <Tabs
                 items={[
                   { value: 'clinical', label: 'Clinical' },
                   { value: 'operative', label: 'Operative' },
                 ]}
                 value={mode}
-                onChange={(v) => runExample(v as ExampleId, false)}
+                onChange={(v) => {
+                  stopTyping()
+                  setTrace([])
+                  setMode(v as ExampleId)
+                }}
               />
+              <p className="order-last w-full text-[12px] text-ink-2 sm:order-none sm:w-auto">
+                <span aria-hidden className="me-1.5 inline-block size-1.5 rounded-full bg-primary align-middle" />
+                Demo. Nothing is saved. Do not enter real patient details.
+              </p>
+              <div className="ms-auto flex items-center gap-2">
+              {typing && (
+                <Button size="sm" variant="ghost" iconLeft={paused ? Play : Pause} onClick={togglePause}>
+                  {paused ? 'Resume' : 'Pause'}
+                </Button>
+              )}
               <Button
                 size="sm"
                 variant="tinted"
-                iconLeft={typing ? SquarePlay : Sparkles}
+                iconLeft={typing ? SkipForward : Sparkles}
                 onClick={() => (typing ? runExample(mode, true) : runExample(mode, false))}
               >
-                {typing ? 'Skip' : 'Try an example'}
+                {typing ? 'Skip to end' : 'Try an example'}
               </Button>
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section className="mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-          <p className="mb-2 text-[12.5px] font-medium text-ink-2">
-            <span aria-hidden className="me-2 inline-block size-1.5 rounded-full bg-primary align-middle" />
-            Demo. Nothing is saved. Do not enter real patient details.
-          </p>
-
-          <div className="flex h-[calc(100dvh-5rem)] max-h-[940px] min-h-[620px] flex-col overflow-hidden rounded-xl border border-line shadow-panel">
             {loadError ? (
               <div className="grid h-full place-items-center px-6 text-center text-[13.5px] text-ink-2">
                 The demo could not load its bundle catalogue right now — try again shortly.
               </div>
             ) : bundles ? (
-              <Workspace key={mode} ref={workspaceRef} mode={mode} bundles={bundles.bundles} demo />
+              <Workspace key={mode} ref={workspaceRef} mode={mode} bundles={bundles.bundles} demo
+                className="min-h-0 flex-1"
+                onChange={({ text, counts }) => {
+                  if (!text.trim()) return setTrace([])
+                  const point = { answered: counts.filled, owed: counts.empty + counts.unclear }
+                  setTrace((prev) => {
+                    const last = prev[prev.length - 1]
+                    if (last && last.answered === point.answered && last.owed === point.owed) return prev
+                    return [...prev.slice(-199), point]
+                  })
+                }}
+              />
             ) : (
               <div className="flex h-full flex-col gap-3 p-6">
                 <Skeleton className="h-5 w-40" />
@@ -156,7 +204,9 @@ export function Landing() {
           </div>
         </section>
 
-        <div className="mt-16">
+        <Charts bundles={bundles?.bundles ?? null} trace={trace} />
+
+        <div className="mt-12">
           <BelowDemo bundles={bundles?.bundles ?? null} accounts={accounts === true} />
         </div>
       </main>

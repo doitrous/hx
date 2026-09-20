@@ -42,7 +42,8 @@ export function GitHubStar({ size = 'sm', className }: { size?: 'sm' | 'lg'; cla
         <Icon icon={Star} size={size === 'lg' ? 16 : 14} className="text-warning transition-transform group-hover:scale-110" />
         Star on GitHub
       </span>
-      {stars !== null && (
+      {/* A tiny count reads as a verdict. It appears once it says something good. */}
+      {stars !== null && stars >= 5 && (
         <span className={cn('tnum inline-flex h-full items-center border-s border-line-2 bg-surface-2 font-mono text-ink-2', size === 'lg' ? 'px-3' : 'px-2')}>
           {stars.toLocaleString('en')}
         </span>

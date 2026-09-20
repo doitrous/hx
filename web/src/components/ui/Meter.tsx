@@ -1,9 +1,10 @@
 import { cn } from '@/lib/cn'
 
-type Tone = 'primary' | 'success' | 'warning' | 'danger' | 'neutral'
+type Tone = 'primary' | 'accent' | 'success' | 'warning' | 'danger' | 'neutral'
 
 const FILL: Record<Tone, string> = {
   primary: 'bg-primary',
+  accent: 'bg-accent',
   success: 'bg-success',
   warning: 'bg-warning',
   danger: 'bg-danger',
