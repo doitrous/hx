@@ -122,7 +122,7 @@ export function Ticks({
           className={cn(
             'h-full rounded-[1px] transition-colors duration-300',
             stretch ? 'min-w-0 flex-1' : 'w-[4px]',
-            i < filled ? 'bg-accent' : i < filled + unclear ? 'bg-ink-3/60' : 'bg-line-2',
+            i < filled ? 'bg-accent' : i < filled + unclear ? 'bg-ink-3' : 'bg-line-2',
           )}
         />
       ))}
