@@ -130,7 +130,7 @@ function CellBars({ rows, hint, note }: { rows: Row[]; hint: string; note?: stri
           `${hint} ${note ?? ''}`
         )}
       </p>
-      <style>{`@keyframes cn-cell-in{from{opacity:0;transform:scaleY(.2)}to{opacity:1;transform:none}}.cn-cell{animation:cn-cell-in .35s ease-out both}@media (prefers-reduced-motion:reduce){.cn-cell{animation:none}}`}</style>
+      <style>{`@keyframes cn-cell-in{from{transform:scaleY(.15)}to{transform:none}}.cn-cell{animation:cn-cell-in .35s ease-out both}@media (prefers-reduced-motion:reduce){.cn-cell{animation:none}}`}</style>
     </div>
   )
 }
@@ -139,8 +139,10 @@ function CellBars({ rows, hint, note }: { rows: Row[]; hint: string; note?: stri
 
 const W = 520
 const H = 300
-const PAD = { l: 30, r: 8, t: 14, b: 14 }
-const LABEL_W = 92
+const PAD = { l: 34, r: 8, t: 14, b: 14 }
+const LABEL_W = 132
+// SVG text shrinks with the chart on a phone, so it is set larger there to stay readable.
+const SVG_TEXT = 'max-sm:[font-size:17px]'
 
 /**
  * Change over passes as a run of thin columns on one axis (both are counts of
@@ -192,7 +194,7 @@ function CompletenessTrace({ trace }: { trace: TracePoint[] }) {
         {[maxY, 0, -maxY].map((t) => (
           <g key={t}>
             <line x1={PAD.l} x2={W - PAD.r} y1={mid - hgt(t)} y2={mid - hgt(t)} stroke={t === 0 ? 'var(--color-line-2)' : 'var(--color-line)'} strokeWidth="1" />
-            <text x={PAD.l - 8} y={mid - hgt(t) + 4} textAnchor="end" fontSize="11" fill="var(--color-ink-3)" className="tnum font-mono">{Math.abs(t)}</text>
+            <text x={PAD.l - 8} y={mid - hgt(t) + 4} textAnchor="end" fontSize="11" fill="var(--color-ink-3)" className={`tnum font-mono ${SVG_TEXT}`}>{Math.abs(t)}</text>
           </g>
         ))}
         {hover !== null && <rect x={x(hover) - 1} y={PAD.t} width={bw + 2} height={H - PAD.t - PAD.b} fill="var(--color-inset)" />}
@@ -205,8 +207,8 @@ function CompletenessTrace({ trace }: { trace: TracePoint[] }) {
             </g>
           )
         })}
-        <text x={labelX} y={mid - 8} fontSize="12" fill="var(--color-ink-2)">{last.answered} answered</text>
-        <text x={labelX} y={mid + 18} fontSize="12" fill="var(--color-ink-2)">{last.owed} still owed</text>
+        <text x={labelX} y={mid - 8} fontSize="12" fill="var(--color-ink-2)" className={SVG_TEXT}>{last.answered} answered</text>
+        <text x={labelX} y={mid + 22} fontSize="12" fill="var(--color-ink-2)" className={SVG_TEXT}>{last.owed} still owed</text>
       </svg>
     </div>
   )

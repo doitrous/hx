@@ -199,7 +199,7 @@ function EvidenceVisual() {
       </Card>
       <dl className="mt-5 grid max-w-sm grid-cols-3 gap-3">
         {facts.map(([v, l]) => (
-          <div key={l} className="flex flex-col-reverse gap-1 border-t border-line pt-2.5">
+          <div key={l} className="flex flex-col-reverse justify-end gap-1 border-t border-line pt-2.5">
             <dt className="text-[11.5px] leading-snug text-ink-3">{l}</dt>
             <dd className="tnum font-serif text-[20px] font-semibold leading-none text-ink">{v}</dd>
           </div>
@@ -242,7 +242,7 @@ function Vision() {
   return (
     <section className="border-t border-line py-16 lg:py-20">
       <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary-strong">The vision</p>
-      <h2 className="mt-4 max-w-5xl font-serif text-[28px] font-semibold leading-[1.18] text-ink sm:text-[36px]">
+      <h2 className="mt-4 max-w-5xl font-serif text-[24px] font-semibold leading-[1.2] text-ink sm:text-[36px]">
         Medicine already knows what a complete note looks like. That knowledge lives in textbooks and in consultants' heads, and it is
         least available at three in the morning. Hx puts it beside the pen.
       </h2>
@@ -277,7 +277,7 @@ function Catalogue({ bundles }: { bundles: Bundle[] }) {
       <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-3">What the demo knows today</h2>
       <dl className="mt-5 grid grid-cols-2 gap-x-10 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
         {figures.map(([value, label]) => (
-          <div key={label} className="flex flex-col-reverse gap-1">
+          <div key={label} className="flex flex-col-reverse justify-end gap-1">
             <dt className="text-[13px] leading-snug text-ink-2">{label}</dt>
             <dd className="tnum font-serif text-[30px] font-semibold leading-none text-ink">{value}</dd>
           </div>
