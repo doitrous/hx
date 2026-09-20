@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Tabs } from '@/components/ui/Tabs'
 import { RecordSheet } from '@/components/sheet/RecordSheet'
+import { colourTriggers } from '@/components/sheet/triggerColor'
 import { aggregateCounts, orderedOpenBundles } from '@/components/sheet/bundleTree'
 import { cn } from '@/lib/cn'
 import { useAnalyze } from '@/lib/useAnalyze'
@@ -14,7 +14,7 @@ export type WorkspaceHandle = {
   setText: (text: string) => void
   /** Recorded-example playback: no request is made while replaying is on. */
   setReplaying: (on: boolean) => void
-  applyResponse: (res: Pick<AnalyzeResponse, 'bundles' | 'fields'>) => void
+  applyResponse: (res: Pick<AnalyzeResponse, 'bundles' | 'fields'>, sourceText: string) => void
 }
 
 export type WorkspaceProps = {
@@ -59,7 +59,6 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
 
   const [hoveredField, setHoveredField] = useState<string | null>(null)
   const [hoveredSentence, setHoveredSentence] = useState<number | null>(null)
-  const [mobileView, setMobileView] = useState<'note' | 'sheet'>('note')
 
   const sentences = useMemo(() => splitSentences(analyze.text), [analyze.text])
 
@@ -81,6 +80,8 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
     }
     return keys
   }, [hoveredField, hoveredSentence, analyze.sheet, sentences])
+
+  const caught = useMemo(() => colourTriggers(analyze.text, analyze.triggers, analyze.openBundleIds), [analyze.text, analyze.triggers, analyze.openBundleIds])
 
   const openBundles = orderedOpenBundles(analyze.openBundleIds, bundles)
   const counts = aggregateCounts(openBundles, analyze.sheet)
@@ -107,23 +108,11 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
 
   return (
     <div className={cn('flex min-h-0 flex-1 flex-col', className)}>
-      <div className="lg:hidden">
-        <Tabs
-          items={[
-            { value: 'note', label: 'Note' },
-            { value: 'sheet', label: 'Sheet', count: counts.filled },
-          ]}
-          value={mobileView}
-          onChange={(v) => setMobileView(v as 'note' | 'sheet')}
-          className="px-4"
-        />
-      </div>
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        {/* Each pane's own root always declares `flex`; the show/hide toggle
-            lives on this wrapper instead, so a "hidden" from here never has
-            to out-rank a "flex" declared inside the same class list. */}
-        <div className={cn(mobileView === 'note' ? 'flex' : 'hidden', 'min-h-0 flex-1 lg:flex lg:w-[40%] lg:flex-none lg:border-e lg:border-line')}>
+        {/* On a phone the note sits on top and the sheet below it, both in view, so the idea lands without a tap. */}
+        <div className="flex min-h-0 flex-none basis-[40%] border-b border-line lg:w-[40%] lg:basis-auto lg:border-b-0 lg:border-e">
           <NotePane
+            marks={caught.marks}
             className="h-full w-full"
             text={analyze.text}
             onTextChange={(t) => {
@@ -138,8 +127,9 @@ export const Workspace = forwardRef<WorkspaceHandle, WorkspaceProps>(function Wo
             statusTone={analyze.status === 'error' ? 'error' : 'neutral'}
           />
         </div>
-        <div className={cn(mobileView === 'sheet' ? 'flex' : 'hidden', 'min-h-0 flex-1 lg:flex')}>
+        <div className="flex min-h-0 flex-1">
           <RecordSheet
+            caught={caught.byBundle}
             className="h-full w-full"
             mode={mode}
             bundles={bundles}

@@ -4,9 +4,10 @@ import { Icon } from '@/components/ui/Icon'
 import { Tooltip } from '@/components/ui/Popover'
 import { cn } from '@/lib/cn'
 import type { UseDictationResult } from '@/lib/useDictation'
+import { triggerStyle, type TriggerMark } from '@/components/sheet/triggerColor'
 import { splitSentences } from './sentences'
 
-const PANE_TEXT = 'font-sans text-[16px] leading-[1.75] whitespace-pre-wrap break-words'
+const PANE_TEXT = 'font-sans text-[16px] leading-[1.6] sm:leading-[1.75] whitespace-pre-wrap break-words'
 
 /**
  * A sheet of paper: mirrored-backdrop technique (a positioned div behind a
@@ -20,6 +21,7 @@ export function NotePane({
   onTextChange,
   activeSentence,
   onHoverSentence,
+  marks = [],
   readOnly,
   dictation,
   statusText,
@@ -30,6 +32,8 @@ export function NotePane({
   onTextChange: (text: string) => void
   activeSentence: number | null
   onHoverSentence: (index: number | null) => void
+  /** The words that opened a question set, each in the colour its set wears on the sheet. */
+  marks?: TriggerMark[]
   readOnly?: boolean
   dictation: UseDictationResult
   statusText?: string
@@ -74,13 +78,21 @@ export function NotePane({
 
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }, [])
 
+  // Text that arrives without the keyboard (dictation, the example playing) keeps its last line in view.
+  useEffect(() => {
+    const ta = textareaRef.current
+    if (!ta || document.activeElement === ta) return
+    ta.scrollTop = ta.scrollHeight
+    if (backdropRef.current) backdropRef.current.scrollTop = ta.scrollTop
+  }, [text])
+
   return (
     <div className={cn('flex min-h-0 flex-col bg-surface', className)}>
       <div className="relative min-h-0 flex-1 overflow-hidden">
         <div
           ref={backdropRef}
           aria-hidden
-          className={cn(PANE_TEXT, 'pointer-events-none absolute inset-0 overflow-y-auto p-6 text-ink sm:p-8')}
+          className={cn(PANE_TEXT, 'pointer-events-none absolute inset-0 overflow-y-auto p-4 text-ink sm:p-8')}
         >
           {sentences.length === 0 && !text ? (
             <span className="text-ink-3">
@@ -96,7 +108,7 @@ export function NotePane({
                 }}
                 className={cn('rounded-[3px] transition-colors', activeSentence === i && 'bg-accent-tint')}
               >
-                {text.slice(s.start, s.end)}
+                {paint(text, s.start, s.end, marks)}
               </span>
             ))
           )}
@@ -113,13 +125,13 @@ export function NotePane({
           placeholder=""
           className={cn(
             PANE_TEXT,
-            'absolute inset-0 resize-none bg-transparent p-6 text-transparent caret-ink outline-none sm:p-8',
+            'absolute inset-0 resize-none bg-transparent p-4 text-transparent caret-ink outline-none sm:p-8',
           )}
           aria-label="Clinical note"
         />
       </div>
 
-      <div className="flex items-center gap-3 border-t border-line px-6 py-2.5 sm:px-8">
+      <div className="flex items-center gap-3 border-t border-line px-4 py-2 sm:px-8 sm:py-2.5">
         <DictateButton dictation={dictation} disabled={readOnly} />
         {dictation.listening && dictation.interim && (
           <span className="min-w-0 flex-1 truncate text-[13px] italic text-ink-3">{dictation.interim}</span>
@@ -135,6 +147,27 @@ export function NotePane({
       </div>
     </div>
   )
+}
+
+/**
+ * Cuts [from, to) wherever a mark starts or stops. Where marks nest ("pain"
+ * inside "epigastric pain") the shorter one wins, so both stay visible.
+ */
+function paint(text: string, from: number, to: number, marks: TriggerMark[]) {
+  const inside = marks.filter((m) => m.start < to && m.end > from)
+  if (!inside.length) return text.slice(from, to)
+  const cuts = [...new Set([from, to, ...inside.flatMap((m) => [Math.max(from, m.start), Math.min(to, m.end)])])].sort((a, b) => a - b)
+  return cuts.slice(0, -1).map((a, i) => {
+    const b = cuts[i + 1]
+    const cover = inside.filter((m) => m.start <= a && m.end >= b).sort((x, y) => x.end - x.start - (y.end - y.start))[0]
+    return cover ? (
+      <mark key={a} style={triggerStyle(cover.hue)}>
+        {text.slice(a, b)}
+      </mark>
+    ) : (
+      text.slice(a, b)
+    )
+  })
 }
 
 function DictateButton({ dictation, disabled }: { dictation: UseDictationResult; disabled?: boolean }) {

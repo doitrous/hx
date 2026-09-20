@@ -224,3 +224,20 @@ test("the catch-all diagnosis bundle stays shut when every named disease already
   const open = await analyze(args, { jev: scriptedJev([leftover(0.9), ...base]), bundles });
   assert.equal(open.bundles.find((b) => b.id === "named_diagnosis").open, true);
 });
+
+test("a newly opened bundle reports the words of the note that opened it", async () => {
+  const text = "Epigastric pain for 3 days. k/c/o DM2 on metformin.";
+  const jev = scriptedJev([
+    { match: (q) => q.type === "choice" && q.instructions.startsWith("Which sentence of the note is the one that shows"), respond: (q) => ({ type: "choice", choice: keyContaining(q.criteria, "DM2"), probabilities: {}, confidence: 0.9 }) },
+    { match: (q) => q.type === "choice" && q.instructions.includes("which words are the mention"), respond: (q) => ({ type: "choice", choice: Object.keys(q.criteria).find((k) => q.criteria[k] === "DM2"), probabilities: {}, confidence: 0.9 }) },
+    { match: (q) => q.type === "noul" && q.instructions.includes("diabetes mellitus"), respond: () => ({ type: "noul", noul: 0.9 }) },
+  ]);
+  const first = await analyze({ mode: "clinical", text, open: [], locked: [] }, { jev, bundles });
+  const diabetes = first.bundles.find((b) => b.id === "diabetes");
+  assert.equal(text.slice(diabetes.trigger.start, diabetes.trigger.end), "DM2");
+  assert.equal(first.bundles.find((b) => b.id === "general").trigger, undefined, "always-on bundles have no trigger");
+
+  // Already open: nothing new was caught, so nothing is asked or sent again.
+  const second = await analyze({ mode: "clinical", text, open: ["general", "diabetes"], locked: [], prevHash: first.clausesHash }, { jev, bundles });
+  assert.equal(second.bundles.find((b) => b.id === "diabetes").trigger, undefined);
+});

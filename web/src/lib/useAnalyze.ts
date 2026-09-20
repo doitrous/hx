@@ -46,7 +46,10 @@ export type UseAnalyzeResult = {
   /** One level of undo for a dismissed (or edited) field — powers the dismiss toast's "Undo". */
   restoreField: (key: FieldKey) => void
   /** Landing-page example playback: merge a recorded response, and gate live analysis while it plays. */
-  applyResponse: (res: Pick<AnalyzeResponse, 'bundles' | 'fields'>) => void
+  /** The words of the note that opened each bundle, by bundle id. */
+  triggers: Record<string, { phrase: string; at: number }>
+  /** `sourceText` is the note the response was computed from, which trigger spans index into. */
+  applyResponse: (res: Pick<AnalyzeResponse, 'bundles' | 'fields'>, sourceText: string) => void
   setReplaying: (on: boolean) => void
 }
 
@@ -85,6 +88,7 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
     const seed = opts.initialOpenBundles?.length ? opts.initialOpenBundles : []
     return [...new Set([...alwaysOnIds, ...seed])]
   })
+  const [triggers, setTriggers] = useState<Record<string, { phrase: string; at: number }>>({})
   const [status, setStatus] = useState<AnalyzeStatus>('idle')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [lastMs, setLastMs] = useState<number | null>(null)
@@ -123,7 +127,9 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
     replaying.current = on
   }, [])
 
-  const applyResponse = useCallback((res: Pick<AnalyzeResponse, 'bundles' | 'fields'>) => {
+  const applyResponse = useCallback((res: Pick<AnalyzeResponse, 'bundles' | 'fields'>, sourceText: string) => {
+    const caught = res.bundles.filter((b) => b.open && b.trigger && scopedIdsRef.current.has(b.id))
+    if (caught.length) setTriggers((prev) => ({ ...prev, ...Object.fromEntries(caught.map((b) => [b.id, { phrase: sourceText.slice(b.trigger!.start, b.trigger!.end), at: b.trigger!.start }])) }))
     // A bundle catalogue can include both note types (op-core bundles are
     // always-on, for instance) — only ever surface the ones that belong to
     // this encounter's own mode, regardless of what the response sends.
@@ -182,7 +188,7 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
       if (epoch.current !== myEpoch) return // superseded by a reset while this was in flight
       clauseHash.current = res.clausesHash
 
-      applyResponse(res)
+      applyResponse(res, snapshotText)
       setLastMs(res.ms)
       if (!firstTracked) {
         firstTracked = true
@@ -214,6 +220,7 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
       history.current = {}
       clauseHash.current = undefined
       setSheet({})
+      setTriggers({})
       setOpenBundleIds([...alwaysOnRef.current])
       setStatus('idle')
       setErrorMessage(null)
@@ -269,5 +276,5 @@ export function useAnalyze(opts: UseAnalyzeOptions): UseAnalyzeResult {
     })
   }, [])
 
-  return { text, setText, sheet, openBundleIds, status, errorMessage, lastMs, editField, dismissField, restoreField, applyResponse, setReplaying }
+  return { text, setText, sheet, openBundleIds, status, errorMessage, lastMs, editField, dismissField, restoreField, triggers, applyResponse, setReplaying }
 }

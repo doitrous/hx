@@ -44,7 +44,8 @@ export type AnalyzeRequest = {
 }
 
 export type AnalyzeResponse = {
-  bundles: { id: string; p: number; open: boolean }[] // every triggered bundle with its probability
+  // Every triggered bundle with its probability. `trigger` is the span of the note that opened it, sent once, when it opens.
+  bundles: { id: string; p: number; open: boolean; trigger?: { start: number; end: number } }[]
   fields: Record<FieldKey, Field> // every item of every open bundle
   usage: { tokens: number; calls: number }
   ms: number

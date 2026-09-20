@@ -6,6 +6,7 @@ import { systemColor } from '@/lib/systems'
 import { cn } from '@/lib/cn'
 import type { Bundle, Item, Sheet } from '@/lib/types'
 import { countBundleItems, displayTitle, type BundleNode } from './bundleTree'
+import { CaughtTitle } from './CaughtTitle'
 import { EditControl } from './FieldRow'
 
 type FieldEntry = Sheet[string]
@@ -26,6 +27,7 @@ export function QuestionBundle({
   onHover,
   onSelect,
   registerRef,
+  caught = {},
   idle,
   depth = 0,
 }: {
@@ -38,6 +40,8 @@ export function QuestionBundle({
   onHover: (fieldKey: string | null) => void
   onSelect: (fieldKey: string) => void
   registerRef: (bundleId: string, el: HTMLElement | null) => void
+  /** The phrase of the note that opened each bundle, and its colour. */
+  caught?: Record<string, { hue: string; phrase: string }>
   depth?: number
 }) {
   const { bundle, parents, children } = node
@@ -61,7 +65,7 @@ export function QuestionBundle({
             {displayTitle(parents[0].bundle.title)}
           </span>
         )}
-        <h3 className={cn('font-sans text-[13.5px] font-bold tracking-[-0.012em]', done ? 'text-ink-2' : 'text-ink')}>{displayTitle(bundle.title)}</h3>
+        <h3 className={cn('font-sans text-[13.5px] font-bold tracking-[-0.012em]', done ? 'text-ink-2' : 'text-ink')}><CaughtTitle title={displayTitle(bundle.title)} caught={caught[bundle.id]} /></h3>
         {done ? (
           <span className="animate-screen-in inline-flex items-center gap-1 text-[11.5px] font-medium text-accent">
             <Icon icon={Check} size={13} />
@@ -105,6 +109,7 @@ export function QuestionBundle({
               onHover={onHover}
               onSelect={onSelect}
               registerRef={registerRef}
+              caught={caught}
               idle={idle}
               depth={depth + 1}
             />
