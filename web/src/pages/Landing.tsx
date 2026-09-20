@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/Button'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Workspace, type WorkspaceHandle } from '@/components/workspace/Workspace'
 import { GitHubStar } from '@/components/landing/GitHubStar'
-import { Charts, type TracePoint } from '@/components/landing/Charts'
 import { BelowDemo } from '@/components/landing/BelowDemo'
 import { useAccounts } from '@/lib/accounts'
 import { track } from '@/lib/analytics'
@@ -37,7 +36,6 @@ export function Landing() {
   const [mode, setMode] = useState<ExampleId>(params.get('example') === 'operative' ? 'operative' : 'clinical')
   const [typing, setTyping] = useState(false)
   const [paused, setPaused] = useState(false)
-  const [trace, setTrace] = useState<TracePoint[]>([])
   const pausedRef = useRef(false)
   const workspaceRef = useRef<WorkspaceHandle>(null)
   const typeTimer = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -76,7 +74,6 @@ export function Landing() {
    */
   function runExample(id: ExampleId = mode, immediate = false) {
     stopTyping()
-    setTrace([])
     track('example_run', { mode: id })
     if (beginTimer.current) clearTimeout(beginTimer.current)
     const modeChanged = id !== mode
@@ -154,8 +151,7 @@ export function Landing() {
                 value={mode}
                 onChange={(v) => {
                   stopTyping()
-                  setTrace([])
-                  setMode(v as ExampleId)
+                                setMode(v as ExampleId)
                 }}
               />
               <p className="order-last w-full text-[12px] text-ink-2 sm:order-none sm:w-auto">
@@ -185,15 +181,6 @@ export function Landing() {
             ) : bundles ? (
               <Workspace key={mode} ref={workspaceRef} mode={mode} bundles={bundles.bundles} demo
                 className="min-h-0 flex-1"
-                onChange={({ text, counts }) => {
-                  if (!text.trim()) return setTrace([])
-                  const point = { answered: counts.filled, owed: counts.empty + counts.unclear }
-                  setTrace((prev) => {
-                    const last = prev[prev.length - 1]
-                    if (last && last.answered === point.answered && last.owed === point.owed) return prev
-                    return [...prev.slice(-199), point]
-                  })
-                }}
               />
             ) : (
               <div className="flex h-full flex-col gap-3 p-6">
@@ -203,8 +190,6 @@ export function Landing() {
             )}
           </div>
         </section>
-
-        <Charts bundles={bundles?.bundles ?? null} trace={trace} />
 
         <div className="mt-12">
           <BelowDemo bundles={bundles?.bundles ?? null} accounts={accounts === true} />

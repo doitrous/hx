@@ -34,7 +34,69 @@ export function BelowDemo({ bundles, accounts }: { bundles: Bundle[] | null; acc
         </Entry>
       </Band>
 
+      <Band title="Why it earns its place on the ward">
+        <Entry title="Nothing new to learn">
+          There is no form, no template to pick and no button to press. You write or dictate the note the way you
+          always have. The sheet does its work beside you and stays out of the way.
+        </Entry>
+        <Entry title="It catches the gap before the note is closed">
+          The allergy nobody asked about, the swab count nobody wrote down, the anticoagulant in a patient going to
+          theatre. What is still owed is counted in front of you while the patient is still in the room.
+        </Entry>
+        <Entry title="Quick enough to keep up with typing">
+          The sheet answers in a second or two, clause by clause. A whole note costs less than half a cent to check,
+          so it can run on every note, not only the important ones.
+        </Entry>
+        <Entry title="Hands full? Dictate">
+          Speak the note and the questions tick themselves off as you talk. It works at the bedside, in clinic and
+          straight after scrubbing out.
+        </Entry>
+        <Entry title="Private by design">
+          The demo stores nothing. In the full product the patient's name and record number never leave your own
+          record, and the analysis model never writes a word into the note.
+        </Entry>
+        <Entry title="Measured, not promised">
+          Before every release the catalogue is tested against 800 ways real doctors phrase things, from textbook
+          diagnoses to ward shorthand and spelling slips. A release ships only when none of them is missed.
+        </Entry>
+      </Band>
+
       {bundles && <Catalogue bundles={bundles} />}
+
+      <Band
+        title="Where this can go"
+        aside={
+          <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-ink-2">
+            The engine is small and the checklists are plain notes, so the same idea stretches a long way. These are
+            directions, not promises. Tell us which one you need.
+          </p>
+        }
+      >
+        <Entry title="Teaching the complete history">
+          A student takes a history and sees at once what a consultant would have asked next. The same sheet works
+          as a marking scheme for clinical exams.
+        </Entry>
+        <Entry title="Audit without chart review">
+          Operative notes are already checked against the Royal College of Surgeons standard for a good record. A
+          department could see its documentation quality across every note, with nobody reading charts by hand.
+        </Entry>
+        <Entry title="Medico-legal peace of mind">
+          Consent, counts, specimens, blood loss and the postoperative plan are the lines a complaint turns on. They
+          are the lines the sheet refuses to forget.
+        </Entry>
+        <Entry title="Research data from ordinary notes">
+          Every ticked question is a structured answer with the sentence it came from. A registry or a study could
+          collect its fields from free text, with no extra form for the doctor.
+        </Entry>
+        <Entry title="Your specialty, your hospital, your protocol">
+          A unit can write its own sets: a local sepsis pathway, a trauma survey, an antenatal booking visit. It
+          takes a text editor, not a developer.
+        </Entry>
+        <Entry title="Inside the systems you already use">
+          The checking runs behind one small interface. It can sit beside an existing electronic record, a
+          dictation tool or a clinic system and fill their fields from the same note.
+        </Entry>
+      </Band>
 
       {!accounts && <ComingSoon />}
 
