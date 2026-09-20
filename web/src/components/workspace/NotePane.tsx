@@ -131,14 +131,14 @@ export function NotePane({
         />
       </div>
 
-      <div className="flex items-center gap-3 border-t border-line px-4 py-2 sm:px-8 sm:py-2.5">
+      <div className="flex items-center gap-3 border-t border-line px-4 py-1.5 sm:px-8 sm:py-2.5">
         <DictateButton dictation={dictation} disabled={readOnly} />
         {dictation.listening && dictation.interim && (
           <span className="min-w-0 flex-1 truncate text-[13px] italic text-ink-3">{dictation.interim}</span>
         )}
         <span
           className={cn(
-            'ms-auto shrink-0 font-mono text-[11px] tnum',
+            'ms-auto shrink-0 font-mono text-[11px] tnum max-sm:hidden',
             statusTone === 'error' ? 'text-danger' : 'text-ink-3',
           )}
         >

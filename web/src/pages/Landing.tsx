@@ -128,16 +128,16 @@ export function Landing() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-paper">
-      <header className="mx-auto flex w-full max-w-[1680px] items-center justify-between px-4 py-4 sm:px-8">
-        <Logo className="h-[30px]" />
+      <header className="mx-auto flex w-full max-w-[1680px] items-center justify-between px-4 py-3 sm:px-8 sm:py-4">
+        <Logo className="h-[26px] sm:h-[30px]" />
         <GitHubStar />
       </header>
 
       <main className="flex-1">
-        <section className="mx-auto w-full max-w-[1680px] px-4 pt-6 pb-5 sm:px-8 lg:pt-8">
+        <section className="mx-auto w-full max-w-[1680px] px-4 pt-2 pb-3 sm:px-8 sm:pt-6 sm:pb-5 lg:pt-8">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
             <div className="min-w-0">
-              <h1 className="font-serif text-[30px] font-semibold leading-[1.12] text-ink sm:text-[38px]">
+              <h1 className="font-serif text-[24px] font-semibold leading-[1.15] text-ink sm:text-[38px]">
                 The record fills itself in while you write.
               </h1>
             </div>
@@ -145,7 +145,7 @@ export function Landing() {
         </section>
 
         <section className="mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-          <div className="flex h-[calc(100dvh-5rem)] max-h-[940px] min-h-[620px] flex-col overflow-hidden rounded-xl border border-line shadow-panel">
+          <div className="flex h-[calc(100dvh-8.5rem)] max-h-[940px] min-h-[560px] sm:h-[calc(100dvh-5rem)] sm:min-h-[620px] flex-col overflow-hidden rounded-xl border border-line shadow-panel">
             {/* The controls live on the thing they control. */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-surface-2 px-3 py-1.5 sm:px-4">
               <Tabs
@@ -159,9 +159,10 @@ export function Landing() {
                                 setMode(v as ExampleId)
                 }}
               />
-              <p className="order-last w-full text-[12px] text-ink-2 sm:order-none sm:w-auto">
+              <p className="order-last w-full text-[11.5px] text-ink-3 sm:order-none sm:w-auto sm:text-[12px] sm:text-ink-2">
                 <span aria-hidden className="me-1.5 inline-block size-1.5 rounded-full bg-primary align-middle" />
-                Demo. Nothing is saved. Do not enter real patient details.
+                Demo. Nothing is saved. <span className="max-sm:hidden">Do not enter real patient details.</span>
+                <span className="sm:hidden">No real patient details.</span>
               </p>
               <div className="ms-auto flex items-center gap-2">
               {typing && (
