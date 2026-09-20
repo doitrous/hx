@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Workspace, type WorkspaceHandle } from '@/components/workspace/Workspace'
 import { GitHubStar } from '@/components/landing/GitHubStar'
+import { Charts, type TracePoint } from '@/components/landing/Charts'
 import { BelowDemo } from '@/components/landing/BelowDemo'
 import { useAccounts } from '@/lib/accounts'
 import { track } from '@/lib/analytics'
@@ -36,6 +37,7 @@ export function Landing() {
   const [mode, setMode] = useState<ExampleId>(params.get('example') === 'operative' ? 'operative' : 'clinical')
   const [typing, setTyping] = useState(false)
   const [paused, setPaused] = useState(false)
+  const [trace, setTrace] = useState<TracePoint[]>([])
   const pausedRef = useRef(false)
   const workspaceRef = useRef<WorkspaceHandle>(null)
   const typeTimer = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -72,9 +74,10 @@ export function Landing() {
    * pressing this button costs nothing. Live analysis resumes the moment they
    * edit the note themselves.
    */
-  function runExample(id: ExampleId = mode, immediate = false) {
+  function runExample(id: ExampleId = mode, immediate = false, auto = false) {
     stopTyping()
-    track('example_run', { mode: id })
+    setTrace([])
+    if (!auto) track('example_run', { mode: id })
     if (beginTimer.current) clearTimeout(beginTimer.current)
     const modeChanged = id !== mode
     setMode(id)
@@ -114,10 +117,12 @@ export function Landing() {
     setPaused(pausedRef.current)
   }
 
+  // The example is a recording, so playing it for every visitor costs nothing.
   useEffect(() => {
-    if (!import.meta.env.DEV || !bundles || startedFromQuery.current || !params.get('example')) return
+    if (!bundles || startedFromQuery.current) return
     startedFromQuery.current = true
-    runExample(mode, instant)
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    runExample(mode, instant || still, true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bundles])
 
@@ -181,6 +186,15 @@ export function Landing() {
             ) : bundles ? (
               <Workspace key={mode} ref={workspaceRef} mode={mode} bundles={bundles.bundles} demo
                 className="min-h-0 flex-1"
+                onChange={({ text, counts }) => {
+                  if (!text.trim()) return setTrace([])
+                  const point = { answered: counts.filled, owed: counts.empty + counts.unclear }
+                  setTrace((prev) => {
+                    const last = prev[prev.length - 1]
+                    if (last && last.answered === point.answered && last.owed === point.owed) return prev
+                    return [...prev.slice(-199), point]
+                  })
+                }}
               />
             ) : (
               <div className="flex h-full flex-col gap-3 p-6">
@@ -190,6 +204,8 @@ export function Landing() {
             )}
           </div>
         </section>
+
+        <Charts bundles={bundles?.bundles ?? null} trace={trace} />
 
         <div className="mt-12">
           <BelowDemo bundles={bundles?.bundles ?? null} accounts={accounts === true} />
