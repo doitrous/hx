@@ -165,7 +165,9 @@ function QuestionChip({
       onBlur={() => onHover(null)}
       onClick={() => onSelect(fieldKey)}
       className={cn(
-        'inline-flex h-7 max-w-full items-center gap-1.5 rounded-md border px-2 text-[12.5px] outline-none transition-colors duration-500 pointer-coarse:h-9 pointer-coarse:px-3 pointer-coarse:text-[13.5px]',
+        'inline-flex h-7 max-w-full items-center gap-1.5 rounded-md border px-2 text-[12.5px] outline-none transition-colors duration-500 pointer-coarse:h-8 pointer-coarse:px-2.5 pointer-coarse:text-[13px]',
+        // On a phone an answered question shows its tick, then steps aside. The block strip keeps the count.
+        (state === 'filled' || state === 'dismissed') && !fresh && !selected && 'max-sm:hidden',
         'focus-visible:ring-2 focus-visible:ring-[var(--ring-field)]',
         state === 'empty' && (idle ? 'border-line bg-surface text-ink-2 hover:border-line-2' : 'border-line-2 bg-surface font-medium text-ink hover:border-primary-line'),
         state === 'unclear' && 'border-dashed border-line-2 bg-surface font-medium text-ink-2 hover:border-primary-line',
@@ -228,13 +230,7 @@ export function Inspector({
     if (editing) inputRef.current?.focus()
   }, [editing])
 
-  if (!fieldKey) {
-    return (
-      <div className="border-t border-line bg-surface-2/60 px-5 py-3 text-[12.5px] text-ink-3">
-        Point at a question to see what was taken from the note. Select one to answer it yourself.
-      </div>
-    )
-  }
+  if (!fieldKey) return null
 
   const [bundleId, itemId] = fieldKey.split('.')
   const bundle = bundles.find((b) => b.id === bundleId)
